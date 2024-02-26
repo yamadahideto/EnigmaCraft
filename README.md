@@ -80,6 +80,7 @@
 - Google text-to-speech API(文章読み上げ)
 - Google認証
 
+*** 
 
 ## 画面遷移図
 Figma_URL：https://www.figma.com/file/5RuNkrEx6rOlGueZG4lVHj/EnigmaCraft_%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?type=design&mode=design&t=vht4UijhSbsprpTd-1
