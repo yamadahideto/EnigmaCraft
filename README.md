@@ -1,6 +1,5 @@
 
 ## ■ER図の作成 
-
 [![Image from Gyazo](https://i.gyazo.com/d1ecba7d52a374070a5f2349bfe14b13.png)](https://gyazo.com/d1ecba7d52a374070a5f2349bfe14b13)
 
 ### テーブル情報
@@ -32,7 +31,6 @@
 - mysery_genres
   + mystery_id
   + genre_id
-*** 
 
 ### 詳細情報
 今回、自分で作成した謎(画像 or 文章)を投稿できるようにしたい為、
@@ -43,7 +41,6 @@ Mysteriesテーブルのcontentカラムに、
 - 画像や音声データに関しては、ActiveStrageを使用してAWSのS3での保存し、モデルにhas_one_attachedで関連付ける。
 
 上記2点での運用を考えています。
-
 
 
 *** 
