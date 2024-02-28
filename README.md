@@ -1,4 +1,3 @@
-
 ## ■ER図の作成 
 [![Image from Gyazo](https://i.gyazo.com/d1ecba7d52a374070a5f2349bfe14b13.png)](https://gyazo.com/d1ecba7d52a374070a5f2349bfe14b13)
 
@@ -34,14 +33,12 @@
 
 ### 詳細情報
 今回、自分で作成した謎(画像 or 文章)を投稿できるようにしたい為、
-Mysteriesテーブルのcontentカラムに、
-作成した謎の 「画像 or テキスト」 を保存をする形を想定しています。
+Mysteriesテーブルのcontentカラムに、作成した謎のテキストを保存をする形を想定しています。
 - contentカラムに**NotNull**を設定し、**「テキストか画像のどちらかが存在することを条件」**でカスタムバリデーションを作成。
 
 - 画像や音声データに関しては、ActiveStrageを使用してAWSのS3での保存し、モデルにhas_one_attachedで関連付ける。
 
 上記2点での運用を考えています。
-
 
 *** 
 
