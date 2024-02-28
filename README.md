@@ -116,3 +116,19 @@ Figma_URL：https://www.figma.com/file/5RuNkrEx6rOlGueZG4lVHj/EnigmaCraft_%E7%94
 直接変更できるものではなく、一旦メールなどを介して専用のページで変更する画面遷移になっているか？
 - [ ] パスワード
 
+
+## ■ER図の作成 
+
+[![Image from Gyazo](https://i.gyazo.com/a572dca1d462eb9f91f9af8045362fb5.png)](https://gyazo.com/a572dca1d462eb9f91f9af8045362fb5)
+
+- users ユーザー登録
+  + name :ニックネーム
+  + email :メールアドレス
+  + crypted_password パスワード (sorcery使用予定です)
+  + point :ポイント
+    - 謎問題の正解時にポイントを付与するので、ポイント管理のため
+  + role :権限
+
+- Mysteries 謎解きの問題を登録
+  + title :タイトル
+  + type :
