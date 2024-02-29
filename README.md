@@ -1,47 +1,3 @@
-## ■ER図の作成 
-[![Image from Gyazo](https://i.gyazo.com/44cd151935ff59e5925f912b82fd1e5b.png)](https://gyazo.com/44cd151935ff59e5925f912b82fd1e5b)
-
-### テーブル情報
-
-- users **( ユーザー登録 )**
-  + name :ニックネーム
-  + email :メールアドレス
-  + crypted_password パスワード (sorceryを使用予定です)
-  + point :ポイント
-    - 謎問題の正解時にポイントを付与するので、ポイント管理のため
-  + role :権限
-
-- Mysteries **( 謎解きの問題を登録 )**
-  + title :問題のタイトル
-  + type :問題のタイプ
-    - 謎問題をテキスト形式か画像形式の問題かをタイプで管理
-  + content :謎の問題を保存 (小説タイプ or 画像タイプ)
-  + correct_answer :問題の答え
-  + user_id 
-  + genre_id
-
-- bookmarks **( ユーザーがいいねをした問題を管理 )**
-  + user_id
-  + mystery_id
- 
-- genre **( 問題のジャンルを管理 タグのイメージで複数のカテゴリで管理)**
-  + name ジャンル名
-
-- mysery_genres
-  + mystery_id
-  + genre_id
-
-### 詳細情報
-今回、自分で作成した謎(画像 or 文章)を投稿できるようにしたい為、
-Mysteriesテーブルのcontentカラムに、作成した謎のテキストを保存をする形を想定しています。
-- contentカラムに**NotNull**を設定し、**「テキストか画像のどちらかが存在することを条件」**でカスタムバリデーションを作成。
-
-- 画像や音声データに関しては、ActiveStrageを使用してAWSのS3での保存し、モデルにhas_one_attachedで関連付ける。
-
-上記2点での運用を考えています。
-
-*** 
-
 ## ■サービス概要
 自作の謎を投稿したり、AIを使用して謎を生成したり自由に謎の投稿・閲覧・解答するためのサービスです。
 謎の正解数に応じてポイントが付与され、ポイント数によってバッチの取得・ランキング表示などを予定しており
@@ -160,3 +116,46 @@ Figma_URL：https://www.figma.com/file/5RuNkrEx6rOlGueZG4lVHj/EnigmaCraft_%E7%94
 直接変更できるものではなく、一旦メールなどを介して専用のページで変更する画面遷移になっているか？
 - [ ] パスワード
 
+*** 
+
+## ■ER図の作成 
+[![Image from Gyazo](https://i.gyazo.com/44cd151935ff59e5925f912b82fd1e5b.png)](https://gyazo.com/44cd151935ff59e5925f912b82fd1e5b)
+
+### テーブル情報
+
+- users **( ユーザー登録 )**
+  + name :ニックネーム
+  + email :メールアドレス
+  + crypted_password パスワード (sorceryを使用予定です)
+  + point :ポイント
+    - 謎問題の正解時にポイントを付与するので、ポイント管理のため
+  + role :権限
+
+- Mysteries **( 謎解きの問題を登録 )**
+  + title :問題のタイトル
+  + type :問題のタイプ
+    - 謎問題をテキスト形式か画像形式の問題かをタイプで管理
+  + content :謎の問題を保存 (小説タイプ or 画像タイプ)
+  + correct_answer :問題の答え
+  + user_id 
+  + genre_id
+
+- bookmarks **( ユーザーがいいねをした問題を管理 )**
+  + user_id
+  + mystery_id
+ 
+- genre **( 問題のジャンルを管理 タグのイメージで複数のカテゴリで管理)**
+  + name ジャンル名
+
+- mysery_genres
+  + mystery_id
+  + genre_id
+
+### 詳細情報
+今回、自分で作成した謎(画像 or 文章)を投稿できるようにしたい為、
+Mysteriesテーブルのcontentカラムに、作成した謎のテキストを保存をする形を想定しています。
+- contentカラムに**NotNull**を設定し、**「テキストか画像のどちらかが存在することを条件」**でカスタムバリデーションを作成。
+
+- 画像や音声データに関しては、ActiveStrageを使用してAWSのS3での保存し、モデルにhas_one_attachedで関連付ける。
+
+上記2点での運用を考えています。
