@@ -1,5 +1,5 @@
 ## ■ER図の作成 
-[![Image from Gyazo](https://i.gyazo.com/d1ecba7d52a374070a5f2349bfe14b13.png)](https://gyazo.com/d1ecba7d52a374070a5f2349bfe14b13)
+[![Image from Gyazo](https://i.gyazo.com/44cd151935ff59e5925f912b82fd1e5b.png)](https://gyazo.com/44cd151935ff59e5925f912b82fd1e5b)
 
 ### テーブル情報
 
