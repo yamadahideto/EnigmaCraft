@@ -118,8 +118,8 @@ Figma_URL：https://www.figma.com/file/5RuNkrEx6rOlGueZG4lVHj/EnigmaCraft_%E7%94
 
 *** 
 
-## ■ER図の作成 
-[![Image from Gyazo](https://i.gyazo.com/44cd151935ff59e5925f912b82fd1e5b.png)](https://gyazo.com/44cd151935ff59e5925f912b82fd1e5b)
+## ■ER図
+[![Image from Gyazo](https://i.gyazo.com/7ea34121feef9bf603390475f51a6380.png)](https://gyazo.com/7ea34121feef9bf603390475f51a6380)
 
 ### テーブル情報
 
@@ -143,6 +143,11 @@ Figma_URL：https://www.figma.com/file/5RuNkrEx6rOlGueZG4lVHj/EnigmaCraft_%E7%94
 - bookmarks **( ユーザーがいいねをした問題を管理 )**
   + user_id
   + mystery_id
+ 
+ - answers **( ユーザーが正解済みの問題を管理 )**
+  + user_id
+  + mystery_id
+  + correct_flag 正解・不正解を管理
  
 - genre **( 問題のジャンルを管理 タグのイメージで複数のカテゴリで管理)**
   + name ジャンル名
