@@ -30,4 +30,4 @@ RUN chmod +x /usr/bin/entrypoint.sh
 
 ENTRYPOINT ["entrypoint.sh"]
 
-CMD ["./bin/dev"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
