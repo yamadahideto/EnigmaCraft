@@ -1,0 +1,40 @@
+<h1>謎の作成</h1>
+
+<div class = "w-1/3 mx-auto">
+  <%= link_to "戻る", mysteries_path %>
+
+  <div class="bg-amber-700 rounded px-4 py-2">
+      <%= form_with model: @mystery, local: true, class: "flex flex-col" do |f| %>
+        <div class="mb-4">
+          <%= f.label :title, "タイトル" %>
+          <%= f.text_field :title, class: "form-input mt-1 block w-full" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.radio_button :mystery_type, :image %>
+          <%= f.label :mystery_type_image, "画像謎", class: "ml-2" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.radio_button :mystery_type, :text %>
+          <%= f.label :mystery_type_text, "暗号謎", class: "ml-2" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :content, "謎の内容" %>
+          <%= f.text_field :content, class: "form-input mt-1 block w-full" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :correct_answer, "謎の回答" %>
+          <%= f.text_field :correct_answer, class: "form-input mt-1 block w-full" %>
+        </div>
+
+        <div class="mb-4">
+          <button class="btn btn-primary py-1">
+            <%= f.submit "投稿する" %>
+          </button>
+        </div>
+      <% end %>
+  </div>
+</div>

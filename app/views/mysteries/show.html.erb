@@ -1,0 +1,26 @@
+<h1>謎の詳細ページ</h1>
+<div class = "w-1/3 mx-auto">
+    <%= link_to "戻る", mysteries_path %>
+    <%= link_to "編集", edit_mystery_path(@mystery) %>
+    <%= link_to "削除", mystery_path(@mystery), data: { turbo_method: :delete } %>
+  <div class="bg-amber-700 rounded px-4 py-2">
+    <div class="flex flex-col">
+      <div class="mb-4">
+        <label name = "title"> タイトル: </label>
+            <%= @mystery.title %>
+      </div>
+      <div class="mb-4">
+        <label name = "title"> 謎のタイプ: </label>
+            <%= @mystery.mystery_type %>
+      </div>
+      <div class="mb-4">
+        <label name = "title"> 謎の内容: </label>
+          <%= @mystery.content %>
+      </div>
+      <div class="mb-4">
+        <label name = "title"> 謎の答え: </label>
+          <%= @mystery.correct_answer %>
+      </div>   
+    </div>
+  </div>
+</div>

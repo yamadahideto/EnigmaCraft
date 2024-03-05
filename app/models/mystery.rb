@@ -1,0 +1,2 @@
+class Mystery < ApplicationRecord
+end
