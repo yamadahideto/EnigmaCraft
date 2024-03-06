@@ -1,5 +1,7 @@
 class MysteriesController < ApplicationController
-  before_action :set_mystery, only: [:show, :edit, :update, :destroy]
+  before_action :set_mystery, only: %i[:show :edit :update :destroy]
+  before_action :require_login, only: %i[:new :edit :update :destroy]
+  
   def index
     @mysteries = Mystery.all
   end
@@ -33,7 +35,7 @@ class MysteriesController < ApplicationController
 
   def destroy
     @mystery.destroy!
-    redirect_to mysteries_path
+    redirect_to mysteries_path, status: :see_other
   end
 
   private
