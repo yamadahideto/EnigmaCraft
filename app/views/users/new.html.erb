@@ -1,0 +1,34 @@
+<h1> ユーザー新規登録 </h1>
+
+<div class = "w-1/3 mx-auto">
+  <%= link_to "戻る", root_path %>
+  <div class="bg-amber-700 rounded px-4 py-2">
+      <%= form_with model: @user, local: true, class: "flex flex-col" do |f| %>
+        <div class="mb-4">
+          <%= f.label :name, "ニックネーム" %>
+          <%= f.text_field :name, class: "form-input mt-1 block w-full" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :email, "メールアドレス" %>
+          <%= f.email_field :email, class: "form-input mt-1 block w-full" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :password, "パスワード" %>
+          <%= f.password_field :password, class: "form-input mt-1 block w-full" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :password_confirmation, "パスワード(確認)" %>
+          <%= f.password_field :password_confirmation, class: "form-input mt-1 block w-full" %>
+        </div>
+
+        <div class="mb-4">
+          <button class="btn btn-primary py-1">
+            <%= f.submit "登録する" %>
+          </button>
+        </div>
+      <% end %>
+  </div>
+</div>
