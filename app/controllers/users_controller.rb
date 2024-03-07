@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[:new :create]
+  skip_before_action :require_login, only: [:new, :create]
   def new   
     @user = User.new
   end
@@ -10,6 +10,7 @@ class UsersController < ApplicationController
       auto_login(@user)
       redirect_back_or_to mysteries_path
     else
+      flash.now[:notice] = "ログインできませんでした"
       render "new"
     end
   end

@@ -1,6 +1,6 @@
 class MysteriesController < ApplicationController
-  before_action :set_mystery, only: %i[:show :edit :update :destroy]
-  before_action :require_login, only: %i[:new :edit :update :destroy]
+  before_action :set_mystery, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:new, :edit, :update, :destroy]
   
   def index
     @mysteries = Mystery.all
