@@ -8,10 +8,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       auto_login(@user)
+      flash[:notice] = "ユーザー登録に成功しました"
       redirect_back_or_to mysteries_path
     else
-      flash.now[:notice] = "ログインできませんでした"
-      render "new"
+      flash.now[:alert] = "ユーザー登録に失敗しました"  
+      render :new, status: :unprocessable_entity
     end
   end
 
