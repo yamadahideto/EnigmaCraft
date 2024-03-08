@@ -1,7 +1,8 @@
 ja:
   activerecord:
     models:
-      user: ユーザー
+      user: ユーザー登録
+      user_session: ログイン
       mystery: 謎
     attributes:
       user:

@@ -1,9 +1,19 @@
 ja:
+  flash:
+    messages:
+      success: "%{text}に成功しました"
+      error: "%{text}に失敗しました"
+      create: "%{text}を作成しました"
+      not_create: "%{text}を作成できませんでした"
+      updated: "%{text}を更新しました"
+      not_updated: "%{text}を更新できませんでした"
+      deleted: "%{text}を削除しました"
   helpers:
     title: タイトル
     mystery_type: 謎のタイプ
     content: 謎の内容
     correct_answer: 謎の答え
+    require_login: ログインしてください
     link:
       back: 戻る
       edit: 編集
@@ -19,6 +29,7 @@ ja:
     new:
       title: ログイン
       login: ログイン
+      logout: ログアウト
   users:
     new:
       title: ユーザー登録
