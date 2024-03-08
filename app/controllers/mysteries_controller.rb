@@ -20,7 +20,7 @@ class MysteriesController < ApplicationController
       redirect_to mysteries_path
     else
       flash.now[:alert] = "謎の作成に失敗しました"  
-      render :index, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -33,7 +33,7 @@ class MysteriesController < ApplicationController
       redirect_to mysteries_path
     else
       flash.now[:alert] = "謎の編集に失敗しました"  
-      render :index, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
