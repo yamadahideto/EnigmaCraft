@@ -1,0 +1,24 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      mystery: 謎
+    attributes:
+      user:
+        name: ニックネーム
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(確認)
+        create: 登録
+      mystery:
+        title: タイトル
+        type: 謎のタイプ
+        type_image: 画像謎
+        type_code: 暗号謎
+        content: 謎の内容
+        correct_answer: 謎の正解
+
+  # 全てのmodelで共通して使用するattributesを定義
+  attributes:
+    created_at: 作成日
+    updated_at: 更新日

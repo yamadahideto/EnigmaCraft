@@ -6,9 +6,8 @@
 
 <button class="btn btn-primary">daisyUI</button>
 <div>
-  <%= link_to "謎一覧", mysteries_path %>
-
-  <%= link_to "ログイン", login_path %>
-  <%= link_to "ユーザー登録", new_user_path %>
+  <%= link_to t('mysteries.index.title'), mysteries_path %>
+  <%= link_to t('user_sessions.new.title'), login_path %>
+  <%= link_to t('users.new.title'), new_user_path %>
 
 </div>

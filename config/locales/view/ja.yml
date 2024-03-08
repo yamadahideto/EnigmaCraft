@@ -1,0 +1,33 @@
+ja:
+  helpers:
+    title: タイトル
+    mystery_type: 謎のタイプ
+    content: 謎の内容
+    correct_answer: 謎の答え
+    link:
+      back: 戻る
+      edit: 編集
+      delete: 削除
+      post: 謎投稿
+      logout: ログアウト
+    submit:
+      create: 登録
+      submit: 保存
+      update: 更新
+      title: タイトル
+  user_sessions:
+    new:
+      title: ログイン
+      login: ログイン
+  users:
+    new:
+      title: ユーザー登録
+  mysteries:
+    index:
+      title: 謎一覧
+    new:
+      title: 謎投稿
+    show:
+      title: 謎詳細
+    edit:
+      title: 謎編集

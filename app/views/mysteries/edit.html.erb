@@ -1,7 +1,6 @@
-<h1>謎の編集</h1>
-
+<h1> <%= t('.title') %>  </h1>
 <div class = "w-1/3 mx-auto">
-  <%= link_to "戻る", mystery_path(@mystery) %>
+  <%= link_to t('helpers.link.back'), mystery_path(@mystery) %>
 
   <div class="bg-amber-700 rounded px-4 py-2">
     <%# 投稿フォームのパーシャル %>

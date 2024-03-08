@@ -5,9 +5,9 @@
 <button class="bg-gray-900 hover:bg-gray-800 text-white rounded px-4 py-2">tailwind</button>
 
 <button class="btn btn-primary">daisyUI</button>
-<%= link_to "謎の投稿", new_mystery_path %>
+<%= link_to t('helpers.link.post'), new_mystery_path %>
 <% if logged_in? %>
-  <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete } %>
+  <%= link_to t('helpers.link.logout'), logout_path, data: { turbo_method: :delete } %>
   ログインしているよ！！
 <% else %>
   ログインしてないよ！！
