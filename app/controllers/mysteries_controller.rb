@@ -1,5 +1,7 @@
 class MysteriesController < ApplicationController
   before_action :set_mystery, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: [:new, :edit, :update, :destroy]
+  
   def index
     @mysteries = Mystery.all
   end
@@ -14,9 +16,11 @@ class MysteriesController < ApplicationController
   def create
     @mystery = Mystery.new(mystery_params)
     if @mystery.save
+      flash[:notice] = "謎の作成に成功しました"
       redirect_to mysteries_path
     else
-      render :index
+      flash.now[:alert] = "謎の作成に失敗しました"  
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -25,15 +29,18 @@ class MysteriesController < ApplicationController
 
   def update
     if @mystery.update(mystery_params)
+      flash[:notice] = "謎の更新に成功しました"
       redirect_to mysteries_path
     else
-      render :index
+      flash.now[:alert] = "謎の編集に失敗しました"  
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @mystery.destroy!
-    redirect_to mysteries_path
+    flash[:notice] = "謎の削除に成功しました"
+    redirect_to mysteries_path, status: :see_other
   end
 
   private
