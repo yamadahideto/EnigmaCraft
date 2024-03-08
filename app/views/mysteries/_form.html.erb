@@ -1,32 +1,33 @@
 <%= form_with model: @mystery, local: true, class: "flex flex-col" do |f| %>
   <div class="mb-4">
-    <%= f.label :title, "タイトル" %>
+    <%= f.label :title %>
     <%= f.text_field :title, class: "form-input mt-1 block w-full" %>
   </div>
 
   <div class="mb-4">
     <%= f.radio_button :mystery_type, :image %>
-    <%= f.label :mystery_type_image, "画像謎", class: "ml-2" %>
+    <%= f.label :type_image, class: "ml-2" %>
   </div>
 
   <div class="mb-4">
     <%= f.radio_button :mystery_type, :text %>
-    <%= f.label :mystery_type_text, "暗号謎", class: "ml-2" %>
+    <%= f.label :type_code, class: "ml-2" %>
   </div>
 
   <div class="mb-4">
-    <%= f.label :content, "謎の内容" %>
+    <%= f.label :content %>
     <%= f.text_field :content, class: "form-input mt-1 block w-full" %>
   </div>
 
   <div class="mb-4">
-    <%= f.label :correct_answer, "謎の回答" %>
+    <%= f.label :correct_answer %>
     <%= f.text_field :correct_answer, class: "form-input mt-1 block w-full" %>
   </div>
 
   <div class="mb-4">
     <button class="btn btn-primary py-1">
-      <%= f.submit "編集する" %>
+      <%= f.submit @mystery.new_record? ? t('helpers.submit.create') : t('helpers.submit.update') %>
+        <%# 新規登録ならcreate訳文 編集ならupdate訳文を使用する %>
     </button>
   </div>
 <% end %>
