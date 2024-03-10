@@ -1,33 +1,38 @@
-<%= form_with model: @mystery, local: true, class: "flex flex-col" do |f| %>
-  <div class="mb-4">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: "form-input mt-1 block w-full" %>
-  </div>
+<div class = "w-1/2 mx-auto">
+  <div class="bg-mainContentColor shadow-xl rounded px-7 py-5 pb-12 my-20">
+    <div class = "flex place-content-end">
+      <%= link_to t('helpers.link.back'), mysteries_path %>
+      <button class="btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> AIでつくる </button>
+    </div>
+    <h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
+      <%= t('mysteries.new.title') %>
+    </h1>
+    <%= form_with model: @mystery, local: true, class: "flex flex-col text-mainTextColor" do |f| %>
+      <div class="mb-4 input input-bordered flex items-center gap-2">
+        <%= f.text_field :title, placeholder: "謎のタイトル", class: "grow" %>
+      </div>
 
-  <div class="mb-4">
-    <%= f.radio_button :mystery_type, :image %>
-    <%= f.label :type_image, class: "ml-2" %>
-  </div>
+      <div class="mb-4">
+        <%= f.radio_button :mystery_type, :image %>
+        <%= f.label :type_image, class: "ml-2" %>
+      </div>
 
-  <div class="mb-4">
-    <%= f.radio_button :mystery_type, :text %>
-    <%= f.label :type_code, class: "ml-2" %>
-  </div>
+      <div class="mb-4">
+        <%= f.radio_button :mystery_type, :text %>
+        <%= f.label :type_code, class: "ml-2" %>
+      </div>
 
-  <div class="mb-4">
-    <%= f.label :content %>
-    <%= f.text_field :content, class: "form-input mt-1 block w-full" %>
-  </div>
+      <div class="mb-4 input input-bordered flex items-center gap-2">
+        <%= f.text_field :content, placeholder: "謎の内容", class: "grow" %>
+      </div>
+      <div class="mb-4 input input-bordered flex items-center gap-2">
+        <%= f.text_field :correct_answer, placeholder: "謎の答え", class: "grow" %>
+      </div>
 
-  <div class="mb-4">
-    <%= f.label :correct_answer %>
-    <%= f.text_field :correct_answer, class: "form-input mt-1 block w-full" %>
-  </div>
-
-  <div class="mb-4">
-    <button class="btn btn-primary py-1">
-      <%= f.submit @mystery.new_record? ? t('helpers.submit.create') : t('helpers.submit.update') %>
+      <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto">
+        <%= f.submit @mystery.new_record? ? t('helpers.submit.create') : t('helpers.submit.update') %>
         <%# 新規登録ならcreate訳文 編集ならupdate訳文を使用する %>
-    </button>
+      </button>
+    <% end %>
   </div>
-<% end %>
+</div>

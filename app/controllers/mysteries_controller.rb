@@ -16,7 +16,7 @@ class MysteriesController < ApplicationController
   def create
     @mystery = Mystery.new(mystery_params)
     if @mystery.save
-      flash[:notice] = t('flash.messages.created', text: Mystery.model_name.human )
+      flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human )
       redirect_to mysteries_path
     else
       flash[:notice] = t('flash.messages.not_create', text: Mystery.model_name.human )
