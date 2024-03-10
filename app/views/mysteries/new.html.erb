@@ -1,9 +1,3 @@
-<h1> <%= t('.title') %>  </h1>
-
-<div class = "w-1/3 mx-auto">
-  <%= link_to t('helpers.link.back'), mysteries_path %>
-
-  <div class="bg-amber-700 rounded px-4 py-2">
-    <%= render 'form', mystery: @mystery %>
-  </div>
+<div class = "mx-auto">
+  <%= render 'form', mystery: @mystery %>
 </div>

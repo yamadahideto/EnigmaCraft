@@ -4,7 +4,7 @@ ja:
       success: "%{text}に成功しました"
       error: "%{text}に失敗しました"
       create: "%{text}を作成しました"
-      not_create: "%{text}を作成できませんでした"
+      not_create: "%{text}を作成できません"
       updated: "%{text}を更新しました"
       not_updated: "%{text}を更新できませんでした"
       deleted: "%{text}を削除しました"
@@ -18,7 +18,7 @@ ja:
       back: 戻る
       edit: 編集
       delete: 削除
-      post: 謎投稿
+      post: 謎をつくる
       logout: ログアウト
     submit:
       create: 登録
@@ -37,7 +37,7 @@ ja:
     index:
       title: 謎一覧
     new:
-      title: 謎投稿
+      title: 謎をつくる
     show:
       title: 謎詳細
     edit:

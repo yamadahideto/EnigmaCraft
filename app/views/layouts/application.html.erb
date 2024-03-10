@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@700&display=swap" rel="stylesheet">
   </head>
-
-  <body>
+  <body class="flex flex-col min-h-screen bg-bodyColor">
     <%= render "shared/header" %>
     <%= render "shared/flash" %>
-
-    <%= yield %>
-    <%= render "shared/footer" %>
+    <div class="flex-grow bg-body">
+      <%= yield %>
+    </div>
+      <%= render 'shared/footer' %>
   </body>
 </html>

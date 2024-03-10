@@ -6,14 +6,14 @@ ja:
       mystery: 謎
     attributes:
       user:
-        name: ニックネーム
+        name: ユーザーネーム
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード(確認)
         create: 登録
       mystery:
         title: タイトル
-        type: 謎のタイプ
+        mystery_type: 謎のタイプ
         type_image: 画像謎
         type_code: 暗号謎
         content: 謎の内容

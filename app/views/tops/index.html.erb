@@ -1,13 +1,20 @@
-<h1 class="text-5xl font-bold underline py-5">
-    Hello world!
-</h1>
-
-<button class="bg-gray-900 hover:bg-gray-800 text-white rounded px-4 py-2">tailwind</button>
-
-<button class="btn btn-primary">daisyUI</button>
-<div>
-  <%= link_to t('mysteries.index.title'), mysteries_path %>
-  <%= link_to t('user_sessions.new.title'), login_path %>
-  <%= link_to t('users.new.title'), new_user_path %>
-
+<div class = "min-w-max bg-mainContentColor font-zen-old-mincho font-medium mx-10 my-10">
+  <h1 class = "text-3xl text-center text-mainTextColor" > <%= t('.title') %> </h1>
+  <div class = "my-8 pb-8 mx-20">  
+    <div class="rounded mx-auto mb-8 text-mainTextColor bg-white border-solid border-2 border-white rounded-lg drop-shadow-xl py-2 my-8"> 
+      <h1 class="text-2xl font-zen-old-mincho font-bold text-center py-5">
+        <%= t("helpers.title") %>:
+        <p> EnigmaPortalsへようこそ!!</p>
+        <p> 謎の作成・共有が簡単にできます！</p>
+        <p> 作ってみたいけれど作り方がわからない方はAIの力を借りて生成もできるので試してみてね </p>
+        <%= link_to t('mysteries.index.title'), mysteries_path %>
+      </h1>
+    </div>
+  </div>
 </div>
+<% unless logged_in? %>
+  <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
+  <%= link_to new_user_path  do %>
+    <button class="btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> 謎を作ってみる </button>
+  <% end %>
+<% end %>
