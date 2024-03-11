@@ -11,7 +11,10 @@
   <h1 class="text-2xl font-bold underline py-5">
     <%= t("helpers.image") %>:
     <% if mystery.image.attached? %>
-      <%= image_tag mystery.image %>
+      <%# imageが保存されていれば画像を表示 %>
+      <%= image_tag mystery.image.variant(:indexsize) %>
+    <% else %>
+      <%= image_tag 'avator.jpeg', size: "200x200" %>
     <% end %>
   </h1>
 

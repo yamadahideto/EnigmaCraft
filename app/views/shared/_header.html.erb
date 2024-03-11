@@ -9,20 +9,24 @@
         <%= link_to t('helpers.link.logout'), logout_path, class: "hover:text-selected-text transition-all duration-300", data: {turbo_method: :delete} %>
         <div class="avatar">
           <div class="w-20 rounded-full hover:cursor-pointer ml-12">
-            <%= image_tag 'avator.jpeg' %>
+            <%= image_tag current_user.avator.variant(:avatorsize) %>
+          </div>
+        </div>
+        <div class="md:hidden">
+          <div class="avatar">
+            <div class="w-16 rounded-full">
+                <% if current_user.avator.attached? %>
+                  <%= image_tag current_user.avator.variant(:avatorsize) %>
+                <% else %>
+                  <%= image_tag 'avator.jpeg' %>
+                <% end %>
+            </div>
           </div>
         </div>
       <% else %>
         <%= link_to t('user_sessions.new.title'), login_path %>
         <%= link_to t('users.new.title'), new_user_path %>
       <% end  %>
-    </div>
-    <div class="md:hidden">
-      <div class="avatar">
-        <div class="w-16 rounded-full">
-          <%= image_tag 'avator.jpeg' %>
-        </div>
-      </div>
     </div>
   </div>
 </header>
