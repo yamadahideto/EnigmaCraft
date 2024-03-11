@@ -4,7 +4,7 @@ ja:
       success: "%{text}に成功しました"
       error: "%{text}に失敗しました"
       create: "%{text}を作成しました"
-      not_create: "%{text}を作成できません"
+      not_create: "%{text}を作成できませんでした"
       updated: "%{text}を更新しました"
       not_updated: "%{text}を更新できませんでした"
       deleted: "%{text}を削除しました"
@@ -12,6 +12,7 @@ ja:
     title: タイトル
     mystery_type: 謎のタイプ
     content: 謎の内容
+    image: 謎画像
     correct_answer: 謎の答え
     require_login: ログインしてください
     link:

@@ -24,6 +24,8 @@ RUN yarn install
 
 RUN yarn add daisyui
 
+RUN apt-get update && apt-get install -y imagemagick
+
 COPY . /EnigmaCraft/
 
 COPY entrypoint.sh /usr/bin/
