@@ -7,7 +7,8 @@
     <h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
       <%= t('mysteries.new.title') %>
     </h1>
-    <%= form_with model: @mystery, local: true, class: "flex flex-col text-mainTextColor" do |f| %>
+    <%= form_with model: @mystery, local: true, multipart: true, class: "flex flex-col text-mainTextColor" do |f| %>
+      <%= render "/shared/error_messages", model: f.object %>
       <div class="mb-4 input input-bordered flex items-center gap-2">
         <%= f.text_field :title, placeholder: "謎のタイトル", class: "grow" %>
       </div>
@@ -20,6 +21,10 @@
       <div class="mb-4">
         <%= f.radio_button :mystery_type, :text %>
         <%= f.label :type_code, class: "ml-2" %>
+      </div>
+
+      <div class="mb-4 input input-bordered flex items-center gap-2">
+        <%= f.file_field :image, placeholder: "謎の画像を投稿", class: "grow" %>
       </div>
 
       <div class="mb-4 input input-bordered flex items-center gap-2">

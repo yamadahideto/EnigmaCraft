@@ -19,7 +19,7 @@ class MysteriesController < ApplicationController
       flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human )
       redirect_to mysteries_path
     else
-      flash[:notice] = t('flash.messages.not_create', text: Mystery.model_name.human )
+      flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human )
       render :new, status: :unprocessable_entity
     end
   end
@@ -46,7 +46,7 @@ class MysteriesController < ApplicationController
   private
 
   def mystery_params
-    params.require(:mystery).permit(:title, :mystery_type, :content, :correct_answer)
+    params.require(:mystery).permit(:title, :mystery_type, :image, :content, :correct_answer)
   end
 
   def set_mystery
