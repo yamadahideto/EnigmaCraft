@@ -12,7 +12,7 @@
     <%= t("helpers.image") %>:
     <% if mystery.image.attached? %>
       <%# imageが保存されていれば画像を表示 %>
-      <%= image_tag mystery.image.variant(:indexsize) %>
+      <%= image_tag mystery.image %>
     <% else %>
       <%= image_tag 'avator.jpeg', size: "200x200" %>
     <% end %>
