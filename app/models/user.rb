@@ -1,9 +1,7 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
-  has_one_attached :avator do |imagesize|
-    imagesize.variant :avatorsize, resize_to_limit: [200, 200]
-    # 画像サイズを事前に決めておく
-  end
+  has_one_attached :avator
+
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   validates :password, length: { minimum: 5 }, if: -> { new_record? || changes[:crypted_password] }

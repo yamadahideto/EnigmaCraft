@@ -55,7 +55,11 @@ class MysteriesController < ApplicationController
 
   def resize_image(params)
     if params[:image]
-      params[:image].tempfile = ImageProcessing::MiniMagick.source(params[:image].tempfile).resize_to_limit(300,300).call
+      params[:image].tempfile = ImageProcessing::MiniMagick
+      .source(params[:image].tempfile)
+      .convert("webp") #webpに変換して保存
+      .resize_to_limit(300,300) #リサイズして保存
+      .call
     end
     params
   end
