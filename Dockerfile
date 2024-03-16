@@ -12,6 +12,9 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
   && apt-get update -qq \
   && apt-get install -y nodejs yarn
 
+RUN apt-get update
+RUN apt-get install vim
+
 WORKDIR /EnigmaCraft
 
 COPY Gemfile Gemfile.lock /EnigmaCraft/

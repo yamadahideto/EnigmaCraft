@@ -14,7 +14,7 @@ class MysteriesController < ApplicationController
   end
 
   def create
-    @mystery = Mystery.new(mystery_params)
+    @mystery = Mystery.new(resize_image(mystery_params))
     if @mystery.save
       flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human )
       redirect_to mysteries_path
@@ -38,6 +38,8 @@ class MysteriesController < ApplicationController
   end
 
   def destroy
+    # 削除時にS3ストレージの画像も削除
+    @mystery.image.purge_later
     @mystery.destroy!
       flash[:notice] = t('flash.messages.deleted', text: Mystery.model_name.human )
     redirect_to mysteries_path, status: :see_other
@@ -51,5 +53,16 @@ class MysteriesController < ApplicationController
 
   def set_mystery
     @mystery = Mystery.find(params[:id])
+  end
+
+  def resize_image(params)
+    if params[:image]
+      params[:image].tempfile = ImageProcessing::MiniMagick
+      .source(params[:image].tempfile)
+      .convert("webp") #webpに変換して保存
+      .resize_to_limit(300,300) #リサイズして保存
+      .call
+    end
+    params
   end
 end
