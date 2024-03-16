@@ -38,6 +38,8 @@ class MysteriesController < ApplicationController
   end
 
   def destroy
+    # 削除時にS3ストレージの画像も削除
+    @mystery.image.purge_later
     @mystery.destroy!
       flash[:notice] = t('flash.messages.deleted', text: Mystery.model_name.human )
     redirect_to mysteries_path, status: :see_other
