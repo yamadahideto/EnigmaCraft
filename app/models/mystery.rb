@@ -6,4 +6,3 @@ class Mystery < ApplicationRecord
   validates :content, presence: true
   validates :correct_answer, presence: true
 end
-
