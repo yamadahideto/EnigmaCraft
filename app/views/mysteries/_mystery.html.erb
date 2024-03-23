@@ -1,29 +1,15 @@
-
 <div class="rounded text-mainTextColor bg-white border-solid border-2 border-white rounded-lg drop-shadow-xl py-2 my-8"> 
-  <h1 class="text-2xl font-zen-old-mincho font-bold underline py-5">
-    <%= t("helpers.title") %>:
-    <%= link_to mystery.title, mystery_path(mystery) %>
-  </h1>
-  <h1 class="text-2xl font-bold underline py-5">
-    <%= t("helpers.mystery_type") %>:
-    <%= mystery.mystery_type %>
-  </h1>
-  <h1 class="text-2xl font-bold underline py-5">
-    <%= t("helpers.image") %>:
-    <% if mystery.image.attached? %>
-      <%# imageが保存されていれば画像を表示 %>
-      <%= image_tag mystery.image %>
-    <% else %>
-      <%= image_tag 'avator.jpeg', size: "200x200" %>
-    <% end %>
-  </h1>               
-
-  <h1 class="text-2xl font-bold underline py-5">
-    <%= t("helpers.content") %>:
-    <%= mystery.content %>
-  </h1>
-  <h1 class="text-2xl font-bold underline py-5">
-    <%= t("helpers.correct_answer") %>:
-    <%= mystery.correct_answer %>
-  </h1>
+  <div class = "mx-auto px-3">
+    <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
+      <%= t("helpers.title") %>:
+      <%= link_to mystery.title, mystery_path(mystery), class: "underline" %>
+    </h1>
+    <h1 class="text-2xl font-bold py-5">
+      <%= t("helpers.mystery_type") %>:
+      <%= mystery.mystery_type %>
+    </h1>
+      <h1 class="text-2xl font-bold underline py-5">
+          <%= image_tag 'interrogation.webp', size: "200x200", class: "mx-auto" %>
+      </h1>               
+  </div>
 </div>
