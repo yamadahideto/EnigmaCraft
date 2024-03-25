@@ -1,3 +1,20 @@
-<div class = "mx-auto">
-  <%= render 'form', mystery: @mystery %>
+<div class = "w-1/2 mx-auto">
+  <div class="bg-mainContentColor shadow-xl rounded px-7 py-5 pb-12 my-20">
+    <div class = "flex place-content-end">
+      <%= link_to t('helpers.link.back'), mysteries_path %>
+      <button id = "ai_generate_button", class="hidden btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> AIでつくる </button>
+      <button id ="image_post_button", class = "btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> 自分でつくる </button>
+    </div>
+
+    <div class = "mx-auto">
+      <div id="ai_generate_form">
+        <%= render 'aigenerate_form', mystery: @mystery %>
+      </div>
+
+      <div id="image_post_form", class = "hidden">
+        <%= render 'form', mystery: @mystery %>
+      </div>
+    </div>
+  </div>
 </div>
+

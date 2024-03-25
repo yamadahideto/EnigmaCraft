@@ -50,6 +50,7 @@ gem "image_processing", "~> 1.2"
 gem 'mini_magick'
 gem "aws-sdk-s3", require: false
 gem 'active_storage_validations'
+gem "ruby-openai"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -59,7 +60,7 @@ group :development, :test do
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
-  gem 'overcommit'
+  # gem 'overcommit'
 end
 
 group :development do
