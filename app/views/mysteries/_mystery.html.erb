@@ -8,8 +8,12 @@
       <%= t("helpers.mystery_type") %>:
       <%= mystery.mystery_type %>
     </h1>
-      <h1 class="text-2xl font-bold underline py-5">
-          <%= image_tag 'interrogation.webp', size: "200x200", class: "mx-auto" %>
-      </h1>               
+    <h1 class="text-2xl font-bold underline py-5">
+      <% if mystery.image.attached? %>
+        <%= image_tag mystery.image, size: '300x300', class: "mx-auto rounded-lg" %>
+      <% else %>
+        <%= image_tag 'interrogation.webp', size: "300x300", class: "mx-auto rounded-lg" %>
+      <% end %>
+    </h1>               
   </div>
 </div>

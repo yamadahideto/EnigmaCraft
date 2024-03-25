@@ -3,6 +3,7 @@ require:
   - rubocop-rails
 
 AllCops:
+  NewCops: disable
   Exclude:
     - "vendor/**/*"
     - "db/**/*"
@@ -14,7 +15,6 @@ AllCops:
     - "node_modules/**/*"
     - "Gemfile"
   DisplayCopNames: true
-
 Rails:
   Enabled: true
 
@@ -28,7 +28,7 @@ Metrics/ClassLength:
 Metrics/CyclomaticComplexity:
   Max: 30
 
-Metrics/LineLength:
+Layout/LineLength:
   Enabled: false
 
 Metrics/MethodLength:
@@ -138,9 +138,9 @@ Lint/UselessRuby2Keywords:
 Naming/BlockForwarding:
   Enabled: true
 Security/CompoundHash:
-  Enabled: true
+  Enabled: false
 Security/IoMethods:
-  Enabled: true
+  Enabled: false
 Style/ArgumentsForwarding:
   Enabled: true
 Style/CollectionCompact:

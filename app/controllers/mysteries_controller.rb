@@ -14,6 +14,17 @@ class MysteriesController < ApplicationController
 
   def create
     @mystery = Mystery.new(resize_image(mystery_params))
+    client = OpenAI::Client.new(access_token: ENV.fetch('OPENAI_ACCESS_TOKEN', nil))
+    response = client.images.generate(
+      parameters: {
+        model: 'dall-e-3',
+        prompt: @mystery.correct_answer.to_s
+      }
+    )
+    image_url = response.dig('data', 0, 'url')
+    downloaded_image = URI.open(image_url)
+    @mystery.image.attach(io: downloaded_image, filename: "#{@mystery.correct_answer}.webp")
+
     if @mystery.save
       flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
       redirect_to mysteries_path

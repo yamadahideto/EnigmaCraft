@@ -7,16 +7,6 @@
     <%= f.text_field :title, placeholder: "謎のタイトル", class: "grow" %>
   </div>
 
-  <div class="mb-4">
-    <%= f.radio_button :mystery_type, :image %>
-    <%= f.label :type_image, class: "ml-2" %>
-  </div>
-
-  <div class="mb-4">
-    <%= f.radio_button :mystery_type, :text %>
-    <%= f.label :type_code, class: "ml-2" %>
-  </div>
-
   <div class="mb-4 input input-bordered flex items-center gap-2">
     <%= f.file_field :image, placeholder: "謎の画像を投稿", class: "grow" %>
   </div>
