@@ -1,0 +1,47 @@
+ja:
+  flash:
+    messages:
+      success: "%{text}に成功しました"
+      error: "%{text}に失敗しました"
+      create: "%{text}を作成しました"
+      not_create: "%{text}を作成できませんでした"
+      updated: "%{text}を更新しました"
+      not_updated: "%{text}を更新できませんでした"
+      deleted: "%{text}を削除しました"
+  helpers:
+    title: タイトル
+    genre: "ジャンル"
+    mystery_type: 謎のタイプ
+    content: 謎の内容
+    image: 謎画像
+    correct_answer: 謎の答え
+    require_login: ログインしてください
+    link:
+      back: 戻る
+      edit: 編集
+      delete: 削除
+      post: 謎をつくる
+      logout: ログアウト
+    submit:
+      create: 登録
+      submit: 保存
+      update: 更新
+      title: タイトル
+  user_sessions:
+    new:
+      title: ログイン
+      login: ログイン
+      logout: ログアウト
+  users:
+    new:
+      title: ユーザー登録
+  mysteries:
+    index:
+      title: 謎一覧
+    new:
+      title: 謎をつくる
+      ai_new_title: AIでつくる
+    show:
+      title: 謎詳細
+    edit:
+      title: 謎編集
