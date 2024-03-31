@@ -44,12 +44,37 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
+# 会員登録
+gem 'sorcery'
+# 日本語化
+gem 'rails-i18n', '~> 7.0.0'
+
+# 画像投稿
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
+gem 'mini_magick'
+gem "aws-sdk-s3", require: false
+gem 'active_storage_validations'
+
+# OpenAI API
+gem "ruby-openai"
+
+# アイコン
+gem 'font-awesome-rails'
+
+# ページネーション
+gem 'kaminari'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem 'pry-rails'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'pry-byebug'
+  # gem 'overcommit'
 end
 
 group :development do
