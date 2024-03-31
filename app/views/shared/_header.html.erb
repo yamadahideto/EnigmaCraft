@@ -2,8 +2,6 @@
   <div class="container mx-auto flex justify-between items-center md:px-14 lg:px-10">
     <%= link_to "EnigmaPortals", root_path, class: "text-3xl mr-4" %>
     <div class="space-x-7 text-base hidden md:flex items-center">
-      <%= link_to "ユーザーランキング", "#" , class: "hover:text-selected-text transition-all duration-300" %>
-      <%= link_to "謎ランキング", "#" , class: "hover:text-selected-text transition-all duration-300" %>
       <% if logged_in? %>
         <%= link_to t('helpers.link.post'), new_mystery_path, class: "hover:text-selected-text transition-all duration-300" %>
         <%= link_to t('helpers.link.logout'), logout_path, class: "hover:text-selected-text transition-all duration-300", data: {turbo_method: :delete} %>
@@ -24,6 +22,7 @@
                 <% else %>
                   <%= image_tag 'avator.jpeg' %>
                 <% end %>
+                <p class = "test"> テストです <p>
             </div>
           </div>
         </div>

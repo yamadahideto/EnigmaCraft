@@ -1,7 +1,7 @@
 <div class="rounded text-mainTextColor bg-white border-solid border-2 border-white rounded-lg drop-shadow-xl py-2 my-8"> 
   <div class = "mx-auto px-3">
     <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
-      <%= t("helpers.title") %>:
+      <%= t("helpers.genre") %>:
       <%= link_to mystery.title, mystery_path(mystery), class: "underline" %>
     </h1>
     <h1 class="text-2xl font-bold py-5">
@@ -14,6 +14,6 @@
       <% else %>
         <%= image_tag 'interrogation.webp', size: "300x300", class: "mx-auto rounded-lg" %>
       <% end %>
-    </h1>               
-  </div>
+    </h1>     
+  </div>    
 </div>

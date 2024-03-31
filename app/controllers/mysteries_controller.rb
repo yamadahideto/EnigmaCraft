@@ -1,12 +1,15 @@
 class MysteriesController < ApplicationController
-  before_action :set_mystery, only: %i[show edit update destroy]
+  before_action :set_mystery, only: %i[edit update destroy]
   before_action :require_login, only: %i[new edit update destroy]
 
   def index
-    @mysteries = Mystery.all
+    @mysteries = Mystery.order(id: :DESC).page(params[:page]).per(9)
   end
 
-  def show; end
+  def show
+    @mystery = Mystery.find(params[:id])
+    @answer = Answer.new
+  end
 
   def new
     @mystery = Mystery.new
@@ -18,7 +21,7 @@ class MysteriesController < ApplicationController
     response = client.images.generate(
       parameters: {
         model: 'dall-e-3',
-        prompt: @mystery.correct_answer.to_s
+        prompt: "Generates a puzzle-solving image that resembles a ciphertext that abstracts the 「#{@mystery.correct_answer}」 and allows you to reach the answer by association"
       }
     )
     image_url = response.dig('data', 0, 'url')
