@@ -3,15 +3,14 @@
     <div class = "flex place-content-end">
       <%= link_to t('helpers.link.back'), mysteries_path %>
     </div>
-
     <div class = "mx-auto px-3">
       <h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
         <%= t('mysteries.show.title') %>
       </h1>
       <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
+        <%= t("helpers.genre") %>:
         <%= @mystery.title %>
       </h1>
-
       <h1 class="text-2xl font-bold py-5">
         <%= t("helpers.content") %>:
         <%= @mystery.content %>
@@ -19,32 +18,33 @@
       <h1 class="text-2xl font-bold underline py-5">
         <%= image_tag @mystery.image, size: '300x300', class: "mx-auto rounded-lg" %>
       </h1>         
-      <%= form_with url: "#", local: true do |f| %>
+      <%= form_with model:[@mystery, @answer], local: true do |f| %>
         <h1 class="text-2xl font-bold py-5">
           <%= t("helpers.correct_answer") %>:
           <div class="mb-4 input input-bordered flex items-center gap-2">
-            <%= f.text_field :correct_answer, placeholder: "謎の答え", class: "grow" %>
+            <%= f.text_field :response, placeholder: "ひらがなで入力", class: "grow" %>
           </div>
+          <%= f.hidden_field :mystery_id, value: @mystery.id %>
+          <%= f.hidden_field :correct_flag, value: true %>
+          <% if current_user %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+          <% end %>
         </h1>
-        <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto">
-          回答
-          <%# 新規登録ならcreate訳文 編集ならupdate訳文を使用する %>
-        </button>
+        <% if logged_in? %>
+          <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto">
+            回答
+          </button>
+        <% else %>
+          <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto" disabled>
+            ログインすると</br>回答できます
+          </button>
+        <% end %>
       <% end %> 
     </div>
+    <%= link_to "https://twitter.com/share?url=https://enigmaportals.com/&text=謎を解いてみて！" do %>
+      <p><i class="fa-brands fa-x-twitter" style='color: #3399FF;'></i>シェア</p>
+    <% end %>
 
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-

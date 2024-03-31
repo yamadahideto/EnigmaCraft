@@ -10,6 +10,7 @@ ja:
       deleted: "%{text}を削除しました"
   helpers:
     title: タイトル
+    genre: "ジャンル"
     mystery_type: 謎のタイプ
     content: 謎の内容
     image: 謎画像
@@ -39,6 +40,7 @@ ja:
       title: 謎一覧
     new:
       title: 謎をつくる
+      ai_new_title: AIでつくる
     show:
       title: 謎詳細
     edit:

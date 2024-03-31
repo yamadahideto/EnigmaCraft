@@ -1,8 +1,12 @@
 <div class = "min-w-max bg-mainContentColor font-zen-old-mincho font-medium mx-10 my-10">
   <h1 class = "text-3xl text-center text-mainTextColor" > <%= t('.title') %> </h1>
-  <div class = "mx-auto grid grid-cols-4 gap-7 my-8 mx-20">  
+  <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">  
     <%= render @mysteries %>
   </div>
+  <!-- ページネーション -->
+  <div class="flex justify-center pb-5">
+    <%= paginate @mysteries %>
+  </div>   
 </div>
 <% unless logged_in? %>
   <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
