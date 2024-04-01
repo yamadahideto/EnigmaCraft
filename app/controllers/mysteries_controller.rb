@@ -16,12 +16,13 @@ class MysteriesController < ApplicationController
   end
 
   def create
-    @mystery = Mystery.new(resize_image(mystery_params))
+    @mystery = current_user.mysteries.new(resize_image(mystery_params))
     client = OpenAI::Client.new(access_token: ENV.fetch('OPENAI_ACCESS_TOKEN', nil))
     response = client.images.generate(
       parameters: {
         model: 'dall-e-3',
-        prompt: "Generates a puzzle-solving image that resembles a ciphertext that abstracts the 「#{@mystery.correct_answer}」 and allows you to reach the answer by association"
+        # prompt: "Generates a puzzle-solving image that resembles a ciphertext that abstracts the 「#{@mystery.correct_answer}」 and allows you to reach the answer by association"
+        prompt: "「#{@mystery.title}」の「#{@mystery.correct_answer}」を抽象化して連想で答えに辿り着ける問題を考えてください。ただし直接的な表現は避け、画像で生成してください"
       }
     )
     image_url = response.dig('data', 0, 'url')
@@ -64,7 +65,7 @@ class MysteriesController < ApplicationController
   end
 
   def set_mystery
-    @mystery = Mystery.find(params[:id])
+    @mystery = current_user.mysteries.find(params[:id])
   end
 
   def resize_image(params)
