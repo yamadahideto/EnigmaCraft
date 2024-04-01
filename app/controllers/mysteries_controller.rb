@@ -61,11 +61,11 @@ class MysteriesController < ApplicationController
   private
 
   def mystery_params
-    params.require(:mystery).permit(:title, :mystery_type, :image, :content, :correct_answer, :user_id)
+    params.require(:mystery).permit(:title, :mystery_type, :image, :content, :correct_answer)
   end
 
   def set_mystery
-    @mystery = Mystery.find(params[:id])
+    @mystery = current_user.mysteries.find(params[:id])
   end
 
   def resize_image(params)
