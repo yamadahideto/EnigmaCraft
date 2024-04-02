@@ -28,11 +28,6 @@
           <div class="mb-4 input input-bordered flex items-center gap-2">
             <%= f.text_field :response, placeholder: "ひらがなで入力", class: "grow" %>
           </div>
-          <%= f.hidden_field :mystery_id, value: @mystery.id %>
-          <%= f.hidden_field :correct_flag, value: true %>
-          <% if current_user %>
-            <%= f.hidden_field :user_id, value: current_user.id %>
-          <% end %>
         </h1>
         <% if logged_in? %>
           <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto">
