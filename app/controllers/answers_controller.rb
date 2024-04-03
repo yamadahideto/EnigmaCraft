@@ -5,10 +5,11 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = Answer.new(answer_params)
+    @answer = current_user.answers.new(answer_params)
     user_answer = @answer.response
     correct_answer = Mystery.find(params[:mystery_id]).correct_answer
     if @answer.check_answer(user_answer, correct_answer)
+      @answer.correct_flag = true
       if @answer.save
         flash[:notice] = '正解しました!'
         redirect_to mysteries_path
@@ -29,6 +30,6 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:user_id, :mystery_id, :response, :correct_flag)
+    params.require(:answer).permit(:response)
   end
 end
