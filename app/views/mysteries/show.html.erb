@@ -3,10 +3,7 @@
     <div class = "flex place-content-end">
       <%= link_to t('helpers.link.back'), mysteries_path %>
     </div>
-    <% if current_user.own?(@mystery) %>
-      <%= link_to t('helpers.link.edit'), edit_mystery_path(@mystery) %>
-      <%= link_to t('helpers.link.delete'), mystery_path(@mystery), data: { turbo_method: :delete } %>
-    <% end %>
+
     <div class = "mx-auto px-3">
       <h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
         <%= t('mysteries.show.title') %>
@@ -33,6 +30,11 @@
           <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto">
             回答
           </button>
+
+          <% if current_user.own?(@mystery) %>
+            <%= link_to t('helpers.link.edit'), edit_mystery_path(@mystery) %>
+            <%= link_to t('helpers.link.delete'), mystery_path(@mystery), data: { turbo_method: :delete } %>
+          <% end %>
         <% else %>
           <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto" disabled>
             ログインすると</br>回答できます
