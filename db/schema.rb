@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_29_193035) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_03_081715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,12 +44,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_29_193035) do
 
   create_table "answers", force: :cascade do |t|
     t.boolean "correct_flag", null: false
-    t.bigint "user_id"
-    t.bigint "mystery_id"
+    t.bigint "user_id", null: false
+    t.bigint "mystery_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["mystery_id"], name: "index_answers_on_mystery_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "mysteries", force: :cascade do |t|
@@ -59,8 +65,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_29_193035) do
     t.string "correct_answer", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_mysteries_on_user_id"
+  end
+
+  create_table "mystery_genres", force: :cascade do |t|
+    t.bigint "mystery_id", null: false
+    t.bigint "genre_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_mystery_genres_on_genre_id"
+    t.index ["mystery_id"], name: "index_mystery_genres_on_mystery_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,5 +90,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_29_193035) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "answers", "mysteries"
+  add_foreign_key "answers", "users"
   add_foreign_key "mysteries", "users"
+  add_foreign_key "mystery_genres", "genres"
+  add_foreign_key "mystery_genres", "mysteries"
 end

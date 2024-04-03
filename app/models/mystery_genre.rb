@@ -1,0 +1,2 @@
+class MysteryGenre < ApplicationRecord
+end
