@@ -5,10 +5,9 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = current_user.answers.new(answer_params)
-    user_answer = @answer.response
-    correct_answer = Mystery.find(params[:mystery_id]).correct_answer
-    if @answer.check_answer(user_answer, correct_answer)
+    @answer = current_user.answers.new(answer_params.merge(mystery_id: params[:mystery_id]))
+    # ユーザーの回答と答えを比較
+    if @answer.check_answer(@answer.response, Mystery.find(params[:mystery_id]).correct_answer)
       @answer.correct_flag = true
       if @answer.save
         flash[:notice] = '正解しました!'
