@@ -11,7 +11,6 @@ ja:
   helpers:
     title: タイトル
     genre: "ジャンル"
-    mystery_type: 謎のタイプ
     content: 謎の内容
     image: 謎画像
     correct_answer: 謎の答え
@@ -41,6 +40,7 @@ ja:
     new:
       title: 謎をつくる
       ai_new_title: AIでつくる
+      self_new_title: 自分でつくる
     show:
       title: 謎詳細
     edit:
