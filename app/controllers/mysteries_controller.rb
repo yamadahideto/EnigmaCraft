@@ -13,6 +13,7 @@ class MysteriesController < ApplicationController
 
   def new
     @mystery = Mystery.new
+    @genres = Genre.all
   end
 
   def create
@@ -28,11 +29,11 @@ class MysteriesController < ApplicationController
     image_url = response.dig('data', 0, 'url')
     downloaded_image = URI.open(image_url)
     @mystery.image.attach(io: downloaded_image, filename: "#{@mystery.correct_answer}.webp")
-
     if @mystery.save
       flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
       redirect_to mysteries_path
     else
+      @genres = Genre.all
       flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
       render :new, status: :unprocessable_entity
     end
@@ -61,11 +62,12 @@ class MysteriesController < ApplicationController
   private
 
   def mystery_params
-    params.require(:mystery).permit(:title, :mystery_type, :image, :content, :correct_answer)
+    params.require(:mystery).permit(:title, :genre_id, :image, :content, :correct_answer)
   end
 
   def set_mystery
     @mystery = current_user.mysteries.find(params[:id])
+    @genres = Genre.all
   end
 
   def resize_image(params)

@@ -1,7 +1,14 @@
+<h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
+  <%= t('mysteries.new.ai_new_title') %>
+</h1>
 <%= form_with model: @mystery, local: true, multipart: true, class: "flex flex-col text-mainTextColor" do |f| %>
   <%= render "/shared/error_messages", model: f.object %>
   <div class="mb-4 input input-bordered flex items-center gap-2">
-    <%= f.text_field :title, placeholder: "ジャンルを入力 (例: 電化製品)", class: "grow" %>
+    <%= f.text_field :title, placeholder: "タイトル", class: "grow" %>
+  </div>
+
+  <div class="mb-4 input input-bordered flex items-center gap-2">
+    <%= f.collection_select :genre_id, @genres, :id, :name, prompt: 'ジャンルを選択してください'%>
   </div>
 
   <div class="mb-4 input input-bordered flex items-center gap-2">
