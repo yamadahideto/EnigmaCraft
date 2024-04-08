@@ -34,6 +34,9 @@ ja:
   users:
     new:
       title: ユーザー登録
+    show:
+      title: マイページ
+      edit: マイページ編集
   mysteries:
     index:
       title: 謎一覧

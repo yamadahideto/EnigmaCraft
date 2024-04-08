@@ -5,15 +5,24 @@
       <% if logged_in? %>
         <%= link_to t('helpers.link.post'), new_mystery_path, class: "hover:text-selected-text transition-all duration-300" %>
         <%= link_to t('helpers.link.logout'), logout_path, class: "hover:text-selected-text transition-all duration-300", data: {turbo_method: :delete} %>
-        <div class="avatar">
-          <div class="w-20 rounded-full hover:cursor-pointer ml-12">
-            <% if current_user.avator.attached? %>
-              <%= image_tag current_user.avator %>
-            <% else %>
-              <%= image_tag 'avator.jpeg' %>
-            <% end %>
+        
+        <%# ユーザーアイコン ホバーでメニュー表示 %>
+        <div class="dropdown dropdown-hover">
+          <div class="avatar">
+            <div class="w-20 rounded-full hover:cursor-pointer ml-12 dropdown dropdown-hover ">
+              <% if current_user.avator.attached? %>
+                <%= image_tag current_user.avator%>
+              <% else %>
+                <%= image_tag 'avator.jpeg' %>
+              <% end %>
           </div>
         </div>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li> <%= link_to t('users.show.title'), user_path(current_user.id), class: "hover:text-selected-text transition-all duration-300" %> </li>
+          <li><a>Item 2</a></li>
+        </ul>
+
+      <%# 縮小時のアイコン表示 %>
         <div class="md:hidden">
           <div class="avatar">
             <div class="w-16 rounded-full">

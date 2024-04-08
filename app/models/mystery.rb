@@ -10,10 +10,6 @@ class Mystery < ApplicationRecord
   validates :content, presence: true
   validates :correct_answer, presence: true
 
-  def create_genre(genres)
-    self.genres = Genre.find_or_create_by(name: genres)
-  end
-
   private
 
   def set_default_value
