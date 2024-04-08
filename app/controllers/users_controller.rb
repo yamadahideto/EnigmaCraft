@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[new create]
+  skip_before_action :require_login, only: %i[new create show update edit]
   def new
     @user = User.new
   end
@@ -13,6 +13,25 @@ class UsersController < ApplicationController
     else
       flash.now[:alert] = t('flash.messages.error', text: User.model_name.human)
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def show
+    @user = current_user
+  end
+
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+    if @user.update(resize_avator(user_params))
+      flash[:notice] = t('flash.messages.success', text: User.model_name.human)
+      redirect_to user_path(@user.id)
+    else
+      flash.now[:alert] = t('flash.messages.error', text: User.model_name.human)
+      render :edit, status: :unprocessable_entity
     end
   end
 
