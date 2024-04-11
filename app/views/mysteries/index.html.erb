@@ -1,10 +1,10 @@
 <div class = "min-w-max bg-mainContentColor font-zen-old-mincho font-medium mx-10 my-10">
   <h1 class = "text-3xl text-center text-mainTextColor" > <%= t('.title') %> </h1>
 
-  <%# <%= search_form_for @q, url: mysteries_path do |f| %> 
-    <%# <%= f.search_field :title_cont, id: 'title_cont', placeholder: 'タイトルを検索' %> 
-    <%# <button class = "btn" type = "submit"> 検索 </button> %>
-  <%# <% end %> 
+  <%= search_form_for @q, url: mysteries_path do |f| %> 
+    <%= f.search_field :title_cont, id: 'title_cont', placeholder: 'タイトルを検索' %> 
+    <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto" type = 'submit'> 検索 </button>
+   <% end %>
 
   <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
     <%= render @mysteries %>

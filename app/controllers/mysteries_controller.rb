@@ -2,9 +2,8 @@ class MysteriesController < ApplicationController
   before_action :set_mystery, only: %i[edit update destroy]
   before_action :require_login, only: %i[new edit update destroy]
   def index
-    # @q = Mystery.ransack(params[:q])
-    # @mysteries = @q.result.order(id: :DESC).page(params[:page]).per(9)
-    @mysteries = Mystery.order(id: :DESC).page(params[:page]).per(9)
+    @q = Mystery.ransack(params[:q])
+    @mysteries = @q.result.order(id: :DESC).page(params[:page]).per(12)
   end
 
   def show
