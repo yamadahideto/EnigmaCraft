@@ -2,8 +2,9 @@
   <h1 class = "text-3xl text-center text-mainTextColor" > <%= t('.title') %> </h1>
 
   <%= search_form_for @q, url: mysteries_path do |f| %> 
-    <%= f.search_field :title_cont, id: 'title_cont', placeholder: 'タイトルを検索' %> 
-    <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto" type = 'submit'> 検索 </button>
+    <%= f.search_field :title_cont, id: 'title_cont', placeholder: 'タイトルを検索' %>
+    <%= f.collection_select :genre_id_eq, @genres, :id, :name, include_blank: 'カテゴリーを選択' %>
+    <button class="btn py-1 bg-white text-mainTextColor text-center mx-auto" type = 'submit'> 検索 </button>
    <% end %>
 
   <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
