@@ -19,6 +19,19 @@ class MysteriesController < ApplicationController
 
   def create
     @mystery = current_user.mysteries.new(resize_image(mystery_params))
+    if @mystery.save
+      flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
+      redirect_to mysteries_path
+    else
+      @genres = Genre.all
+      flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  # AI画像生成
+  def generate
+    @mystery = current_user.mysteries.new(resize_image(mystery_params))
     client = OpenAI::Client.new(access_token: ENV.fetch('OPENAI_ACCESS_TOKEN', nil))
     response = client.images.generate(
       parameters: {
