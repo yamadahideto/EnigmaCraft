@@ -3,13 +3,18 @@
     <div class = "flex place-content-end">
       <%= link_to t('helpers.link.back'), mysteries_path %>
     </div>
+
     <div class = "mx-auto px-3">
       <h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
         <%= t('mysteries.show.title') %>
       </h1>
       <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
-        <%= t("helpers.genre") %>:
+        <%= t("helpers.title") %>:
         <%= @mystery.title %>
+      </h1>
+      <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
+        <%= t("helpers.genre") %>:
+        <%= @mystery.genre.name %>
       </h1>
       <h1 class="text-2xl font-bold py-5">
         <%= t("helpers.content") %>:
@@ -24,16 +29,16 @@
           <div class="mb-4 input input-bordered flex items-center gap-2">
             <%= f.text_field :response, placeholder: "ひらがなで入力", class: "grow" %>
           </div>
-          <%= f.hidden_field :mystery_id, value: @mystery.id %>
-          <%= f.hidden_field :correct_flag, value: true %>
-          <% if current_user %>
-            <%= f.hidden_field :user_id, value: current_user.id %>
-          <% end %>
         </h1>
         <% if logged_in? %>
           <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto">
             回答
           </button>
+
+          <% if current_user.own?(@mystery) %>
+            <%= link_to t('helpers.link.edit'), edit_mystery_path(@mystery) %>
+            <%= link_to t('helpers.link.delete'), mystery_path(@mystery), data: { turbo_method: :delete } %>
+          <% end %>
         <% else %>
           <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto" disabled>
             ログインすると</br>回答できます
@@ -41,10 +46,11 @@
         <% end %>
       <% end %> 
     </div>
-    <%= link_to "https://twitter.com/share?url=https://enigmaportals.com/&text=謎を解いてみて！" do %>
-      <p><i class="fa-brands fa-x-twitter" style='color: #3399FF;'></i>シェア</p>
-    <% end %>
-
+    <div class = "mx-auto py-5">
+      <%= link_to "https://twitter.com/share?url=#{mystery_url(@mystery)}/&text=謎を解いてみて！" do %>
+        <p><i class="fa-brands fa-twitter" style='color: #3399FF;'></i>Twitterにシェア</p>
+      <% end %>
+    </div>
     </div>
   </div>
 </div>

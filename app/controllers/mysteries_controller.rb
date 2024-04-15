@@ -1,9 +1,10 @@
 class MysteriesController < ApplicationController
   before_action :set_mystery, only: %i[edit update destroy]
   before_action :require_login, only: %i[new edit update destroy]
-
   def index
-    @mysteries = Mystery.order(id: :DESC).page(params[:page]).per(9)
+    @genres = Genre.all
+    @q = Mystery.ransack(params[:q])
+    @mysteries = @q.result.order(id: :DESC).page(params[:page]).per(12)
   end
 
   def show
@@ -13,25 +14,40 @@ class MysteriesController < ApplicationController
 
   def new
     @mystery = Mystery.new
+    @genres = Genre.all
   end
 
   def create
-    @mystery = Mystery.new(resize_image(mystery_params))
+    @mystery = current_user.mysteries.new(resize_image(mystery_params))
+    if @mystery.save
+      flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
+      redirect_to mysteries_path
+    else
+      @genres = Genre.all
+      flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  # AI画像生成
+  def generate
+    @mystery = current_user.mysteries.new(resize_image(mystery_params))
     client = OpenAI::Client.new(access_token: ENV.fetch('OPENAI_ACCESS_TOKEN', nil))
     response = client.images.generate(
       parameters: {
         model: 'dall-e-3',
-        prompt: "Generates a puzzle-solving image that resembles a ciphertext that abstracts the 「#{@mystery.correct_answer}」 and allows you to reach the answer by association"
+        # prompt: "Generates a puzzle-solving image that resembles a ciphertext that abstracts the 「#{@mystery.correct_answer}」 and allows you to reach the answer by association"
+        prompt: "「#{@mystery.title}」の「#{@mystery.correct_answer}」を抽象化して連想で答えに辿り着ける問題を考えてください。ただし直接的な表現は避け、画像で生成してください"
       }
     )
     image_url = response.dig('data', 0, 'url')
     downloaded_image = URI.open(image_url)
     @mystery.image.attach(io: downloaded_image, filename: "#{@mystery.correct_answer}.webp")
-
     if @mystery.save
       flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
       redirect_to mysteries_path
     else
+      @genres = Genre.all
       flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
       render :new, status: :unprocessable_entity
     end
@@ -60,11 +76,12 @@ class MysteriesController < ApplicationController
   private
 
   def mystery_params
-    params.require(:mystery).permit(:title, :mystery_type, :image, :content, :correct_answer)
+    params.require(:mystery).permit(:title, :genre_id, :image, :content, :correct_answer)
   end
 
   def set_mystery
-    @mystery = Mystery.find(params[:id])
+    @mystery = current_user.mysteries.find(params[:id])
+    @genres = Genre.all
   end
 
   def resize_image(params)

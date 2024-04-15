@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
   has_one_attached :avator
-  has_many :mysteries, through: :answers
+  has_many :mysteries
+  has_many :answers
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true

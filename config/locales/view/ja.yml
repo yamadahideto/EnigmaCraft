@@ -9,9 +9,9 @@ ja:
       not_updated: "%{text}を更新できませんでした"
       deleted: "%{text}を削除しました"
   helpers:
+    name: 名前
     title: タイトル
     genre: "ジャンル"
-    mystery_type: 謎のタイプ
     content: 謎の内容
     image: 謎画像
     correct_answer: 謎の答え
@@ -35,12 +35,18 @@ ja:
   users:
     new:
       title: ユーザー登録
+    show:
+      title: マイページ
+      edit: マイページ編集
+    rankings:
+      title: ユーザーランキング
   mysteries:
     index:
       title: 謎一覧
     new:
       title: 謎をつくる
       ai_new_title: AIでつくる
+      self_new_title: 自分でつくる
     show:
       title: 謎詳細
     edit:
