@@ -9,6 +9,7 @@ ja:
       not_updated: "%{text}を更新できませんでした"
       deleted: "%{text}を削除しました"
   helpers:
+    name: 名前
     title: タイトル
     genre: "ジャンル"
     content: 謎の内容
@@ -37,6 +38,8 @@ ja:
     show:
       title: マイページ
       edit: マイページ編集
+    rankings:
+      title: ユーザーランキング
   mysteries:
     index:
       title: 謎一覧

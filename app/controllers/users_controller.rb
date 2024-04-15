@@ -35,6 +35,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def rankings
+    @users = User.all.order(point: :desc).limit(10)
+  end
+
   private
 
   def user_params

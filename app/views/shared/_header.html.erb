@@ -5,6 +5,7 @@
       <% if logged_in? %>
         <%= link_to t('helpers.link.post'), new_mystery_path, class: "hover:text-selected-text transition-all duration-300" %>
         <%= link_to t('helpers.link.logout'), logout_path, class: "hover:text-selected-text transition-all duration-300", data: {turbo_method: :delete} %>
+        <%= link_to 'ランキング', rankings_users_path, class: "hover:text-selected-text transition-all duration-300" %>
         
         <%# ユーザーアイコン ホバーでメニュー表示 %>
         <div class="dropdown dropdown-hover">
