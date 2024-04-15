@@ -4,7 +4,6 @@
     <div class="space-x-7 text-base hidden md:flex items-center">
       <% if logged_in? %>
         <%= link_to t('helpers.link.post'), new_mystery_path, class: "hover:text-selected-text transition-all duration-300" %>
-        <%= link_to t('helpers.link.logout'), logout_path, class: "hover:text-selected-text transition-all duration-300", data: {turbo_method: :delete} %>
         <%= link_to 'ランキング', rankings_users_path, class: "hover:text-selected-text transition-all duration-300" %>
         
         <%# ユーザーアイコン ホバーでメニュー表示 %>
@@ -20,7 +19,7 @@
         </div>
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
           <li> <%= link_to t('users.show.title'), user_path(current_user.id), class: "hover:text-selected-text transition-all duration-300" %> </li>
-          <li><a>Item 2</a></li>
+          <li> <%= link_to t('helpers.link.logout'), logout_path, class: "hover:text-selected-text transition-all duration-300", data: {turbo_method: :delete} %> </li>
         </ul>
 
       <%# 縮小時のアイコン表示 %>

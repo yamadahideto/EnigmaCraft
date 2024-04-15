@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'tops#index'
   resources :mysteries do
+    collection do
+      post 'generate'
+    end
     resources :answers, only: [:new, :create]
   end
   resources :users, only:[:show ,:new, :create, :edit, :update] do
