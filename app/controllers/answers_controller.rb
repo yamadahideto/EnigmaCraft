@@ -2,14 +2,17 @@ class AnswersController < ApplicationController
   before_action :require_login, except: %i[new create]
   def new
     @answer = Answer.new
+    @current_user = current_user
   end
 
   def create
     @answer = current_user.answers.new(answer_params.merge(mystery_id: params[:mystery_id]))
     # ユーザーの回答と答えを比較
-    if @answer.check_answer(@answer.response, Mystery.find(params[:mystery_id]).correct_answer)
-      @answer.correct_flag = true
+    if @answer.check_answer(@answer, Mystery.find(params[:mystery_id]).correct_answer)
       if @answer.save
+        # 正解時にポイント付与
+        @current_user.point += 1
+        @current_user.save
         flash[:notice] = '正解しました!'
         redirect_to mysteries_path
       else

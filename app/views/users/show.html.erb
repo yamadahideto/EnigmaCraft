@@ -8,11 +8,15 @@
       <h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
         <%= t('users.show.title') %>
       </h1>
-      <h1 class="text-2xl font-bold underline py-5">
-        <%= image_tag @user.avator, size: '300x300', class: "mx-auto rounded-full" %>
+      <h1 class="text-2xl font-bold py-5">
+        <% if current_user.avator.attached? %>
+          <%= image_tag @user.avator, size: '300x300', class: "mx-auto rounded-full" %>
+        <% else %>
+          <%= image_tag 'avator.jpeg', size: '300x300', class: "rounded-full" %>
+        <% end %>
       </h1>    
       <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
-        <%= t("helpers.title") %>:
+        <%= t("helpers.name") %>:
         <%= @user.name %>
       </h1>
       <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
