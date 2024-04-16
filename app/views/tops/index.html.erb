@@ -11,10 +11,11 @@
     </div>
   </div>
 </div>
+
 <% unless logged_in? %>
   <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
-  <%= link_to new_user_path  do %>
-    <button class="btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> 謎を作ってみる</br>(会員登録が必要) </button>
+  <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
+    <button class="btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> 謎を作ってみる</br>(ゲストログイン) </button>
   <% end %>
 <% end %>
 
