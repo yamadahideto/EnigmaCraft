@@ -10,19 +10,17 @@ class AnswersController < ApplicationController
     # ユーザーの回答と答えを比較
     if @answer.check_answer(@answer, Mystery.find(params[:mystery_id]).correct_answer)
       if @answer.save
-        # 正解時にポイント付与
-        @current_user.point += 1
+        # 正解時にゲスト以外ならポイント付与
+        @current_user.point += 1 unless current_user.guest?
         @current_user.save
         flash[:notice] = '正解しました!'
         redirect_to mysteries_path
       else
-        # saveの失敗時の処理
         flash.now[:alert] = '回答が正しく保存できませんでした。'
         @mystery = Mystery.find(params[:mystery_id])
         render 'mysteries/show', status: :unprocessable_entity
       end
     else
-      # 問題に不正解時の処理
       flash.now[:alert] = '不正解です!'
       @mystery = Mystery.find(params[:mystery_id])
       render 'mysteries/show', status: :unprocessable_entity

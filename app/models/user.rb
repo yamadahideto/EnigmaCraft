@@ -14,4 +14,8 @@ class User < ApplicationRecord
   def own?(object)
     id == object&.user_id
   end
+
+  def guest?
+    name == 'ゲスト'
+  end
 end

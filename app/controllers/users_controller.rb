@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: %i[new create show update edit]
+  before_action :set_user, only: %i[show edit update]
   def new
     @user = User.new
   end
@@ -16,16 +17,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    @user = current_user
-  end
+  def show; end
 
-  def edit
-    @user = current_user
-  end
+  def edit; end
 
   def update
-    @user = current_user
     if @user.update(resize_avator(user_params))
       flash[:notice] = t('flash.messages.success', text: User.model_name.human)
       redirect_to user_path(@user.id)
@@ -36,13 +32,17 @@ class UsersController < ApplicationController
   end
 
   def rankings
-    @users = User.all.order(point: :desc).limit(10)
+    @users = User.all.order(point: :desc).limit(5)
   end
 
   private
 
   def user_params
     params.require(:user).permit(:avator, :name, :email, :password, :password_confirmation)
+  end
+
+  def set_user
+    @user = current_user
   end
 
   def resize_avator(params)
