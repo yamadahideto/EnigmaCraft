@@ -1,5 +1,5 @@
 class Mystery < ApplicationRecord
-  after_initialize :set_default_value
+  # after_initialize :set_default_value
   has_one_attached :image
   belongs_to :user
   belongs_to :genre
@@ -10,9 +10,9 @@ class Mystery < ApplicationRecord
   validates :content, presence: true
   validates :correct_answer, presence: true
 
-  private
+  # private
 
-  def set_default_value
-    self.content = 'Ai画像生成'
-  end
+  # def set_default_value
+  #   self.content = 'Ai画像生成'
+  # end
 end

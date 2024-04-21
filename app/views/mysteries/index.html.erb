@@ -10,10 +10,16 @@
   <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
     <%= render @mysteries %>
   </div>
+
+  <!-- ページネーション -->
+  <div class="flex justify-center pb-5">
+    <%= paginate @mysteries %>
+  </div>   
+
 </div>
 <% unless logged_in? %>
   <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
-  <%= link_to new_user_path  do %>
-    <button class="btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> 謎を作ってみる </button>
+  <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
+    <button class="btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> 謎を作ってみる</br>(ゲストログイン) </button>
   <% end %>
 <% end %>
