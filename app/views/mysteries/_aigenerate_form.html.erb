@@ -4,10 +4,6 @@
 <%= form_with model: @mystery, url: generate_mysteries_path  ,local: true, multipart: true, class: "flex flex-col text-mainTextColor" do |f| %>
   <%= render "/shared/error_messages", model: f.object %>
   <div class="mb-4 input input-bordered flex items-center gap-2">
-    <%= f.text_field :title, placeholder: "タイトル", class: "grow" %>
-  </div>
-
-  <div class="mb-4 input input-bordered flex items-center gap-2">
     <%= f.collection_select :genre_id, @genres, :id, :name, prompt: 'ジャンルを選択してください'%>
   </div>
 
