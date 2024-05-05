@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_one_attached :avator
   has_many :mysteries
   has_many :answers
+  has_many :mystery_bookmarks, through: :bookmarks, source: :mystery
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
@@ -17,5 +18,15 @@ class User < ApplicationRecord
 
   def guest?
     name == 'ゲスト'
+  end
+
+  # ブックマーク登録
+  def bookmark(mystery)
+    mystery_bookmarks << mystery
+  end
+
+  # ブックマーク登録
+  def unbookmark(mystery)
+    mystery_bookmarks.delete(mystery)
   end
 end
