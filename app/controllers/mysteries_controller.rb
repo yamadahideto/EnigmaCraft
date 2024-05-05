@@ -4,7 +4,7 @@ class MysteriesController < ApplicationController
   def index
     @genres = Genre.all
     @q = Mystery.ransack(params[:q])
-    @mysteries = @q.result.order(id: :DESC).page(params[:page]).per(9)
+    @mysteries = @q.result.includes(:genre).order(id: :DESC).page(params[:page]).per(6)
   end
 
   def show
@@ -33,34 +33,14 @@ class MysteriesController < ApplicationController
   def generate
     @mystery = current_user.mysteries.new(resize_image(mystery_params))
     client = OpenAI::Client.new(access_token: ENV.fetch('OPENAI_ACCESS_TOKEN', nil))
-    response = client.images.generate(
-      parameters: {
-        model: 'dall-e-3',
-        # prompt: "Generates a puzzle-solving image that resembles a ciphertext that abstracts the 「#{@mystery.correct_answer}」 and allows you to reach the answer by association"
-        prompt: "「#{@mystery.genre.name}」の「#{@mystery.correct_answer}」を抽象化して論理的に答えにたどり着ける問題を考えてください。ただし直接的な表現は避け、画像で生成してください"
-      }
+    generate_text = MysteryGenerate.generate_text(client, @mystery.genre.name, @mystery.correct_answer)
+    generate_image = MysteryGenerate.generate_image(client, @mystery.genre.name, @mystery.correct_answer)
+    @mystery.title = generate_text[:title]
+    @mystery.content = generate_text[:content]
+    @mystery.image.attach(
+      io: generate_image[:image],
+      filename: generate_image[:filename]
     )
-    image_url = response.dig('data', 0, 'url')
-    downloaded_image = URI.open(image_url)
-    @mystery.image.attach(io: downloaded_image, filename: "#{@mystery.correct_answer}.webp")
-
-    client = OpenAI::Client.new(access_token: ENV.fetch('OPENAI_ACCESS_TOKEN', nil))
-    response = client.chat(
-      parameters: {
-        model: 'gpt-4',
-        messages: [
-          { role: 'system', content: 'あなたは暗号文のような謎解きを考えるプロです' },
-          { role: 'user', content: "「#{@mystery.genre.name}」の「#{@mystery.correct_answer}」を抽象化して連想で答えに辿りつける問題を考えてください。ただし直接的な表現は避け、200字程度のタイトルと問題文をのみを生成してください。タイトルは「」で囲み、最後に/を入れてください 問題は*の後に続けてください" }
-        ],
-        temperature: 0.7
-      }
-    )
-
-    # 生成されるレスポンスからタイトルを抽出
-    @mystery.title = response.dig('choices', 0, 'message', 'content').match(%r{^(.*?)(?=/)})
-    # 生成されるレスポンスから問題文を抽出
-    @mystery.content = response.dig('choices', 0, 'message', 'content').match(/\*(.*)$/)
-
     if @mystery.save
       flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
       redirect_to mysteries_path
@@ -107,7 +87,7 @@ class MysteriesController < ApplicationController
       params[:image].tempfile = ImageProcessing::MiniMagick
                                 .source(params[:image].tempfile)
                                 .convert('webp') # webpに変換して保存
-                                # .resize_to_limit(300, 300) # リサイズして保存
+                                .resize_to_limit(300, 300) # リサイズして保存
                                 .call
     end
     params

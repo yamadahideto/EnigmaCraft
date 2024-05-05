@@ -10,6 +10,8 @@ module EnigmaCraft
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
+    # ライブラリディレクトリの自動読み込み設定
+    config.autoload_paths += %W(#{config.root}/lib)
     config.generators do |g|
       g.skip_routes true # ルーティング追加なし
       g.assets false # assetsファイル作成スキップ
