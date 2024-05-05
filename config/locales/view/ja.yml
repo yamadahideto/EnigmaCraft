@@ -31,6 +31,7 @@ ja:
     new:
       title: ログイン
       login: ログイン
+      guest_login: ゲストログイン
       logout: ログアウト
   users:
     new:
