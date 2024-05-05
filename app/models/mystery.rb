@@ -10,9 +10,8 @@ class Mystery < ApplicationRecord
   validates :content, presence: true
   validates :correct_answer, presence: true
 
-  # private
-
   # def set_default_value
-  #   self.content = 'Ai画像生成'
+  #   self.title = 'AI生成'
+  #   self.content = 'AI生成'
   # end
 end
