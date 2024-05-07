@@ -64,7 +64,11 @@ class MysteriesController < ApplicationController
   end
 
   def bookmarks
-    @bookmarks = current_user.mystery_bookmarks.includes(:user).order(created_at: :desc)
+    @genres = Genre.all
+    @q = current_user.mystery_bookmarks.ransack(params[:q])
+    @bookmarks = @q.result.includes(:genre).order(id: :DESC).page(params[:page]).per(6)
+
+    # @bookmarks = current_user.mystery_bookmarks.includes(:user).order(created_at: :desc)
   end
 
   def destroy

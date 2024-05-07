@@ -1,0 +1,4 @@
+<%# ブックマーク登録%>
+  <%= link_to bookmarks_path(mystery_id: mystery.id), data: { turbo_method: :post } do %>
+    <%= image_tag 'favorite.png', size: '35x35' %>
+  <% end %>

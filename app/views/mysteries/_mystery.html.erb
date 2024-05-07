@@ -9,18 +9,9 @@
       <%= mystery.genre.name %>
     </h1>
 
+    <%# ログインユーザーにブックマークボタンを表示 %>
     <% if logged_in? %>
-      <%if current_user.bookmark?(mystery) %> 
-      <%# ブックマーク解除 %>
-        <%= link_to bookmark_path(mystery.id), data: { turbo_method: :delete } do %>
-          <%= image_tag 'favorite_full.png', size: '35x35' %>
-        <% end %>
-      <% else %>
-      <%# ブックマーク登録%>
-        <%= link_to bookmarks_path(mystery_id: mystery.id), data: { turbo_method: :post } do %>
-          <%= image_tag 'favorite.png', size: '35x35' %>
-        <% end %>
-      <% end %>
+      <%= render 'bookmark_button', { mystery: mystery } %>
     <% end %>
 
     <h1 class="text-2xl font-bold underline py-5">

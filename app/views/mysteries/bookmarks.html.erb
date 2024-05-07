@@ -1,37 +1,37 @@
-
-<div class="rounded text-mainTextColor bg-white border-solid border-2 border-white rounded-lg drop-shadow-xl py-2 my-8"> 
-  <div class = "mx-auto px-3">
-    <% @bookmarks.each do |mystery| %>
-      <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
-        <%= t("helpers.title") %>:
-        <%= link_to mystery.title, mystery_path(mystery), class: "underline" %>
-      </h1>
-      <h1 class="text-2xl font-bold py-5">
-        <%= t("helpers.genre") %>:
-        <%= mystery.genre.name %>
-      </h1>
-
-      <% if logged_in? %>
-        <%if current_user.bookmark?(mystery) %> 
-        <%# ブックマーク解除 %>
-          <%= link_to bookmark_path(mystery.id), data: { turbo_method: :delete } do %>
-            <%= image_tag 'favorite_full.png', size: '35x35' %>
-          <% end %>
-        <% else %>
-        <%# ブックマーク登録%>
-          <%= link_to bookmarks_path(mystery_id: mystery.id), data: { turbo_method: :post } do %>
-            <%= image_tag 'favorite.png', size: '35x35' %>
-          <% end %>
-        <% end %>
-      <% end %>
-
-      <h1 class="text-2xl font-bold underline py-5">
-        <% if mystery.image.attached? %>
-          <%= image_tag mystery.image, size: '300x300', class: "mx-auto rounded-lg" %>
-        <% else %>
-          <%= image_tag 'interrogation.webp', size: "300x300", class: "mx-auto rounded-lg" %>
-        <% end %>
-      </h1>     
-    <% end %>
-  </div>    
+<div class = "min-w-max bg-mainContentColor font-zen-old-mincho font-medium mx-10 my-10">
+  <h1 class = "text-3xl text-center text-mainTextColor" > <%= t('mysteries.bookmark.title') %> </h1>
+  <%# 検索ボックス %>
+  <%= search_form_for @q, url: bookmarks_mysteries_path do |f| %> 
+    <%= f.search_field :title_cont, id: 'title_cont', placeholder: 'タイトルを検索' %>
+    <%= f.collection_select :genre_id_eq, @genres, :id, :name, include_blank: 'カテゴリーを選択' %>
+    <button class="btn py-1 bg-white text-mainTextColor text-center mx-auto" type = 'submit'> 検索 </button>
+   <% end %>
+  <%# ブックマーした謎の一覧 %>
+  <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
+    <%= render 'mystery_bookmarks', bookmarks: @bookmarks %>
+  </div>
+  <%# ページネーション %>
+  <div class="flex justify-center pb-5">
+    <%= paginate @bookmarks %>
+  </div>   
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

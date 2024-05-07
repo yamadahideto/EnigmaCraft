@@ -1,0 +1,4 @@
+<%# ブックマーク解除 %>
+<%= link_to bookmark_path(mystery.id), data: { turbo_method: :delete } do %>
+  <%= image_tag 'favorite_full.png', size: '35x35' %>
+<% end %>

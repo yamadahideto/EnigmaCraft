@@ -2,9 +2,10 @@
   <div class="container mx-auto flex justify-between items-center md:px-14 lg:px-10">
     <%= link_to "EnigmaPortals", root_path, class: "text-3xl mr-4" %>
     <div class="space-x-7 text-base hidden md:flex items-center">
+      <%= link_to 'ランキング', rankings_users_path, class: "hover:text-selected-text transition-all duration-300" %>
+      <%= link_to '謎一覧', mysteries_path, class: "hover:text-selected-text transition-all duration-300" %>
       <% if logged_in? %>
         <%= link_to t('helpers.link.post'), new_mystery_path, class: "hover:text-selected-text transition-all duration-300" %>
-        <%= link_to 'ランキング', rankings_users_path, class: "hover:text-selected-text transition-all duration-300" %>
         
         <%# ユーザーアイコン ホバーでメニュー表示 %>
         <div class="dropdown dropdown-hover">
