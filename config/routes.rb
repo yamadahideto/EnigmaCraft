@@ -6,8 +6,8 @@ Rails.application.routes.draw do
       get 'bookmarks'
     end
     resources :answers, only: %i[new create]
-    resources :bookmarks, only: %i[create destroy]
   end
+  resources :bookmarks, only: %i[create destroy]
   resources :users, only: %i[show new create edit update] do
     collection do
       get 'rankings'

@@ -63,6 +63,10 @@ class MysteriesController < ApplicationController
     end
   end
 
+  def bookmarks
+    @bookmarks = current_user.mystery_bookmarks.includes(:user).order(created_at: :desc)
+  end
+
   def destroy
     # 削除時にS3ストレージの画像も削除
     @mystery.image.purge_later

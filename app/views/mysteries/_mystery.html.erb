@@ -9,9 +9,18 @@
       <%= mystery.genre.name %>
     </h1>
 
-    <%# ブックマークアイコン %>
-    <%= link_to root_path do %>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+    <% if logged_in? %>
+      <%if current_user.bookmark?(mystery) %> 
+      <%# ブックマーク解除 %>
+        <%= link_to bookmark_path(mystery.id), data: { turbo_method: :delete } do %>
+          <%= image_tag 'favorite_full.png', size: '35x35' %>
+        <% end %>
+      <% else %>
+      <%# ブックマーク登録%>
+        <%= link_to bookmarks_path(mystery_id: mystery.id), data: { turbo_method: :post } do %>
+          <%= image_tag 'favorite.png', size: '35x35' %>
+        <% end %>
+      <% end %>
     <% end %>
 
     <h1 class="text-2xl font-bold underline py-5">

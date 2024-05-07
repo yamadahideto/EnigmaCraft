@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_one_attached :avator
   has_many :mysteries
   has_many :answers
+  has_many :bookmarks, dependent: :destroy
   has_many :mystery_bookmarks, through: :bookmarks, source: :mystery
 
   validates :name, presence: true
@@ -25,8 +26,13 @@ class User < ApplicationRecord
     mystery_bookmarks << mystery
   end
 
-  # ブックマーク登録
+  # ブックマーク解除
   def unbookmark(mystery)
-    mystery_bookmarks.delete(mystery)
+    mystery_bookmarks.destroy(mystery)
+  end
+
+  # ブックマークをしているか確認
+  def bookmark?(mystery)
+    mystery_bookmarks.include?(mystery)
   end
 end
