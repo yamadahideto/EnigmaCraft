@@ -4,7 +4,7 @@ class MysteriesController < ApplicationController
   def index
     @genres = Genre.all
     @q = Mystery.ransack(params[:q])
-    @mysteries = @q.result.includes(:genre).order(id: :DESC).page(params[:page]).per(6)
+    @mysteries = @q.result.includes(%i[genre bookmarks]).order(id: :DESC).page(params[:page]).per(6)
   end
 
   def show
@@ -66,9 +66,7 @@ class MysteriesController < ApplicationController
   def bookmarks
     @genres = Genre.all
     @q = current_user.mystery_bookmarks.ransack(params[:q])
-    @bookmarks = @q.result.includes(:genre).order(id: :DESC).page(params[:page]).per(6)
-
-    # @bookmarks = current_user.mystery_bookmarks.includes(:user).order(created_at: :desc)
+    @bookmarks = @q.result.includes(%i[genre bookmarks]).order(id: :DESC).page(params[:page]).per(6)
   end
 
   def destroy
@@ -95,7 +93,6 @@ class MysteriesController < ApplicationController
       params[:image].tempfile = ImageProcessing::MiniMagick
                                 .source(params[:image].tempfile)
                                 .convert('webp') # webpに変換して保存
-                                .resize_to_limit(300, 300) # リサイズして保存
                                 .call
     end
     params

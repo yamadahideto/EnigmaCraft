@@ -17,6 +17,7 @@ class User < ApplicationRecord
     id == object&.user_id
   end
 
+  # ゲストユーザーか確認
   def guest?
     name == 'ゲスト'
   end
@@ -33,6 +34,6 @@ class User < ApplicationRecord
 
   # ブックマークをしているか確認
   def bookmark?(mystery)
-    mystery_bookmarks.include?(mystery)
+    mystery.bookmarks.pluck(:user_id).include?(id)
   end
 end
