@@ -1,0 +1,7 @@
+<%if current_user.bookmark?(mystery) %> 
+<%# ブックマーク解除ボタン %>
+  <%= render 'unbookmark', { mystery: mystery } %>
+<% else %>
+<%# ブックマーク登録ボタン %>
+  <%= render 'bookmark', { mystery: mystery } %>
+<% end %>

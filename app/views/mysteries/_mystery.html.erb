@@ -1,7 +1,6 @@
 <div class="rounded text-mainTextColor bg-white border-solid border-2 border-white rounded-lg drop-shadow-xl py-2 my-8"> 
   <div class = "mx-auto px-3">
     <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
-
       <%= t("helpers.title") %>:
       <%= link_to mystery.title, mystery_path(mystery), class: "underline" %>
     </h1>
@@ -9,6 +8,12 @@
       <%= t("helpers.genre") %>:
       <%= mystery.genre.name %>
     </h1>
+
+    <%# ログインユーザーにブックマークボタンを表示 %>
+    <% if logged_in? %>
+      <%= render 'bookmark_button', { mystery: mystery } %>
+    <% end %>
+
     <h1 class="text-2xl font-bold underline py-5">
       <% if mystery.image.attached? %>
         <%= image_tag mystery.image, size: '300x300', class: "mx-auto rounded-lg" %>

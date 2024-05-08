@@ -3,10 +3,12 @@ Rails.application.routes.draw do
   resources :mysteries do
     collection do
       post 'generate'
+      get 'bookmarks'
     end
-    resources :answers, only: [:new, :create]
+    resources :answers, only: %i[new create]
   end
-  resources :users, only:[:show ,:new, :create, :edit, :update] do
+  resources :bookmarks, only: %i[create destroy]
+  resources :users, only: %i[show new create edit update] do
     collection do
       get 'rankings'
     end

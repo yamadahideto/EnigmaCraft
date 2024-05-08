@@ -21,12 +21,14 @@ ja:
       edit: 編集
       delete: 削除
       post: 謎をつくる
+      bookmarks: ブックマーク一覧
       logout: ログアウト
     submit:
       create: 登録
       submit: 保存
       update: 更新
       title: タイトル
+      search: 検索
   user_sessions:
     new:
       title: ログイン
@@ -52,3 +54,5 @@ ja:
       title: 謎詳細
     edit:
       title: 謎編集
+    bookmark:
+      title: ブックマーク一覧

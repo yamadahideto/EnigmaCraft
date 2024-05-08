@@ -1,24 +1,31 @@
 <div class = "min-w-max bg-mainContentColor font-zen-old-mincho font-medium mx-10 my-10">
   <h1 class = "text-3xl text-center text-mainTextColor" > <%= t('.title') %> </h1>
-
+  <%# 検索ボックス %>
   <%= search_form_for @q, url: mysteries_path do |f| %> 
     <%= f.search_field :title_cont, id: 'title_cont', placeholder: 'タイトルを検索' %>
     <%= f.collection_select :genre_id_eq, @genres, :id, :name, include_blank: 'カテゴリーを選択' %>
-    <button class="btn py-1 bg-white text-mainTextColor text-center mx-auto" type = 'submit'> 検索 </button>
+    <button class="btn py-1 bg-white text-mainTextColor text-center mx-auto">
+      <%= f.submit t('helpers.submit.search') %>
+    </button>
    <% end %>
+  <%# 謎の一覧表示 %>
+  <% if @mysteries.present? %>
+    <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
+      <%= render @mysteries %>
+    </div>
+  <% else %>
+    <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
+      謎がありません
+    </div>
+  <% end %>
 
-  <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
-    <%= render @mysteries %>
-  </div>
-
-  <!-- ページネーション -->
+  <%# ページネーション %>
   <div class="flex justify-center pb-5">
     <%= paginate @mysteries %>
   </div>   
-
 </div>
+<%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
 <% unless logged_in? %>
-  <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
   <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
     <button class="btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> 謎を作ってみる</br>(ゲストログイン) </button>
   <% end %>

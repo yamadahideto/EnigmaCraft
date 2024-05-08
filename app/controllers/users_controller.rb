@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[new create show update edit]
+  skip_before_action :require_login, only: %i[new create show update edit rankings]
   before_action :set_user, only: %i[show edit update]
   def new
     @user = User.new
