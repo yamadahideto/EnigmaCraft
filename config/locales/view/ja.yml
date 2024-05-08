@@ -28,6 +28,7 @@ ja:
       submit: 保存
       update: 更新
       title: タイトル
+      search: 検索
   user_sessions:
     new:
       title: ログイン
