@@ -2,7 +2,7 @@
   <div class = "mx-auto px-3">
     <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
       <%= t("helpers.title") %>:
-      <%= link_to mystery.title, mystery_path(mystery), class: "underline" %>
+      <%= link_to mystery.title, mystery_path(mystery), class: "underline", data: { turbo_frame: '_top' } %>
     </h1>
     <h1 class="text-2xl font-bold py-5">
       <%= t("helpers.genre") %>:

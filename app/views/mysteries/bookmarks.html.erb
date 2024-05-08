@@ -1,28 +1,30 @@
 <div class = "min-w-max bg-mainContentColor font-zen-old-mincho font-medium mx-10 my-10">
   <h1 class = "text-3xl text-center text-mainTextColor" > <%= t('mysteries.bookmark.title') %> </h1>
   <%# 検索ボックス %>
-  <%= search_form_for @q, url: bookmarks_mysteries_path do |f| %> 
+  <%= search_form_for @q, url: bookmarks_mysteries_path, html: { data: { turbo_frame: 'mystery-list' } } do |f| %> 
     <%= f.search_field :title_cont, id: 'title_cont', placeholder: 'タイトルを検索' %>
     <%= f.collection_select :genre_id_eq, @genres, :id, :name, include_blank: 'カテゴリーを選択' %>
     <button class="btn py-1 bg-white text-mainTextColor text-center mx-auto">
       <%= f.submit t('helpers.submit.search') %>
     </button>
    <% end %>
-  <%# ブックマークした謎の一覧 %>
-  <% if @bookmarks.present? %>
-  <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
-    <%= render 'mystery_bookmarks', bookmarks: @bookmarks %>
-  </div>
-  <% else %>
+  <%= turbo_frame_tag 'mystery-list' do %>
+    <%# ブックマークした謎の一覧 %>
+    <% if @bookmarks.present? %>
     <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
-      謎がありません
+      <%= render 'mystery_bookmarks', bookmarks: @bookmarks %>
+    </div>
+    <% else %>
+      <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
+        謎がありません
+      </div>
+    <% end %>
+
+    <%# ページネーション %>
+    <div class="flex justify-center pb-5">
+      <%= paginate @bookmarks %>
     </div>
   <% end %>
-
-  <%# ページネーション %>
-  <div class="flex justify-center pb-5">
-    <%= paginate @bookmarks %>
-  </div>   
 </div>
 
 
