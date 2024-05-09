@@ -5,7 +5,10 @@ class User < ApplicationRecord
   has_many :answers
   has_many :bookmarks, dependent: :destroy
   has_many :mystery_bookmarks, through: :bookmarks, source: :mystery
-
+  # === google認証で追加
+  has_many :authentications, dependent: :destroy
+  accepts_nested_attributes_for :authentications
+  # === /google認証で追加
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   validates :password, length: { minimum: 5 }, if: -> { new_record? || changes[:crypted_password] }
