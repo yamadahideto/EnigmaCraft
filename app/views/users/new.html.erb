@@ -29,6 +29,10 @@
       <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto">
         <%= f.submit t('users.new.title') %>
       </button>
+
+      <%= link_to auth_at_provider_path(provider: :google), class: 'text-center mx-auto my-5' do %>
+        <%= image_tag 'google_signup.png' %>
+      <% end %>
     <% end %>
   </div>
 </div>
