@@ -1,0 +1,26 @@
+<%= turbo_stream.append 'content_body' do %>
+  <dialog id="my_modal_4" class="modal rounded-lg">
+    <div class="modal-box w-1/2 max-w-5xl">
+      <% if @correct %>
+        <h1 class="font-bold text-lg">正解です！！</h1>
+        <%= image_tag 'correct.png', size: '400x400', class: 'mx-auto rounded-lg' %>
+        <h2 class="py-4">1Ptゲット！</h2>
+      <% else %>
+        <h1 class="font-bold text-lg">不正解です！！</h1>
+        <%= image_tag 'incorrect.png', size: '400x400', class: 'mx-auto rounded-lg' %>
+        <h2 class="py-4">もう一度考えてみましょう！</h2>
+      <% end %>
+
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button, it will close the modal -->
+          <button class="btn">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+  <script>
+    document.getElementById('my_modal_4').showModal();  // ページロード時にモーダルを表示
+  </script>
+<% end %>
+

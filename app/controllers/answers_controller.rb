@@ -13,17 +13,16 @@ class AnswersController < ApplicationController
         # 正解時にゲスト以外ならポイント付与
         @current_user.point += 1 unless current_user.guest?
         @current_user.save
-        flash[:notice] = '正解しました!'
-        redirect_to mysteries_path
+        @correct = true
       else
         flash.now[:alert] = '回答が正しく保存できませんでした。'
         @mystery = Mystery.find(params[:mystery_id])
         render 'mysteries/show', status: :unprocessable_entity
       end
     else
-      flash.now[:alert] = '不正解です!'
       @mystery = Mystery.find(params[:mystery_id])
-      render 'mysteries/show', status: :unprocessable_entity
+      @correct = false
+      # render 'mysteries/show', status: :unprocessable_entity
     end
   end
 

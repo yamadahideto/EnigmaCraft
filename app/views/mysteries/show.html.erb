@@ -5,25 +5,28 @@
     </div>
 
     <div class = "mx-auto px-3">
-      <h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
-        <%= t('mysteries.show.title') %>
-      </h1>
-      <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
-        <%= t("helpers.title") %>:
-        <%= @mystery.title %>
-      </h1>
-      <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
-        <%= t("helpers.genre") %>:
-        <%= @mystery.genre.name %>
-      </h1>
-      <h1 class="text-2xl font-bold py-5">
-        <%= t("helpers.content") %>:
-        <%= @mystery.content %>
-      </h1>    
-      <h1 class="text-2xl font-bold underline py-5">
-        <%= image_tag @mystery.image, size: '300x300', class: "mx-auto rounded-lg" %>
-      </h1>         
-      <%= form_with model:[@mystery, @answer], local: true do |f| %>
+      <div id = "content_body">
+        <h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
+          <%= t('mysteries.show.title') %>
+        </h1>
+        <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
+          <%= t("helpers.title") %>:
+          <%= @mystery.title %>
+        </h1>
+        <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
+          <%= t("helpers.genre") %>:
+          <%= @mystery.genre.name %>
+        </h1>
+        <h1 class="text-2xl font-bold py-5">
+          <%= t("helpers.content") %>:
+          <%= @mystery.content %>
+        </h1>    
+        <h1 class="text-2xl font-bold underline py-5">
+          <%= image_tag @mystery.image, size: '300x300', class: "mx-auto rounded-lg" %>
+        </h1>
+      </div>  
+
+      <%= form_with model:[@mystery, @answer] do |f| %>
         <h1 class="text-2xl font-bold py-5">
           <%= t("helpers.correct_answer") %>:
           <div class="mb-4 input input-bordered flex items-center gap-2">
@@ -34,10 +37,9 @@
           <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto">
             回答
           </button>
-
           <% if current_user.own?(@mystery) %>
             <%= link_to t('helpers.link.edit'), edit_mystery_path(@mystery) %>
-            <%= link_to t('helpers.link.delete'), mystery_path(@mystery), data: { turbo_method: :delete } %>
+            <%= link_to t('helpers.link.delete'), mystery_path(@mystery), data: { turbo_confirm: '本当に削除しますか？', 'turbo_method': :delete } %>
           <% end %>
         <% else %>
           <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto" disabled>
