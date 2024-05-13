@@ -1,0 +1,10 @@
+<% if logged_in? %>
+<%# ログイン済みのユーザーは回答可能にする %>
+  <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto" id='answer_button'>
+    回答
+  </button>
+<% else %>
+  <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto" disabled>
+    ログインすると<br/>回答できます
+  </button>
+<% end %>

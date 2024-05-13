@@ -1,0 +1,4 @@
+<%# ブックマーク登録 %>
+<%= turbo_stream.replace "bookmark-button-#{@mystery.id}" do %>
+  <%= render 'mysteries/unbookmark', mystery: @mystery %>
+<% end %>

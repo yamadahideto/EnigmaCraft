@@ -3,7 +3,12 @@ class User < ApplicationRecord
   has_one_attached :avator
   has_many :mysteries
   has_many :answers
-
+  has_many :bookmarks, dependent: :destroy
+  has_many :mystery_bookmarks, through: :bookmarks, source: :mystery
+  # === google認証で追加
+  has_many :authentications, dependent: :destroy
+  accepts_nested_attributes_for :authentications
+  # === /google認証で追加
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   validates :password, length: { minimum: 5 }, if: -> { new_record? || changes[:crypted_password] }
@@ -15,7 +20,23 @@ class User < ApplicationRecord
     id == object&.user_id
   end
 
+  # ゲストユーザーか確認
   def guest?
     name == 'ゲスト'
+  end
+
+  # ブックマーク登録
+  def bookmark(mystery)
+    mystery_bookmarks << mystery
+  end
+
+  # ブックマーク解除
+  def unbookmark(mystery)
+    mystery_bookmarks.destroy(mystery)
+  end
+
+  # ブックマークをしているか確認
+  def bookmark?(mystery)
+    mystery.bookmarks.pluck(:user_id).include?(id)
   end
 end

@@ -7,23 +7,23 @@ class AnswersController < ApplicationController
 
   def create
     @answer = current_user.answers.new(answer_params.merge(mystery_id: params[:mystery_id]))
+    @mystery = Mystery.find(params[:mystery_id])
     # ユーザーの回答と答えを比較
-    if @answer.check_answer(@answer, Mystery.find(params[:mystery_id]).correct_answer)
+    if @answer.check_answer(@answer, @mystery.correct_answer)
       if @answer.save
         # 正解時にゲスト以外ならポイント付与
         @current_user.point += 1 unless current_user.guest?
         @current_user.save
-        flash[:notice] = '正解しました!'
-        redirect_to mysteries_path
+        @correct = true
       else
         flash.now[:alert] = '回答が正しく保存できませんでした。'
         @mystery = Mystery.find(params[:mystery_id])
         render 'mysteries/show', status: :unprocessable_entity
       end
     else
-      flash.now[:alert] = '不正解です!'
       @mystery = Mystery.find(params[:mystery_id])
-      render 'mysteries/show', status: :unprocessable_entity
+      @correct = false
+      # render 'mysteries/show', status: :unprocessable_entity
     end
   end
 
