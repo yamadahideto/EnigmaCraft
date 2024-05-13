@@ -12,7 +12,11 @@
     <%# 謎の一覧表示 %>
     <% if @mysteries.present? %>
       <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
-        <%= render @mysteries %>
+        <% if logged_in? %>
+          <%= render partial: "login_mystery", collection: @mysteries, as: :mystery %>
+        <% else %>
+          <%= render @mysteries %>
+        <% end %>
       </div>
     <% else %>
       <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">

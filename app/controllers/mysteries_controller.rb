@@ -1,8 +1,8 @@
 class MysteriesController < ApplicationController
   before_action :set_mystery, only: %i[edit update destroy]
+  before_action :set_genre, except: %i[show destroy]
   before_action :require_login, only: %i[new edit update destroy]
   def index
-    @genres = Genre.all
     @q = Mystery.ransack(params[:q])
     @mysteries = @q.result.includes(%i[genre bookmarks]).order(id: :DESC).page(params[:page]).per(6)
   end
@@ -14,7 +14,6 @@ class MysteriesController < ApplicationController
 
   def new
     @mystery = Mystery.new
-    @genres = Genre.all
   end
 
   def create
@@ -23,7 +22,6 @@ class MysteriesController < ApplicationController
       flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
       redirect_to mysteries_path
     else
-      @genres = Genre.all
       flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
       render :new, status: :unprocessable_entity
     end
@@ -32,21 +30,25 @@ class MysteriesController < ApplicationController
   # AI画像生成
   def generate
     @mystery = current_user.mysteries.new(resize_image(mystery_params))
-    client = OpenAI::Client.new(access_token: ENV.fetch('OPENAI_ACCESS_TOKEN', nil))
-    generate_text = MysteryGenerate.generate_text(client, @mystery.genre.name, @mystery.correct_answer)
-    generate_image = MysteryGenerate.generate_image(client, @mystery.genre.name, @mystery.correct_answer)
-    @mystery.title = generate_text[:title]
-    @mystery.content = generate_text[:content]
-    @mystery.image.attach(
-      io: generate_image[:image],
-      filename: generate_image[:filename]
-    )
-    if @mystery.save
-      flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
-      redirect_to mysteries_path
-    else
-      @genres = Genre.all
-      flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
+    begin
+      client = OpenAI::Client.new(access_token: ENV.fetch('OPENAI_ACCESS_TOKEN', nil))
+      generate_text = MysteryGenerate.generate_text(client, @mystery.genre.name, @mystery.correct_answer)
+      generate_image = MysteryGenerate.generate_image(client, @mystery.genre.name, @mystery.correct_answer)
+      @mystery.title = generate_text[:title]
+      @mystery.content = generate_text[:content]
+      @mystery.image.attach(
+        io: generate_image[:image],
+        filename: generate_image[:filename]
+      )
+      if @mystery.save
+        flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
+        redirect_to mysteries_path
+      else
+        flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
+        render :new, status: :unprocessable_entity
+      end
+    rescue MysteryGenerate::OpenAiResponseError => e
+      flash[:alert] = e.message
       render :new, status: :unprocessable_entity
     end
   end
@@ -64,7 +66,6 @@ class MysteriesController < ApplicationController
   end
 
   def bookmarks
-    @genres = Genre.all
     @q = current_user.mystery_bookmarks.ransack(params[:q])
     @bookmarks = @q.result.includes(%i[genre bookmarks]).order(id: :DESC).page(params[:page]).per(6)
   end
@@ -85,6 +86,9 @@ class MysteriesController < ApplicationController
 
   def set_mystery
     @mystery = current_user.mysteries.find(params[:id])
+  end
+
+  def set_genre
     @genres = Genre.all
   end
 

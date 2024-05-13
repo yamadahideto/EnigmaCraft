@@ -11,9 +11,9 @@
   <%= turbo_frame_tag 'mystery-list' do %>
     <%# ブックマークした謎の一覧 %>
     <% if @bookmarks.present? %>
-    <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
-      <%= render 'mystery_bookmarks', bookmarks: @bookmarks %>
-    </div>
+      <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
+        <%= render 'mystery_bookmarks', bookmarks: @bookmarks %>
+      </div>
     <% else %>
       <div class = "mx-auto grid grid-cols-3 gap-7 my-8 mx-20">
         謎がありません
