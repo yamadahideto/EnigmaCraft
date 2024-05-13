@@ -1,5 +1,5 @@
-<% if current_user.own?(mystery) %>
-<%# 自作の謎は答えを表示 %>
+<% if mystery.correctly?(current_user.id) || current_user.own?(mystery) %>
+  <%# 正解済み or 自作の謎は答えを表示 %>
   <h1 class="text-2xl font-bold py-5">
     <%= t("helpers.correct_answer") %>:
   </h1>
@@ -7,7 +7,7 @@
     <%= mystery.correct_answer %>
   </h1>
 <% else %>
-<%# 他人が作成したは謎は回答できるようにフォーム表示 %>
+  <%# 他人が作成したは謎は回答できるようにフォーム表示 %>
   <%= form_with model: [mystery, answer] do |f| %>
     <h1 class="text-2xl font-bold py-5">
       <%= t("helpers.correct_answer") %>:
@@ -15,15 +15,6 @@
     <div class="mb-4 input input-bordered flex items-center gap-2" id='answer_form'>
       <%= f.text_field :response, placeholder: "ひらがなで入力", class: "grow" %>
     </div>
-    <% if logged_in? %>
-    <%# ログイン済みのユーザーは回答可能にする %>
-      <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto" id='answer_button'>
-        回答
-      </button>
-    <% else %>
-      <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto" disabled>
-        ログインすると<br/>回答できます
-      </button>
-    <% end %>
+    <%= render 'answer_button'%>
   <% end %>
 <% end %>

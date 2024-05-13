@@ -3,10 +3,6 @@
     <div class = "flex place-content-end">
       <%= link_to t('helpers.link.back'), mysteries_path %>
     </div>
-    <% if logged_in? %>
-      <%# 編集・削除リンク %>
-      <%= render 'currentuser_action', mystery: @mystery %>
-    <% end %>
     <div class = "mx-auto px-3">
       <div id = "content_body">
         <h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
@@ -28,8 +24,13 @@
           <%= image_tag @mystery.image, size: '300x300', class: "mx-auto rounded-lg" %>
         </h1>
       </div>
-      <%# 答えの入力フォーム表示 %>
-      <%= render 'answer_form', mystery: @mystery, answer: @answer %>
+      <% if logged_in? %>
+        <%# 編集・削除リンク %>
+        <%= render 'currentuser_action', mystery: @mystery %>
+        <%= render 'answer_form', mystery: @mystery, answer: @answer %>
+      <% else %>
+        <%= render 'answer_button'%>
+      <% end %>
     </div>
     <div class = "mx-auto py-5">
       <%= link_to "https://twitter.com/share?url=#{mystery_url(@mystery)}/&text=謎を解いてみて！" do %>
