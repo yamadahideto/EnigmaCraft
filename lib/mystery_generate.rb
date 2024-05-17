@@ -10,7 +10,7 @@ module MysteryGenerate
           model: 'gpt-4',
           messages: [
             { role: 'system', content: 'あなたは暗号文のような謎解きを考えるプロです' },
-            { role: 'user', content: "「#{genre}」の「#{correct_answer}」を抽象化して連想で答えに辿りつける問題を考えてください。ただし直接的な表現は避け、200字程度のタイトルと問題文をのみを生成してください。タイトルは「」で囲み、最後に/を入れてください 問題は*の後に続けてください" }
+            { role: 'user', content: "「#{genre}」の「#{correct_answer}」を抽象化して論理的に答えに辿りつける問題を考えてください。ただし直接的な表現は避け、タイトルと200字程度の問題文をのみを生成してください。タイトルは「」で囲み、最後に/を入れてください 問題は*の後に続けてください" }
           ],
           temperature: 0.7
         }
@@ -18,8 +18,9 @@ module MysteryGenerate
       # 生成されるレスポンスからタイトルを抽出
       title = response.dig('choices', 0, 'message', 'content').match(%r{^(.*?)(?=/)})
       # 生成されるレスポンスから問題文を抽出
-      content = response.dig('choices', 0, 'message', 'content').match(/\*(.*)$/)
-      { title: title, content: content }  
+      content = response.dig('choices', 0, 'message', 'content').match(/\*(.*)/)
+
+    { title: title, content: content }
     rescue Faraday::Error => e
        raise handle_error(e)
     end
@@ -51,7 +52,7 @@ module MysteryGenerate
     when 429
       raise OpenAiResponseError, "リクエストの制限を超えました。しばらく経ってから再度お試しください"
     when 500
-      raise OpenAiResponseError, "内部エラーが発生しました。しばらく経ってから再度お試しください"
+      raise OpenAiResponseError, "内部エラーが発生しました。管理者にお問い合わせください"
     when 503
       raise OpenAiResponseError, "現在利用ができません。しばらく経ってから再度お試しください"
     else
