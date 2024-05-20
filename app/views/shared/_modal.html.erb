@@ -1,0 +1,12 @@
+<div id="modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+  <div class="relative p-5 border w-90 shadow-lg rounded-md bg-white">
+    <div class="text-center">
+      <p class="text-base md:text-lg mb-3">謎を生成中</p>
+      <%= image_tag random_image, size: "500x500", class:"mx-auto" %>
+      <span class="loading loading-ring loading-lg"></span>
+      <div class="mt-3">
+        <p class="text-base md:text-lg">待っている間に謎を解いてみよう</p>
+      </div>
+    </div>
+  </div>
+</div>

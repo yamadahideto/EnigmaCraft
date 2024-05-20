@@ -5,8 +5,7 @@
       <button id = "ai_generate_button", class="hidden btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> AIでつくる </button>
       <button id = "image_post_button", class="btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> 自分でつくる </button>
     </div>
-
-    <div class = "mx-auto">
+    <div class = "mx-auto" data-controller="modal">
       <div id="ai_generate_form">
         <%= render 'aigenerate_form', mystery: @mystery %>
       </div>
@@ -14,6 +13,7 @@
       <div id="image_post_form" class = "hidden">
         <%= render 'form', mystery: @mystery %>
       </div>
+      <%= render 'shared/modal' %>
     </div>
   </div>
 </div>
