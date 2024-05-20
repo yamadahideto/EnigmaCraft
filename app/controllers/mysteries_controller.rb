@@ -20,7 +20,7 @@ class MysteriesController < ApplicationController
     @mystery = current_user.mysteries.new(resize_image(mystery_params))
     if @mystery.save
       flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
-      # redirect_to mysteries_path
+      redirect_to mysteries_path
     else
       flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
       render :new, status: :unprocessable_entity
@@ -30,31 +30,27 @@ class MysteriesController < ApplicationController
   # AI画像生成
   def generate
     @mystery = current_user.mysteries.new(resize_image(mystery_params))
-    ActiveRecord::Base.transaction do
+    begin
+      client = OpenAI::Client.new(access_token: ENV.fetch('OPENAI_ACCESS_TOKEN', nil))
+      generate_text = MysteryGenerate.generate_text(client, @mystery.genre.name, @mystery.correct_answer)
+      generate_image = MysteryGenerate.generate_image(client, @mystery.genre.name, @mystery.correct_answer)
+      @mystery.title = generate_text[:title]
+      @mystery.content = generate_text[:content]
+      @mystery.image.attach(
+        io: generate_image[:image],
+        filename: generate_image[:filename]
+      )
       if @mystery.save
-        AsyncGenerateJob.perform_later(@mystery.id)
-        # flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
-        # redirect_to mysteries_path
+        flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
+        redirect_to mysteries_path
       else
-        flash.now[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
+        flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
         render :new, status: :unprocessable_entity
       end
     rescue MysteryGenerate::OpenAiResponseError => e
       flash[:alert] = e.message
       render :new, status: :unprocessable_entity
     end
-    # generate_text = MysteryGenerate.generate_text(client, @mystery.genre.name, @mystery.correct_answer)
-    # generate_image = MysteryGenerate.generate_image(client, @mystery.genre.name, @mystery.correct_answer)
-    # @mystery.title = generate_text[:title]
-    # @mystery.content = generate_text[:content]
-    # @mystery.image.attach(
-    #   io: generate_image[:image],
-    #   filename: generate_image[:filename]
-    # )
-    # rescue MysteryGenerate::OpenAiResponseError => e
-    #   flash[:alert] = e.message
-    #   render :new, status: :unprocessable_entity
-    # end
   end
 
   def edit; end

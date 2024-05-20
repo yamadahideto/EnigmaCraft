@@ -10,17 +10,25 @@ module MysteryGenerate
           model: 'gpt-4',
           messages: [
             { role: 'system', content: 'あなたは暗号文のような謎解きを考えるプロです' },
-            { role: 'user', content: "「#{genre}」の「#{correct_answer}」を抽象化して論理的に答えに辿りつける問題を考えてください。ただし直接的な表現は避け、タイトルと200字程度の問題文をのみを生成してください。タイトルは「」で囲み、最後に/を入れてください 問題は*の後に続けてください" }
+            { role: 'user', content: "「#{genre}」の「#{correct_answer}」を抽象化して論理的に答えに辿りつける問題を考えてください。ただし直接的な表現は避け、タイトルと100文字までの問題文をのみを生成してください。タイトルは「」で囲み、問題分は<>囲ってください" }
           ],
           temperature: 0.7
         }
       )
-      # 生成されるレスポンスからタイトルを抽出
-      title = response.dig('choices', 0, 'message', 'content').match(%r{^(.*?)(?=/)})
-      # 生成されるレスポンスから問題文を抽出
-      content = response.dig('choices', 0, 'message', 'content').match(/\*(.*)/)
+      # レスポンスが返ってきているかチェック
+      if response.key?('choices') && response['choices'].any?
+        response.dig('choices', 0, 'message', 'content')
+        # レスポンスからタイトルを抽出
+        title = response.dig('choices', 0, 'message', 'content').match(/「(.*?)」/)
+        # レスポンスから問題文を抽出
+        match = response.dig('choices', 0, 'message', 'content').match(/<([^>]*)>/)
+        content = match[1] if match
+        { title: title, content: content }
 
-    { title: title, content: content }
+      else
+        raise OpenAiResponseError, "予期せぬレスポンス形式です。"
+      end
+
     rescue Faraday::Error => e
        raise handle_error(e)
     end

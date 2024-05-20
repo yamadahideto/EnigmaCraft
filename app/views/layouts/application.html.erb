@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= action_cable_meta_tag %>
     <%= favicon_link_tag "interrogation.webp" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
@@ -21,7 +22,7 @@
     </script>
   <!-- /Google Analytics (gtag.js) -->
   </head>
-  <body class="flex flex-col min-h-screen bg-bodyColor">
+  <body class="flex flex-col min-h-screen bg-bodyColor" data-user-id="<%= current_user&.id %>">
     <%= render "shared/header" %>
     <%= render "shared/flash" %>
     <div class="flex-grow bg-body">
@@ -30,3 +31,7 @@
       <%= render 'shared/footer' %>
   </body>
 </html>
+
+
+
+ 
