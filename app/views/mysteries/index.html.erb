@@ -1,4 +1,4 @@
-<div class = "min-w-max bg-mainContentColor font-zen-old-mincho font-medium mx-10 my-10">
+<div class = "min-w-max bg-neutral font-zen-old-mincho font-medium mx-10 my-10">
   <h1 class = "text-3xl text-center text-mainTextColor" > <%= t('.title') %> </h1>
   <%# 検索ボックス %>
   <%= search_form_for @q, url: mysteries_path, html: { data: { turbo_frame: 'mystery-list' } } do |f| %> 

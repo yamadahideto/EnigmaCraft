@@ -8,10 +8,17 @@ module.exports = {
   plugins: [require("daisyui")],
   theme: {
     extend: {
+      // colors: {
+      //   bodyColor: "#F2EDDA",
+      //   footer: "#672516",
+      //   mainContentColor: "#FFF6EA",
+      //   mainTextColor: "#A23D13",
+      // },
       colors: {
-        bodyColor: "#F2EDDA",
-        footer: "#735240",
-        mainContentColor: "#FFF6EA",
+        header: "#060608",
+        bodyColor: "#020100",
+        footer: "#11215a",
+        mainContentColor: "#020100",
         mainTextColor: "#A23D13",
       },
       fontFamily: {
