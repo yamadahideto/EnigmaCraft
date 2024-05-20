@@ -31,7 +31,7 @@ ja:
       search: 検索
   user_sessions:
     new:
-      title: ログイン
+      title: ログイン/新規登録
       login: ログイン
       guest_login: ゲストログイン
       logout: ログアウト

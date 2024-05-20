@@ -19,7 +19,8 @@ module.exports = {
         bodyColor: "#020100",
         footer: "#11215a",
         mainContentColor: "#020100",
-        mainTextColor: "#A23D13",
+        mainTextColor: "#3185d9",
+        buttonColor: "#3185d9",
       },
       fontFamily: {
         "zen-old-mincho": ['"Zen Old Mincho"', "serif", "bold"],

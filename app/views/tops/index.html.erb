@@ -11,7 +11,7 @@
       <p class="py-4"> いろんな人が作った謎があるので </p>
       <p class="py-4"> お気に入りの謎を見つけてみよう </p>
         <%= link_to mysteries_path do %>
-          <button class="btn btn-primary">謎を見に行く</button>
+          <button class="btn bg-buttonColor text-white">謎を見に行く</button>
         <% end %>
     </div>
   </div>
@@ -28,11 +28,11 @@
       <% unless logged_in? %>
         <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
         <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
-          <button class="btn btn-primary">謎を作ってみる</br>(ゲストログイン)</button>
+          <button class="btn bg-buttonColor text-white">謎を作ってみる</br>(ゲストログイン)</button>
         <% end %>
       <% else %>
         <%= link_to new_mystery_path, data: {turbo_method: :post} do %>
-          <button class="btn btn-primary">謎を作ってみる</button>
+          <button class="btn bg-buttonColor text-white">謎を作ってみる</button>
         <% end %>
       <% end %>
     </div>
@@ -50,11 +50,11 @@
       <% unless logged_in? %>
         <%# 未ログイン時の謎に回答するボタン追加 (に遷移) %>
         <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
-          <button class="btn btn-primary">謎を解いてみる</br>(ゲストログイン)</button>
+          <button class="btn bg-buttonColor text-white">謎を解いてみる</br>(ゲストログイン)</button>
         <% end %>
       <% else %>
         <%= link_to nmystery_path, data: {turbo_method: :post} do %>
-          <button class="btn btn-primary">謎を解いてみる</button>
+          <button class="btn bg-buttonColor text-white">謎を解いてみる</button>
         <% end %>
       <% end %>
     </div>
@@ -65,8 +65,11 @@
   <div class="hero-content text-center text-neutral-content">
     <div class="max-w-md">
       <h1 class="mb-5 text-5xl font-bold">謎解きを体験しよう</h1>
-        <%= link_to login_path do %>
-          <button class="btn btn-primary">ログイン</button>
+        <%= link_to auth_at_provider_path(provider: :google), class: 'text-center mx-auto my-5 mb-5' do %>
+          <%= image_tag 'google_signin.png', class: 'mx-auto' %>
+        <% end %>
+        <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
+          <button class="btn bg-buttonColor text-white my-6">ゲストログイン</button>
         <% end %>
     </div>
   </div>
