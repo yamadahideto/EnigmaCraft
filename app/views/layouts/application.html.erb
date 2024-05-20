@@ -23,7 +23,11 @@
   <!-- /Google Analytics (gtag.js) -->
   </head>
   <body class="flex flex-col min-h-screen bg-header">
-    <%= render "shared/header" %>
+    <% if logged_in? %>
+      <%= render "shared/after_login" %>
+    <% else %>
+      <%= render "shared/header" %>
+    <% end %>
     <%= render "shared/flash" %>
     <div class="flex-grow">
       <%= yield %>
