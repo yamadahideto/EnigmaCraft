@@ -15,12 +15,13 @@ module.exports = {
       //   mainTextColor: "#A23D13",
       // },
       colors: {
-        header: "#060608",
+        header: "#0f1f52",
         bodyColor: "#020100",
-        footer: "#11215a",
+        footer: "#0f1f52",
         mainContentColor: "#020100",
         mainTextColor: "#3185d9",
         buttonColor: "#3185d9",
+        correctText: "#f2c13b",
       },
       fontFamily: {
         "zen-old-mincho": ['"Zen Old Mincho"', "serif", "bold"],

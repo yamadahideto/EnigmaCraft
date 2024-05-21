@@ -1,20 +1,28 @@
-<div class = "w-1/2 mx-auto">
-  <div class="bg-mainContentColor shadow-xl rounded px-7 py-5 pb-12 my-20">
-    <div class = "flex place-content-end">
-      <%= link_to t('helpers.link.back'), mysteries_path %>
-      <button id = "ai_generate_button", class="hidden btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> AIでつくる </button>
-      <button id = "image_post_button", class="btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> 自分でつくる </button>
-    </div>
-    <div class = "mx-auto" data-controller="modal">
-      <div id="ai_generate_form">
-        <%= render 'aigenerate_form', mystery: @mystery %>
+<div class="hero min-h-screen bg-header" style="background-image: url(assets/topImage.png);">
+  <div class="hero-overlay bg-opacity-60"></div>
+  <div class="hero-content text-center w-full bg-opacity-60">
+    <div class="max-w-lg w-full mx-auto">
+      <!-- フレックスコンテナの調整 -->
+      <div class="flex justify-between">
+        <%= link_to mysteries_path do %>
+          <button class="btn btn-sm bg-white">
+            <%= t('helpers.link.back') %>
+          </button>
+        <% end %>
+        <div>
+          <button id="ai_generate_button" class="hidden btn btn-sm">AIでつくる</button>
+          <button id="image_post_button" class="btn btn-sm">自分でつくる</button>
+        </div>
       </div>
-
-      <div id="image_post_form" class = "hidden">
-        <%= render 'form', mystery: @mystery %>
+      <div class="mx-auto" data-controller="modal">
+        <div id="ai_generate_form">
+          <%= render 'aigenerate_form', mystery: @mystery %>
+        </div>
+        <div id="image_post_form" class="hidden">
+          <%= render 'form', mystery: @mystery %>
+        </div>
+        <%= render 'shared/modal' %>
       </div>
-      <%= render 'shared/modal' %>
     </div>
   </div>
 </div>
-

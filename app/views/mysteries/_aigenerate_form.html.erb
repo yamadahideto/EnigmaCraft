@@ -1,22 +1,19 @@
-<h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
+<h1 class = "text-center text-3xl font-zen-old-mincho text-white mb-7">
   <%= t('mysteries.new.ai_new_title') %>
 </h1>
-
-  <%= form_with model: @mystery, url: generate_mysteries_path  , data: { controller: "modal" }, class: "flex flex-col text-mainTextColor" do |f| %>
-    <div id = "loadAnimetion">
-      <%= render "/shared/error_messages", model: f.object %>
-      <div class="mb-4 input input-bordered flex items-center gap-2">
-        <%= f.collection_select :genre_id, @genres, :id, :name, prompt: 'ジャンルを選択してください'%>
-      </div>
-
-      <div class="mb-4 input input-bordered flex items-center gap-2">
-        <%= f.text_field :correct_answer, placeholder: "謎の答えを入力 (例: 炊飯器) ※ひらがなで入力", class: "grow" %>
-      </div>
+<%= form_with model: @mystery, url: generate_mysteries_path  , data: { controller: "modal" }, class: "flex flex-col text-mainTextColor" do |f| %>
+  <div id = "loadAnimetion">
+    <%= render "/shared/error_messages", model: f.object %>
+    <div class="mb-4 input input-bordered flex items-center gap-2">
+      <%= f.collection_select :genre_id, @genres, :id, :name, prompt: 'ジャンルを選択してください'%>
     </div>
-
-    <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto" id = "submitButton">
-      <%= f.submit @mystery.new_record? ? t('helpers.submit.create') : t('helpers.submit.update') %>
-      <%# 新規登録ならcreate訳文 編集ならupdate訳文を使用する %>
-    </button>
-  <% end %>
+    <div class="mb-4 input input-bordered flex items-center gap-2">
+      <%= f.text_field :correct_answer, placeholder: "謎の答えを入力 (例: 炊飯器)", class: "grow" %>
+    </div>
+  </div>
+  <button class="btn bg-buttonColor text-white my-6" id = "submitButton">
+    <%= f.submit @mystery.new_record? ? t('helpers.submit.create') : t('helpers.submit.update') %>
+    <%# 新規登録ならcreate訳文 編集ならupdate訳文を使用する %>
+  </button>
 </div>
+<% end %>

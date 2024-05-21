@@ -26,6 +26,7 @@
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 text-header rounded-box w-52">
           <li> <%= link_to 'ランキング', rankings_users_path, class: "md:hidden text-header hover:text-selected-text transition-all duration-300" %> </li>
           <li> <%= link_to '謎一覧', mysteries_path, class: "md:hidden text-header hover:text-selected-text transition-all duration-300" %> </li>
+          <li> <%= link_to '謎をつくる', new_mystery_path, class: "hover:text-selected-text transition-all duration-300" %> </li>
           <li> <%= link_to t('users.show.title'), user_path(current_user.id), class: "hover:text-selected-text transition-all duration-300" %> </li>
           <li> <%= link_to t('helpers.link.bookmarks'), bookmarks_mysteries_path, class: "hover:text-selected-text transition-all duration-300" %> </li>
           <li> <%= link_to t('helpers.link.logout'), logout_path, class: "hover:text-selected-text transition-all duration-300", data: {turbo_method: :delete} %> </li>
