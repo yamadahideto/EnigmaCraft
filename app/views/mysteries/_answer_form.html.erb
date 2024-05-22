@@ -1,11 +1,13 @@
 <% if mystery.correctly?(current_user.id) || current_user.own?(mystery) %>
   <%# 正解済み or 自作の謎は答えを表示 %>
-  <h1 class="text-2xl font-bold py-5">
-    <%= t("helpers.correct_answer") %>:
-  </h1>
-  <h1 class="text-2xl font-bold py-5">
-    <%= mystery.correct_answer %>
-  </h1>
+  <div class = "flex mt-5">
+    <p class="text-2xl font-bold">
+      <%= t("helpers.correct_answer") %>:
+    </p>
+    <p class="text-2xl font-bold ml-4 mb-4">
+      <%= mystery.correct_answer %>
+    </p>
+  <div/>
 <% else %>
   <%# 他人が作成したは謎は回答できるようにフォーム表示 %>
   <%= form_with model: [mystery, answer] do |f| %>

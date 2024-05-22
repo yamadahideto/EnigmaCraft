@@ -1,9 +1,7 @@
 <% if logged_in? %>
   <% if mystery.correctly?(current_user.id) %>
     <div class="card w-full shadow-xl relative" style="background-image: url(<%= asset_path 'backColorCorrect.png' %>); opacity: 0.5;">
-      <div class="absolute inset-0 flex items-center justify-center">
-        <span class="text-xl font-bold text-correctText z-10">解決済み</span>
-      </div>
+      <span class="text-xl font-bold text-correctText z-10">解決済み</span>
   <% else %>
     <div class="card w-full bg-base-100 shadow-xl" style="background-image: url( <%= asset_path 'backColor.png' %> );">
   <% end %>

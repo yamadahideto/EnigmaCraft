@@ -1,17 +1,13 @@
-<div class="hero min-h-screen bg-header" style="background-image: url(assets/topImage.png);">
-  <div class="hero-overlay bg-opacity-60"></div>
+<div class="hero min-h-screen bg-header ">
   <div class="hero-content text-center w-full bg-opacity-60">
-    <div class="max-w-lg w-full mx-auto">
-      <!-- フレックスコンテナの調整 -->
+    <div class="w-full md:mx-44 mx-auto">
       <div class="flex justify-between">
-        <%= link_to mysteries_path do %>
-          <button class="btn btn-sm bg-white">
-            <%= t('helpers.link.back') %>
-          </button>
+        <%= link_to :back do %>
+          <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back') %> </button>
         <% end %>
         <div>
-          <button id="ai_generate_button" class="hidden btn btn-sm">AIでつくる</button>
-          <button id="image_post_button" class="btn btn-sm">自分でつくる</button>
+          <button id="ai_generate_button" class="hidden btn btn-sm bg-editDeleteBtn text-buttonText">AIでつくる</button>
+          <button id="image_post_button" class="btn btn btn-sm bg-editDeleteBtn text-buttonText">自分でつくる</button>
         </div>
       </div>
       <div class="mx-auto" data-controller="modal">

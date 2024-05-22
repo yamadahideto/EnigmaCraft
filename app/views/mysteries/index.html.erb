@@ -2,12 +2,14 @@
   <div class="hero-overlay bg-opacity-60"></div>
   <div class="text-center text-neutral-content">
     <div class = "mx-auto">
-      <h1 class = "text-3xl text-center text-mainTextColor" > <%= t('.title') %> </h1>
+      <h1 class="text-center text-3xl font-zen-old-mincho text-white mb-7">
+        <%= t('.title') %>
+      </h1>
       <div class="items-center justify-center space-x-0 sm:space-x-3 my-8 mb-10">
         <%= search_form_for @q, url: mysteries_path, html: { data: { turbo_frame: 'mystery-list' } } do |f| %>
           <%= f.search_field :title_cont, id: 'title_cont', placeholder: 'タイトルを検索', class: "input input-bordered w-full max-w-xs mb-4 sm:mb-0" %>
           <%= f.select :genre_id_eq, options_for_select(@genres.map { |genre| [genre.name, genre.id] }, selected: f.object.genre_id_eq), { include_blank: 'カテゴリーを選択' }, { class: 'select select-bordered w-full max-w-xs mb-4 sm:mb-0' } %>
-          <button class="btn btn-sm bg-white text-mainTextColor text-center">
+          <button class="btn btn-sm bg-buttonColor text-white text-center">
             <%= f.submit t('helpers.submit.search') %>
           </button>
         <% end %>

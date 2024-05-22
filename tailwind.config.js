@@ -8,12 +8,6 @@ module.exports = {
   plugins: [require("daisyui")],
   theme: {
     extend: {
-      // colors: {
-      //   bodyColor: "#F2EDDA",
-      //   footer: "#672516",
-      //   mainContentColor: "#FFF6EA",
-      //   mainTextColor: "#A23D13",
-      // },
       colors: {
         header: "#0f1f52",
         bodyColor: "#020100",
@@ -22,6 +16,9 @@ module.exports = {
         mainTextColor: "#3185d9",
         buttonColor: "#3185d9",
         correctText: "#f2c13b",
+        test: "#001b64",
+        editDeleteBtn: "#f2c13b",
+        buttonText: "#c96a30",
       },
       fontFamily: {
         "zen-old-mincho": ['"Zen Old Mincho"', "serif", "bold"],

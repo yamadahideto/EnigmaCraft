@@ -4,6 +4,9 @@
       <h1 class="text-center text-3xl font-zen-old-mincho text-white mb-7">
         <%= t('users.rankings.title') %>
       </h1>
+      <%= link_to :back do %>
+        <button class="flex justify-start btn btn-sm ml-5 mb-5 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back') %> </button>
+      <% end %>
       <% @users.each.with_index(1) do |user, i| %>
         <div class="flex items-center mb-5">
           <div class="mr-5">

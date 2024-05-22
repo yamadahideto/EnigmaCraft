@@ -1,5 +1,0 @@
-<% if current_user.own?(mystery) %>
-  <%# ログイン済みで自作した謎は編集、削除リンク表示 %>
-  <%= link_to t('helpers.link.edit'), edit_mystery_path(@mystery) %>
-  <%= link_to t('helpers.link.delete'), mystery_path(@mystery), data: { turbo_confirm: '本当に削除しますか？', 'turbo_method': :delete } %>
-<% end %>

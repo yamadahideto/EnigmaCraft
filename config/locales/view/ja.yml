@@ -16,6 +16,7 @@ ja:
     image: 謎画像
     correct_answer: 謎の答え
     require_login: ログインしてください
+    email: メールアドレス
     link:
       back: 戻る
       edit: 編集
