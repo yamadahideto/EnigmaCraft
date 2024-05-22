@@ -12,7 +12,7 @@
           <div class="mr-5">
             <h1 class="text-correctText sm:text-4xl"> <%= i %> </h1>
           </div>
-          <div class="card card-side text-correctText shadow-xl flex-grow" style="background-image: url(<%= asset_path 'テスト.png' %>);">
+          <div class="card card-side text-correctText shadow-xl flex-grow animate-tracking-in-expand-fwd-bottom" style="background-image: url(<%= asset_path 'テスト.png' %>);">
             <div class="flex items-center p-4">
               <% if user.avator.attached? %>
                 <%= image_tag user.avator, size: '80x80', class: "rounded-full" %>
