@@ -1,11 +1,11 @@
 <% @bookmarks.each do |mystery| %>
   <% if mystery.correctly?(current_user.id) %>
-    <div class="card w-full shadow-xl relative" style="background-image: url(assets/backColorCorrect.png); opacity: 0.5;">
+    <div class="card w-full shadow-xl relative" style="background-image: url( <%= asset_path 'backColorCorrect.png' %>); opacity: 0.5;">
       <div class="absolute inset-0 flex items-center justify-center">
-        <span class="text-xl font-bold text-correctText z-10">解決済み</span>
+        <span class="text-3xl font-bold text-white z-10">解決済み</span>
       </div>
   <% else %>
-    <div class="card w-full bg-base-100 shadow-xl" style="background-image: url(assets/backColor.png);">
+    <div class="card w-full bg-base-100 shadow-xl" style="background-image: url( <%= asset_path 'backColor.png' %> );">
   <% end %>
   <%= link_to mystery_path(mystery), class: "hover:transition-all duration-300 max-h-96", data: { turbo_frame: '_top' } do %>
     <figure><%= image_tag mystery.image, size: "300x300", class: "mx-auto rounded-lg my-5 bg-opacity-60"%></figure>
