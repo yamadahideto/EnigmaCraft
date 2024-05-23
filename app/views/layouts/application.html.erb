@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= action_cable_meta_tag %>
-    <%= favicon_link_tag "interrogation.webp" %>
+    <%= favicon_link_tag "icon.png" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,16 +22,14 @@
     </script>
   <!-- /Google Analytics (gtag.js) -->
   </head>
-  <body class="flex flex-col min-h-screen bg-bodyColor" data-user-id="<%= current_user&.id %>">
-    <%= render "shared/header" %>
+  <body class="flex flex-col min-h-screen">
+    <% if logged_in? %>
+      <%= render "shared/after_login" %>
+    <% else %>
+      <%= render "shared/header" %>
+    <% end %>
     <%= render "shared/flash" %>
-    <div class="flex-grow bg-body">
-      <%= yield %>
-    </div>
-      <%= render 'shared/footer' %>
+    <%= yield %>
+    <%= render 'shared/footer' %>
   </body>
 </html>
-
-
-
- 

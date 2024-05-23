@@ -2,10 +2,28 @@
   <dialog id="my_modal_4" class="modal rounded-lg">
     <div class="modal-box w-1/2 max-w-5xl">
       <% if @correct %>
-      <%# 不正解時の処理 %>
-        <h1 class="font-bold text-lg">正解です！！</h1>
-        <%= image_tag 'correct.webp', size: '400x400', class: 'mx-auto rounded-lg' %>
-        <h2 class="py-4">1Ptゲット！</h2>
+      <%# 正解時の処理 %>
+        <h1 class="font-bold text-5xl text-correctText font-zen-old-mincho">おめでとう！謎を解決しました！</h1>
+        <%= image_tag 'correct.png', size: '300x300', class: 'mx-auto my-5 rounded-lg' %>
+        <div class = "flex items-center justify-center">
+          <svg class="h-8 w-8 text-correctText"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <h2 class="text-3xl py-4 text-correctText font-bold font-zen-old-mincho">
+            1ナゾ ポイントゲット！! 
+          </h2>
+          <svg class="h-8 w-8 text-correctText"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+
+        <%= link_to "https://x.com/intent/tweet?url=#{mystery_url(@mystery)}/&target=blank&hashtags=EnigmaPortals&text=これは難しい...わかるかな？？", target: '_blank' do %>
+          <button class="btn btn-sm bg-buttonColor text-white my-6">
+            <svg class="h-8 w-8 text-gray-900"  width="24" height="24" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /> </svg>
+            <h2>共有</h2>
+          </button>
+        <% end %>
+
         <%= turbo_stream.replace 'answer_form' do %>
           <%# 答えを表示 %>
           <h1 class="text-2xl font-bold py-5">
@@ -16,14 +34,22 @@
         <%= turbo_stream.remove 'answer_button' %>
       <% else %>
       <%# 不正解時の処理 %>
-        <h1 class="font-bold text-lg">不正解です！！</h1>
-        <%= image_tag 'incorrect.webp', size: '400x400', class: 'mx-auto rounded-lg' %>
-        <h2 class="py-4">もう一度考えてみましょう！</h2>
+      <h1 class="font-bold text-3xl text-correctText">不正解です！！</h1>
+      <%= image_tag 'incorrect.webp', size: '400x400', class: 'mx-auto rounded-lg' %>
+        <h2 class="text-2xl py-4 text-correctText">もう一度考えてみましょう！</h2>
+      <div class = "flex justify-center">
+        <%= link_to "https://x.com/intent/tweet?url=#{mystery_url(@mystery)}/&target=blank&hashtags=EnigmaPortals&text=これは難しい...わかるかな？？", target: '_blank' do %>
+          <button class="btn btn-sm bg-buttonColor text-white my-6">
+            <svg class="h-8 w-8 text-gray-900"  width="24" height="24" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /> </svg>
+            <h2>共有</h2>
+          </button>
+        <% end %>
+      </div>
       <% end %>
       <div class="modal-action">
         <form method="dialog">
           <!-- if there is a button, it will close the modal -->
-          <button class="btn">Close</button>
+          <button class="btn my-5">Close</button>
         </form>
       </div>
     </div>

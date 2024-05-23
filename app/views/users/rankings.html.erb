@@ -1,43 +1,32 @@
-<div class = "w-9/12 mx-auto">
-  <div class="bg-mainContentColor shadow-xl rounded px-7 py-5 pb-12 my-20">
-      <div class = "mx-auto px-3">
-        <h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
-          <%= t('users.rankings.title') %>
-        </h1>
-        <% @users.each.with_index(1) do |user, i| %>
-          <div class = "border my-5 bg-white rounded-lg">
-            <div class = "bg-red flex items-center px-10">
-              <div class = "mx-5">
-                <h1 class = "text-mainTextColor sm:text-4xl"> <%= i %> </h1>
-              </div>
-              <div class = "mx-10">
-                <h1 class="text-2xl font-bold">
-                  <% if user.avator.attached? %>
-                    <%= image_tag user.avator, size: '80x80', class: "rounded-full" %>
-                  <% else %>
-                    <%= image_tag 'avator.jpeg', size: '80x80', class: "rounded-full" %>
-                  <% end %>
-                </h1>    
-              </div>
-              <div class = "flex justify-between w-full px-7">
-                <div class = "">
-                  <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
-                    <%= user.name %>
-                  </h1>
-                </div>
-                <div class = "">
-                  <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
-                    ポイント数:
-                    <%= user.point %>
-                  </h1>     
-                </div>
-              </div>
-            </div>
-
+<div class="hero min-h-screen bg-header">
+  <div class="hero-content text-center text-neutral-content">
+    <div class="w-full mx-auto bg-header">
+      <h1 class="text-center text-3xl font-zen-old-mincho text-white mb-7">
+        <%= t('users.rankings.title') %>
+      </h1>
+      <%= link_to :back do %>
+        <button class="flex justify-start btn btn-sm ml-5 mb-5 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back') %> </button>
+      <% end %>
+      <% @users.each.with_index(1) do |user, i| %>
+        <div class="flex items-center mb-5">
+          <div class="mr-5">
+            <h1 class="text-correctText sm:text-4xl"> <%= i %> </h1>
           </div>
-        <% end %>
-      </div>
-
+          <div class="card card-side text-correctText shadow-xl flex-grow animate-tracking-in-expand-fwd-bottom" style="background-image: url(<%= asset_path 'テスト.png' %>);">
+            <div class="flex items-center p-4">
+              <% if user.avator.attached? %>
+                <%= image_tag user.avator, size: '80x80', class: "rounded-full" %>
+              <% else %>
+                <%= image_tag 'avator.jpeg', size: '80x80', class: "rounded-full" %>
+              <% end %>
+            </div>
+            <div class="card-body">
+              <h2 class="card-title"> <%= user.name %> </h2>
+              <p> ポイント数: <%= user.point %> </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

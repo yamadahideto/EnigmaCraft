@@ -1,19 +1,28 @@
-<div class="rounded text-mainTextColor bg-white border-solid border-2 border-white rounded-lg drop-shadow-xl py-2 my-8"> 
-  <div class = "mx-auto px-3">
-    <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
-      <%= t("helpers.title") %>:
-      <%= link_to mystery.title, mystery_path(mystery), class: "underline", data: { turbo_frame: '_top' } %>
-    </h1>
-    <h1 class="text-2xl font-bold py-5">
-      <%= t("helpers.genre") %>:
-      <%= mystery.genre.name %>
-    </h1>
-    <%# ログインユーザーにブックマークボタンを表示 %>
-    <% if logged_in? %>
-      <%= render 'bookmark_button', { mystery: mystery } %>
-    <% end %>
-    <h1 class="text-2xl font-bold underline py-5">
-      <%= image_tag 'incorrect.webp', size: "300x300", class: "mx-auto rounded-lg" %>
-    </h1>     
-  </div>  
+<% if logged_in? %>
+  <% if mystery.correctly?(current_user.id) %>
+    <div class="card w-full shadow-xl relative hover:animate-text-pop-up-top" style="background-image: url(<%= asset_path 'backColorCorrect.png' %>); opacity: 0.5;">
+      <span class="text-xl font-bold text-correctText z-10">解決済み</span>
+  <% else %>
+    <div class="card w-full bg-base-100 shadow-xl hover:animate-text-pop-up-top" style="background-image: url( <%= asset_path 'backColor.png' %> );">
+  <% end %>
+<% else %>
+  <div class="card w-full bg-base-100 shadow-xl hover:animate-text-pop-up-top" style="background-image: url(<%= asset_path 'backColor.png' %>);">
+<% end %>
+  <%= link_to mystery_path(mystery), class: "hover:transition-all duration-300 max-h-96", data: { turbo_frame: '_top' } do %>
+    <figure><%= image_tag mystery.image, size: "300x300", class: "mx-auto rounded-lg my-5 bg-opacity-60"%></figure>
+  <% end %>
+  <div class="card-body">
+    <h2 class="card-title text-header">
+      <%= mystery.title %>
+      <div class="">
+        <% if logged_in? %>
+          <%= render 'bookmark_button', { mystery: mystery } %>
+        <% end %>
+      </div>
+    </h2>
+    <div class="card-actions justify-start lign-height-center text-header">
+      カテゴリー:
+      <div class="badge badge-outline text-header"><%= mystery.genre.name %></div> 
+    </div>
+  </div>
 </div>

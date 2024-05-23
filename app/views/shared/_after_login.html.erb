@@ -1,0 +1,37 @@
+<%# ログイン後 ヘッダー %>
+<header class="py-6 text-white bg-header">
+  <div class="container mx-auto flex justify-between items-center px-8 md:px-14 lg:px-24 w-full">
+    <%= link_to root_path, class: "text-3xl mr-4" do %>
+      <%= image_tag 'logo.png', size: '200x200' %>
+    <% end %>
+    <div class="text-sm items-center flex">
+      <div class = "space-x-12 hidden md:flex ">
+        <%= link_to 'ランキング', rankings_users_path, class: "hover:text-selected-text transition-all duration-300" %>
+        <%= link_to '謎一覧', mysteries_path, class: "hover:text-selected-text transition-all duration-300" %>
+        <%= link_to '謎をつくる', new_mystery_path, class: "hover:text-selected-text transition-all duration-300" %>
+      </div>
+      <div class="dropdown dropdown-bottom dropdown-end border-none">
+        <div tabindex="0" class="bg-header border-none">
+          <div tabindex="0" role="button" class="bg-header border-none">
+            <div class="avatar">
+              <div class="w-20 rounded-full hover:cursor-pointer ml-12">
+                <% if current_user.avator.attached? %>
+                  <%= image_tag current_user.avator%>
+                <% else %>
+                  <%= image_tag 'avator.jpeg' %>
+                <% end %>
+            </div>
+          </div>
+        </div>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 text-header rounded-box w-52">
+          <li> <%= link_to 'ランキング', rankings_users_path, class: "md:hidden text-header hover:text-selected-text transition-all duration-300" %> </li>
+          <li> <%= link_to '謎一覧', mysteries_path, class: "md:hidden text-header hover:text-selected-text transition-all duration-300" %> </li>
+          <li> <%= link_to '謎をつくる', new_mystery_path, class: "hover:text-selected-text transition-all duration-300" %> </li>
+          <li> <%= link_to t('users.show.title'), user_path(current_user.id), class: "hover:text-selected-text transition-all duration-300" %> </li>
+          <li> <%= link_to t('helpers.link.bookmarks'), bookmarks_mysteries_path, class: "hover:text-selected-text transition-all duration-300" %> </li>
+          <li> <%= link_to t('helpers.link.logout'), logout_path, class: "hover:text-selected-text transition-all duration-300", data: {turbo_method: :delete} %> </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>

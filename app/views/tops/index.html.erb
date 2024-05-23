@@ -1,21 +1,84 @@
-<div class = "min-w-max bg-mainContentColor font-zen-old-mincho font-medium mx-10 my-10">
-  <h1 class = "text-3xl text-center text-mainTextColor" > <%= link_to '謎一覧へ', mysteries_path, class: 'underline' %> </h1>
-  <div class = "my-8 pb-8 mx-20">  
-    <div class="rounded mx-auto mb-8 text-mainTextColor bg-white border-solid border-2 border-white rounded-lg drop-shadow-xl py-2 my-8"> 
-      <h1 class="text-2xl font-zen-old-mincho font-bold text-center py-5">
-        <p> EnigmaPortalsへようこそ!!</p>
-        <p> 謎の作成・共有が簡単にできます！</p>
-        <p> AIの画像生成機能を使って謎を作成しましょう！ </p>
-        <p> ジャンルと謎の答えを入力するだけで簡単に謎を作成できます </p>
-      </h1>
+<div class="hero">
+  <%= image_tag 'topImage.png', class: "animate-text-focus-in" %>
+</div>
+
+<div class="hero min-h-screen bg-header text-white">
+  <div class="hero-content flex-col lg:flex-row">
+    <%= image_tag 'icon.png', class: "max-w-sm rounded-lg shadow-2xl",  size: "200x200" %>
+    <div>
+      <h1 class="text-3xl md:text-5xl font-zen-old-mincho">集まった謎を見に行こう</h1>
+      <p class="py-4"> いろんな方が作成した謎がたくさん集まっています。 </p>
+      <p class="py-4"> お気に入りの謎を見つけてみよう </p>
+      <img src="https://i.gyazo.com/6652e34bfe775ad841702ee95d280916.gif", width="600">
+      <%= link_to mysteries_path do %>
+        <button class="btn bg-buttonColor text-white my-3">謎を見に行く</button>
+      <% end %>
     </div>
   </div>
 </div>
 
-<% unless logged_in? %>
-  <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
-  <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
-    <button class="btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> 謎を作ってみる</br>(ゲストログイン) </button>
-  <% end %>
-<% end %>
 
+<div class="hero min-h-screen bg-header text-white">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <%= image_tag 'icon.png', class: "max-w-sm rounded-lg shadow-2xl", size: "200x200" %>
+    <div>
+      <h1 class="text-3xl md:text-5xl font-bold font-zen-old-mincho">自作の謎を作ってみよう</h1>
+      <p class="py-2"> 初めて作る方でも、「ジャンルと答え」だけでAIで簡単に作成ができます。</p>
+      <p class="py-2"> 自分で作成した謎の投稿もできます </p>
+      <div class="badge badge-warning gap-2 my-3">
+        ※作成・投稿にはログインが必要です
+      </div>
+      <img src="https://i.gyazo.com/c0ae7555788c5eed136fde1f0b07c980.gif", width="600">
+      <% unless logged_in? %>
+        <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
+        <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
+          <button class="btn bg-buttonColor text-white my-3">謎を作ってみる</br>(ゲストログイン)</button>
+        <% end %>
+      <% else %>
+        <%= link_to new_mystery_path do %>
+          <button class="btn bg-buttonColor text-white my-3">謎を作ってみる</button>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="hero min-h-screen bg-header text-white">
+  <div class="hero-content flex-col lg:flex-row">
+    <%= image_tag 'icon.png', size: "200x200" %>
+    <div>
+      <h1 class="text-3xl md:text-5xl font-bold text-zen-old-mincho">謎に回答してみよう</h1>
+      <p class="py-2"> 正解だと思う謎を書いてね！ 正解すると謎ポイントがもらえます！</p>
+      <p class="py-2"> ポイントの獲得数に応じてユーザーランキングが決まるよ </p>
+      <div class="badge badge-warning gap-2 my-3">
+        ※作成・投稿にはログインが必要です
+      </div>
+      <img src="https://i.gyazo.com/6d11fcee682d70789875ea5a4b86db82.gif", width="500">
+      <% unless logged_in? %>
+        <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
+        <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
+          <button class="btn bg-buttonColor text-white my-3">謎を作ってみる</br>(ゲストログイン)</button>
+        <% end %>
+      <% else %>
+        <%= link_to new_mystery_path do %>
+          <button class="btn bg-buttonColor text-white my-3">謎を作ってみる</button>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="hero min-h-screen" style="background-image: url( <%= asset_path 'topImage.png' %> );">
+  <div class="hero-overlay bg-opacity-60"></div>
+  <div class="hero-content text-center text-neutral-content">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-5xl font-bold font-zen-old-mincho">謎解きを体験しよう</h1>
+        <%= link_to auth_at_provider_path(provider: :google), class: 'text-center mx-auto my-5 mb-5' do %>
+          <%= image_tag 'google_signin.png', class: 'mx-auto hover:opacity-50' %>
+        <% end %>
+        <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
+          <button class="btn bg-buttonColor text-white my-6">ゲストログイン</button>
+        <% end %>
+    </div>
+  </div>
+</div>
