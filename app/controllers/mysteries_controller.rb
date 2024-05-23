@@ -4,7 +4,7 @@ class MysteriesController < ApplicationController
   before_action :require_login, only: %i[new edit update destroy]
   def index
     @q = Mystery.ransack(params[:q])
-    @mysteries = @q.result.includes(%i[genre bookmarks]).order(id: :DESC).page(params[:page]).per(6)
+    @mysteries = @q.result.includes(%i[genre bookmarks]).order(id: :DESC).page(params[:page]).per(9)
   end
 
   def show

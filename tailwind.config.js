@@ -73,7 +73,7 @@ module.exports = {
         "text-focus-in": "text-focus-in 1s linear",
         "tracking-in-expand-fwd-bottom":
           "tracking-in-expand-fwd-bottom 1s cubic-bezier(0.215, 0.610, 0.355, 1.000)   both",
-        "text-pop-up-top": "text-pop-up-top 0.5s linear  0.5 both",
+        "text-pop-up-top": "text-pop-up-top 0.8s linear  0.2 both",
       },
     },
   },
