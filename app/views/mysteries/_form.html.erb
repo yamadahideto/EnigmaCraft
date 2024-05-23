@@ -1,7 +1,7 @@
 <h1 class = "text-center text-3xl font-zen-old-mincho text-white mb-7">
-  <%= t('mysteries.new.ai_new_title') %>
+  <%= t('mysteries.new.self_new_title') %>
 </h1>
-<%= form_with model: @mystery, url: generate_mysteries_path  , data: { controller: "modal" }, class: "flex flex-col text-mainTextColor" do |f| %>
+<%= form_with model: @mystery, url: mysteries_path  , data: { controller: "modal" }, class: "flex flex-col text-mainTextColor" do |f| %>
   <%= render "/shared/error_messages", model: f.object %>
   <div class="mb-4 input input-bordered flex items-center gap-2">
     <%= f.text_field :title, placeholder: "謎のタイトル", class: "grow" %>

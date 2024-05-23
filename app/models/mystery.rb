@@ -5,10 +5,26 @@ class Mystery < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
 
-  validates :title, presence: true
-  validates :image, presence: true, content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/webp', 'image/HEIF']
-  validates :content, presence: true
+  attr_accessor :ai_generated # AI生成かどうかのフラグ
+
+  validates :title, presence: true, unless: -> { ai_generated? }
+  validates :image, presence: true, content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/webp', 'image/HEIF'], unless: -> { ai_generated? }
+  validates :content, presence: true, unless: -> { ai_generated? }
   validates :correct_answer, presence: true
+
+  def generate_content(content)
+    self.title = content[:title]
+    self.content = content[:content]
+    image.attach(
+      io: content[:image],
+      filename: content[:filename]
+    )
+  end
+
+  def ai_generated?
+    # AI生成時と自作の謎投稿時でのバリデーションの切り替え
+    ai_generated
+  end
 
   def correctly?(current_user_id)
     # 正解済みであればtrueを返却

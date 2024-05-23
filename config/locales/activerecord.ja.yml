@@ -13,9 +13,6 @@ ja:
         create: 登録
       mystery:
         title: タイトル
-        mystery_type: 謎のタイプ
-        type_image: 画像謎
-        type_code: 暗号謎
         image: 謎画像
         content: 謎の内容
         correct_answer: 謎の正解

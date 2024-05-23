@@ -2,6 +2,18 @@ module MysteryGenerate
   # 例外クラスを作成
   class OpenAiResponseError < StandardError; end
 
+  def self.create_mystery_content(genre, correct_answer)
+    client = OpenAI::Client.new(access_token: ENV.fetch('OPENAI_ACCESS_TOKEN', nil)) 
+    begin
+      text = generate_text(client, genre, correct_answer)
+      image = generate_image(client, genre, correct_answer)
+
+      { title: text[:title], content: text[:content], image: image[:image], filename: image[:filename] }
+    rescue Faraday::Error => e
+      raise handle_error(e)
+    end
+  end
+
   # 文章生成メソッド
   def self.generate_text(client, genre, correct_answer)
     begin
@@ -35,7 +47,7 @@ module MysteryGenerate
   end
 
   # 画像生成メソッド
-  def self.generate_image(client, genre, answer)
+  def self.generate_image(client, genre, answer)   
     begin
       response = client.images.generate(
         parameters: {
@@ -52,6 +64,7 @@ module MysteryGenerate
     end
   end
 
+  # OpenAIエラーハンドリングを追加
   def self.handle_error(e)
     status = e.response[:status]
     case status
