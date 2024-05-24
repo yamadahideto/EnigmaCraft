@@ -35,7 +35,7 @@ class MysteriesController < ApplicationController
     if @mystery.valid?
       ActiveRecord::Base.transaction do
         content = MysteryGenerate.create_mystery_content(@mystery.genre.name, @mystery.correct_answer)
-        @mystery.generated_content(content)
+        @mystery.generate_content(content)
         @mystery.save!
         flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
         redirect_to mysteries_path
