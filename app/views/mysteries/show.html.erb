@@ -38,7 +38,7 @@
               <p><%= t("helpers.content") %>: </p>
               <p><%= @mystery.content %> </p>
             </h1>  
-            <%= image_tag @mystery.image, size: '300x300', class: "mx-auto rounded-lg" %>
+            <%= image_tag @mystery.image, size: '300x300', class: "mx-auto rounded-lg mb-3" %>
             <% if logged_in? %>
               <%= render 'answer_form', mystery: @mystery, answer: @answer %>
             <% else %>

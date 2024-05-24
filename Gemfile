@@ -59,14 +59,14 @@ gem 'active_storage_validations'
 # OpenAI API
 gem "ruby-openai"
 
-# アイコン
-gem 'font-awesome-rails'
-
 # ページネーション
 gem 'kaminari'
 
 # 検索処理
 gem 'ransack', '~> 3.1.0'
+
+# Xシェア時のOGP対応
+gem 'meta-tags'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
