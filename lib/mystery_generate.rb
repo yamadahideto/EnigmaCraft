@@ -7,8 +7,13 @@ module MysteryGenerate
     begin
       text = generate_text(client, genre, correct_answer)
       image = generate_image(client, genre, correct_answer)
+      
+      if text[:title].blank? || text[:content].blank? || image[:image].blank? || image[:filename].blank?
+        raise OpenAiResponseError, "予期せぬレスポンス形式です。"
+      else
+        { title: text[:title], content: text[:content], image: image[:image], filename: image[:filename] }
+      end
 
-      { title: text[:title], content: text[:content], image: image[:image], filename: image[:filename] }
     rescue Faraday::Error => e
       raise handle_error(e)
     end
