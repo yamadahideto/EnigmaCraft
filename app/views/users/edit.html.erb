@@ -12,20 +12,26 @@
       <% if current_user.avator.attached? %>
         <%= image_tag @user.avator, size: '300x300', class: "mx-auto rounded-full" %>
       <% else %>
-        <%= image_tag 'avator.jpeg', size: '300x300', class: "rounded-full" %>
+        <%= image_tag 'avator.jpeg', size: '300x300', class: "mx-auto rounded-full" %>
       <% end %>
       <div class="mx-auto mt-2">
         <%= form_with model: @user, local: true, multipart: true, class: "flex flex-col text-mainTextColor" do |f| %>
           <%= render "/shared/error_messages", model: f.object %> 
+          <div class="badge badge-warning text-header font-bold gap-2 my-1">
+            <%= f.label :avator %> (必須)
+          </div>
           <div class="mb-4 input input-bordered flex items-center gap-2">
             <%= f.file_field :avator, placeholder: "謎の画像を投稿", class: "grow" %>
+          </div>
+          <div class="badge badge-warning text-header font-bold gap-2 my-1">
+            <%= f.label :name %> (必須)
           </div>
           <div class="mb-4 input input-bordered flex items-center gap-2">
             <%= f.text_field :name, placeholder: "ユーザーネーム", class: "grow" %>
           </div>
 
-          <div class="mb-4 flex input-bordered items-center text-white gap-2">
-            <p> Googelログインユーザーはメールアドレスを変更できません </p>
+          <div class="mb-4 flex input-bordered items-center text-white font-bold gap-2">
+            <p> ※ゲスト/Googelログインユーザーはメールアドレスを変更できません </p>
           </div>
 
           <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto">

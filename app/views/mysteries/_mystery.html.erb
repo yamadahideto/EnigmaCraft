@@ -1,15 +1,15 @@
 <% if logged_in? %>
   <% if mystery.correctly?(current_user.id) %>
-    <div class="card w-full shadow-xl relative hover:animate-text-pop-up-top" style="background-image: url(<%= asset_path 'backColorCorrect.png' %>); opacity: 0.5;">
+    <div class="card w-full bg-base-100 shadow-xl hover:animate-text-pop-up-top min-h-[400px] relative" style="background-image: url(<%= asset_path 'backColorCorrect.png' %>); opacity: 0.5;">
       <span class="text-xl font-bold text-correctText z-10">解決済み</span>
   <% else %>
-    <div class="card w-full bg-base-100 shadow-xl hover:animate-text-pop-up-top" style="background-image: url( <%= asset_path 'backColor.png' %> );">
+    <div class="card w-full bg-base-100 shadow-xl hover:animate-text-pop-up-top min-h-[400px]" style="background-image: url( <%= asset_path 'backColor.png' %> );">
   <% end %>
 <% else %>
-  <div class="card w-full bg-base-100 shadow-xl hover:animate-text-pop-up-top" style="background-image: url(<%= asset_path 'backColor.png' %>);">
+  <div class="card w-full bg-base-100 shadow-xl hover:animate-text-pop-up-top min-h-[400px]" style="background-image: url(<%= asset_path 'backColor.png' %>);">
 <% end %>
   <%= link_to mystery_path(mystery), class: "hover:transition-all duration-300 max-h-96", data: { turbo_frame: '_top' } do %>
-    <figure><%= image_tag mystery.image, size: "300x300", class: "mx-auto rounded-lg my-5 bg-opacity-60"%></figure>
+    <figure><%= image_tag mystery.image, size: "300x300", class: "mx-auto rounded-lg my-5 bg-opacity-60 h-48 object-cover"%></figure>
   <% end %>
   <div class="card-body">
     <h2 class="card-title text-header">
@@ -20,7 +20,7 @@
         <% end %>
       </div>
     </h2>
-    <div class="card-actions justify-start lign-height-center text-header">
+    <div class="card-actions justify-start flex items-center text-header">
       カテゴリー:
       <div class="badge badge-outline text-header"><%= mystery.genre.name %></div> 
     </div>

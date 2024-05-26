@@ -3,18 +3,24 @@
     <div class="w-full md:mx-44 mx-auto animate-text-focus-in">
       <div class="flex justify-between">
         <%= link_to :back do %>
-          <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back') %> </button>
+          <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonColor"> <%= t('helpers.link.back') %> </button>
         <% end %>
         <div>
-          <button id="ai_generate_button" class="hidden btn btn-sm bg-editDeleteBtn text-buttonText">AIでつくる</button>
-          <button id="image_post_button" class="btn btn btn-sm bg-editDeleteBtn text-buttonText">自分でつくる</button>
+          <button id="ai_generate_button" class="hidden btn btn-sm bg-editDeleteBtn text-buttonColor">AIでつくる</button>
+          <button id="image_post_button" class="btn btn btn-sm bg-editDeleteBtn text-buttonColor">自分でつくる</button>
         </div>
       </div>
       <div class="mx-auto" data-controller="modal">
         <div id="ai_generate_form">
+          <h1 class = "text-center text-3xl font-zen-old-mincho text-white mb-7">
+            <%= t('mysteries.new.ai_new_title') %>
+          </h1>
           <%= render 'aigenerate_form', mystery: @mystery %>
         </div>
         <div id="image_post_form" class="hidden">
+          <h1 class = "text-center text-3xl font-zen-old-mincho text-white mb-7">
+            <%= t('mysteries.new.self_new_title') %>
+          </h1>
           <%= render 'form', mystery: @mystery %>
         </div>
         <%= render 'shared/modal' %>

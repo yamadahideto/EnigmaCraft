@@ -18,19 +18,24 @@
           <% if current_user.avator.attached? %>
             <%= image_tag @user.avator, size: '300x300', class: "mx-auto rounded-full" %>
           <% else %>
-            <%= image_tag 'avator.jpeg', size: '300x300', class: "rounded-full" %>
+            <%= image_tag 'avator.jpeg', size: '300x300', class: "mx-auto rounded-full" %>
           <% end %>
         </div>
         <%= render 'shared/modal' %>
-
-        <h1 class="text-2xl text-correctText font-zen-old-mincho font-bold py-5">
-          <%= t("helpers.name") %>:
-          <%= @user.name %>
-        </h1>
-        <h1 class="text-2xl text-correctText font-zen-old-mincho font-bold py-5">
-          <%= t("helpers.email") %>:
-          <%= @user.email %>
-        </h1>   
+        <% if current_user.guest? %>
+          <h1 class="text-2xl text-correctText font-zen-old-mincho font-bold py-5">
+            ゲストユーザー
+          </h1>
+        <% else %>
+          <h1 class="text-2xl text-correctText font-zen-old-mincho font-bold py-5">
+            <%= t("helpers.name") %>:
+            <%= @user.name %>
+          </h1>
+          <h1 class="text-2xl text-correctText font-zen-old-mincho font-bold py-5">
+            <%= t("helpers.email") %>:
+            <%= @user.email %>
+          </h1>   
+        <% end %>
       </div>
     </div>
   </div>
