@@ -18,6 +18,7 @@ module.exports = {
         correctText: "#f2c13b",
         test: "#001b64",
         editDeleteBtn: "#f2c13b",
+        editDeleteBtnText: "#657faf",
         buttonText: "#c96a30",
       },
       fontFamily: {

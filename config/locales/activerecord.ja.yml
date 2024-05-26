@@ -7,13 +7,15 @@ ja:
     attributes:
       user:
         name: ユーザーネーム
+        avator: プロフィール画像
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード(確認)
         create: 登録
       mystery:
         title: タイトル
-        image: 謎画像
+        genre: 謎のジャンル
+        image: 謎の画像
         content: 謎の内容
         correct_answer: 謎の正解
 

@@ -6,7 +6,13 @@
           <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back') %> </button>
         <% end %>
       </div>
+      <h1 class = "text-center text-3xl font-zen-old-mincho text-white mb-7">
+        <%= t('mysteries.edit.title') %>
+      </h1>
       <div class="mx-auto" data-controller="modal">
+        <div class = "mb-3 text-right">
+          <%= image_tag @mystery.image, size: '500x500', class: "mx-auto rounded-lg" %>
+        </div>
         <div id="image_post_form">
           <%= render 'form', mystery: @mystery %>
         </div>
