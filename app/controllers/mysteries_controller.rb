@@ -4,7 +4,7 @@ class MysteriesController < ApplicationController
   before_action :require_login, only: %i[new edit update destroy]
   def index
     @q = Mystery.ransack(params[:q])
-    @mysteries = @q.result.includes(%i[genre bookmarks]).order(id: :DESC).page(params[:page]).per(6)
+    @mysteries = @q.result.includes(%i[genre bookmarks]).order(id: :DESC).page(params[:page]).per(9)
   end
 
   def show
@@ -18,6 +18,7 @@ class MysteriesController < ApplicationController
 
   def create
     @mystery = current_user.mysteries.new(resize_image(mystery_params))
+    @mystery.ai_generated = false
     if @mystery.save
       flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
       redirect_to mysteries_path
@@ -30,25 +31,20 @@ class MysteriesController < ApplicationController
   # AI画像生成
   def generate
     @mystery = current_user.mysteries.new(resize_image(mystery_params))
-    begin
-      client = OpenAI::Client.new(access_token: ENV.fetch('OPENAI_ACCESS_TOKEN', nil))
-      generate_text = MysteryGenerate.generate_text(client, @mystery.genre.name, @mystery.correct_answer)
-      generate_image = MysteryGenerate.generate_image(client, @mystery.genre.name, @mystery.correct_answer)
-      @mystery.title = generate_text[:title]
-      @mystery.content = generate_text[:content]
-      @mystery.image.attach(
-        io: generate_image[:image],
-        filename: generate_image[:filename]
-      )
-      if @mystery.save
+    @mystery.ai_generated = true
+    if @mystery.valid?
+      ActiveRecord::Base.transaction do
+        content = MysteryGenerate.create_mystery_content(@mystery.genre.name, @mystery.correct_answer)
+        @mystery.generate_content(content)
+        @mystery.save!
         flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
         redirect_to mysteries_path
-      else
-        flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
+      rescue MysteryGenerate::OpenAiResponseError => e
+        flash[:alert] = e.message
         render :new, status: :unprocessable_entity
       end
-    rescue MysteryGenerate::OpenAiResponseError => e
-      flash[:alert] = e.message
+    else
+      flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
       render :new, status: :unprocessable_entity
     end
   end

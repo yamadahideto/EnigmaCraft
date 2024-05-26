@@ -1,42 +1,54 @@
-<div class = "w-1/2 mx-auto">
-  <div class="bg-mainContentColor shadow-xl rounded px-7 py-5 pb-12 my-20">
-    <div class = "flex place-content-end">
-      <%= link_to t('helpers.link.back'), mysteries_path %>
-    </div>
-    <div class = "mx-auto px-3">
-      <div id = "content_body">
-        <h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
-          <%= t('mysteries.show.title') %>
-        </h1>
-        <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
-          <%= t("helpers.title") %>:
-          <%= @mystery.title %>
-        </h1>
-        <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
-          <%= t("helpers.genre") %>:
-          <%= @mystery.genre.name %>
-        </h1>
-        <h1 class="text-2xl font-bold py-5">
-          <%= t("helpers.content") %>:
-          <%= @mystery.content %>
-        </h1>    
-        <h1 class="text-2xl font-bold underline py-5">
-          <%= image_tag @mystery.image, size: '300x300', class: "mx-auto rounded-lg" %>
-        </h1>
+<div class="flex flex-col min-h-screen">
+  <div class="flex-grow">
+    <div class="hero min-h-screen bg-header">
+      <div class="hero-content min-h-screen text-center text-neutral-content">
+        <div class="w-full max-w-4xl mx-auto" id = "content_body">
+          <h1 class="mb-5 text-3xl font-bold"> <%= t('mysteries.show.title') %> </h1>
+          <div class="flex justify-between items-center">
+            <div class = "flex items-center" >
+              <%= link_to :back do %>
+                <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back') %> </button>
+              <% end %>
+
+              <%# Xシェアボタン %>
+              <%= link_to "https://x.com/intent/tweet?url=#{mystery_url(@mystery)}/&target=blank&hashtags=EnigmaPortals&text=これは難しい...わかるかな？？" do %>
+                <button class="btn btn-sm bg-buttonColor text-white my-6 flex justify-end">
+                  <svg class="h-8 w-8 text-gray-900"  width="24" height="24" viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /> </svg>
+                  <h2>共有</h2>
+                </button>
+              <% end %>
+            </div>
+            <div>
+              <% if logged_in? && current_user.own?(@mystery) %>
+                <%= link_to edit_mystery_path(@mystery) do %>
+                  <button class="btn btn-sm bg-green-400 text-black"> <%= t('helpers.link.edit') %> </button>
+                <% end %>
+                <%= link_to mystery_path(@mystery), data: { turbo_confirm: '本当に削除しますか？', 'turbo_method': :delete } do %>
+                  <button class="btn btn-sm mx-4 bg-rose-600 text-white"> <%= t('helpers.link.delete') %> </button>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="p-4 mx-auto text-test rounded-lg text-left bg-header" style="background-image: url(<%= asset_path 'backColor.png' %>);">
+            <h1 class="text-2xl font-zen-old-mincho font-bold py-5">
+              <p><%= t("helpers.title") %>: <%= @mystery.title %> </p>
+            </h1>
+            <h1 class="text-2xl text-left font-zen-old-mincho font-bold py-5">
+              <p><%= t("helpers.genre") %>: <%= @mystery.genre.name %> </p>
+            </h1>  
+            <h1 class="text-2xl text-left font-zen-old-mincho font-bold py-5">
+              <p><%= t("helpers.content") %>: </p>
+              <p><%= @mystery.content %> </p>
+            </h1>  
+            <%= image_tag @mystery.image, size: '300x300', class: "mx-auto rounded-lg w-full h-auto px-24 object-cover" %>
+            <% if logged_in? %>
+              <%= render 'answer_form', mystery: @mystery, answer: @answer %>
+            <% else %>
+              <%= render 'answer_button'%>
+            <% end %>
+          </div>
+        </div>
       </div>
-      <% if logged_in? %>
-        <%# 編集・削除リンク %>
-        <%= render 'currentuser_action', mystery: @mystery %>
-        <%= render 'answer_form', mystery: @mystery, answer: @answer %>
-      <% else %>
-        <%= render 'answer_button'%>
-      <% end %>
-    </div>
-    <div class = "mx-auto py-5">
-      <%= link_to "https://twitter.com/share?url=#{mystery_url(@mystery)}/&text=謎を解いてみて！" do %>
-        <p><i class="fa-brands fa-twitter" style='color: #3399FF;'></i>Twitterにシェア</p>
-      <% end %>
-    </div>
     </div>
   </div>
 </div>

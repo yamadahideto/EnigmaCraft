@@ -1,29 +1,46 @@
-<div class = "w-1/2 mx-auto">
-  <div class="bg-mainContentColor shadow-xl rounded px-7 py-5 pb-12 my-20">
-    <h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
-      <%= t('users.show.edit') %>
-    </h1>
-    <%= form_with model: @user, local: true, multipart: true, class: "flex flex-col text-mainTextColor" do |f| %>
-      <%= render "/shared/error_messages", model: f.object %>
-      <div class="mb-4 input input-bordered flex items-center gap-2">
-        <%= f.text_field :name, placeholder: "謎のタイトル", class: "grow" %>
+<div class="hero min-h-screen bg-header ">
+  <div class="hero-content text-center w-full bg-opacity-60">
+    <div class="w-full md:mx-44 mx-auto">
+      <h1 class = "text-center text-3xl font-zen-old-mincho text-white mb-7">
+        <%= t('users.show.edit') %>
+      </h1>
+      <div class="flex justify-start mb-3">
+        <%= link_to :back do %>
+          <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back') %> </button>
+        <% end %>
       </div>
+      <% if current_user.avator.attached? %>
+        <%= image_tag @user.avator, size: '300x300', class: "mx-auto rounded-full" %>
+      <% else %>
+        <%= image_tag 'avator.jpeg', size: '300x300', class: "mx-auto rounded-full" %>
+      <% end %>
+      <div class="mx-auto mt-2">
+        <%= form_with model: @user, local: true, multipart: true, class: "flex flex-col text-mainTextColor" do |f| %>
+          <%= render "/shared/error_messages", model: f.object %> 
+          <div class="badge badge-warning text-header font-bold gap-2 my-1">
+            <%= f.label :avator %> (必須)
+          </div>
+          <div class="mb-4 input input-bordered flex items-center gap-2">
+            <%= f.file_field :avator, placeholder: "謎の画像を投稿", class: "grow" %>
+          </div>
+          <div class="badge badge-warning text-header font-bold gap-2 my-1">
+            <%= f.label :name %> (必須)
+          </div>
+          <div class="mb-4 input input-bordered flex items-center gap-2">
+            <%= f.text_field :name, placeholder: "ユーザーネーム", class: "grow" %>
+          </div>
 
-      <div class="mb-4 input input-bordered flex items-center gap-2">
-        <%= f.text_field :email, placeholder: "謎の内容", class: "grow" %>
+          <div class="mb-4 flex input-bordered items-center text-white font-bold gap-2">
+            <p> ※ゲスト/Googelログインユーザーはメールアドレスを変更できません </p>
+          </div>
+
+          <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto">
+            <%= f.submit @user.new_record? ? t('helpers.submit.create') : t('helpers.submit.update') %>
+            <%# 新規登録ならcreate訳文 編集ならupdate訳文を使用する %>
+          </button>
+        <% end %>
       </div>
-      
-      <div class="mb-4 input input-bordered flex items-center gap-2">
-        <%= f.file_field :avator, placeholder: "謎の画像を投稿", class: "grow" %>
-      </div>
-
-
-      <button class="btn py-1 bg-white text-mainTextColor text-center w-1/5 mx-auto">
-        <%= f.submit @user.new_record? ? t('helpers.submit.create') : t('helpers.submit.update') %>
-        <%# 新規登録ならcreate訳文 編集ならupdate訳文を使用する %>
-      </button>
-    <% end %>
+    </div>
   </div>
 </div>
-
 

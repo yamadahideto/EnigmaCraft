@@ -1,16 +1,22 @@
-<div class = "w-1/2 mx-auto">
-  <div class="bg-mainContentColor shadow-xl rounded px-7 py-5 pb-12 my-20">
-    <div class = "flex place-content-end">
-      <%= link_to t('helpers.link.back'), mysteries_path %>
-      <button id = "ai_generate_button", class="hidden btn btn-lg text-mainTextColor rounded-full bg-white sm:btn-sm md:btn-md lg:btn-lg"> AIでつくる </button>
-    </div>
-
-    <div class = "mx-auto">
-      <div id="ai_generate_form">
-        <h1 class = "text-center text-3xl font-zen-old-mincho text-mainTextColor mb-7">
-          <%= t('mysteries.edit.title') %>
-        </h1>
-        <%= render 'form', mystery: @mystery %>
+<div class="hero min-h-screen bg-header ">
+  <div class="hero-content text-center w-full bg-opacity-60">
+    <div class="w-full md:mx-44 mx-auto">
+      <div class="flex justify-between">
+        <%= link_to :back do %>
+          <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back') %> </button>
+        <% end %>
+      </div>
+      <h1 class = "text-center text-3xl font-zen-old-mincho text-white mb-7">
+        <%= t('mysteries.edit.title') %>
+      </h1>
+      <div class="mx-auto" data-controller="modal">
+        <div class = "mb-3 text-right">
+          <%= image_tag @mystery.image, size: '500x500', class: "mx-auto rounded-lg" %>
+        </div>
+        <div id="image_post_form">
+          <%= render 'form', mystery: @mystery %>
+        </div>
+        <%= render 'shared/modal' %>
       </div>
     </div>
   </div>

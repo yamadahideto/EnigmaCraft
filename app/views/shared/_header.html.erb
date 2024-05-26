@@ -1,48 +1,28 @@
-<header class="py-4 text-mainTextColor font-zen-old-mincho font-extrabold">
-  <div class="container mx-auto flex justify-between items-center md:px-14 lg:px-10">
-    <%= link_to "EnigmaPortals", root_path, class: "text-3xl mr-4" %>
-    <div class="space-x-7 text-base hidden md:flex items-center">
+<%# 未ログイン ヘッダー %>
+<header class="py-6 text-white bg-header">
+  <div class="container mx-auto flex justify-between items-center px-8 md:px-14 lg:px-24 w-full">
+    <%= link_to root_path, class: "text-3xl mr-4" do %>
+      <%= image_tag 'logo.png', size: '200x200' %>
+    <% end %>
+    <div class="space-x-12 text-sm hidden md:flex items-center">
       <%= link_to 'ランキング', rankings_users_path, class: "hover:text-selected-text transition-all duration-300" %>
       <%= link_to '謎一覧', mysteries_path, class: "hover:text-selected-text transition-all duration-300" %>
-      <% if logged_in? %>
-        <%= link_to t('helpers.link.post'), new_mystery_path, class: "hover:text-selected-text transition-all duration-300" %>
-        
-        <%# ユーザーアイコン ホバーでメニュー表示 %>
-        <div class="dropdown dropdown-hover">
-          <div class="avatar">
-            <div class="w-20 rounded-full hover:cursor-pointer ml-12 dropdown dropdown-hover ">
-              <% if current_user.avator.attached? %>
-                <%= image_tag current_user.avator%>
-              <% else %>
-                <%= image_tag 'avator.jpeg' %>
-              <% end %>
-          </div>
+      <%= link_to t('user_sessions.new.title'), login_path, class: "hover:text-selected-text transition-all duration-300" %>
+    </div>
+    <%# 縮小でヘッダー文字を隠しアイコン表示 %>
+    <div class="md:hidden">
+      <div class="dropdown dropdown-bottom dropdown-end border-none">
+        <div tabindex="0" role="button" class="btn bg-header border-none">
+          <svg class="h-10 w-10 text-blue-500" role="button" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+          </svg>
         </div>
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-          <li> <%= link_to t('users.show.title'), user_path(current_user.id), class: "hover:text-selected-text transition-all duration-300" %> </li>
-          <li> <%= link_to t('helpers.link.bookmarks'), bookmarks_mysteries_path, class: "hover:text-selected-text transition-all duration-300" %> </li>
-          <li> <%= link_to t('helpers.link.logout'), logout_path, class: "hover:text-selected-text transition-all duration-300", data: {turbo_method: :delete} %> </li>
+          <li> <%= link_to 'ランキング', rankings_users_path, class: "text-header hover:text-selected-text transition-all duration-300" %> </li>
+          <li> <%= link_to '謎一覧', mysteries_path, class: "text-header hover:text-selected-text transition-all duration-300" %> </li>
+          <li> <%= link_to t('user_sessions.new.title'), login_path, class: "text-header hover:text-selected-text transition-all duration-300" %> </li>
         </ul>
-
-      <%# 縮小時のアイコン表示 %>
-        <div class="md:hidden">
-          <div class="avatar">
-            <div class="w-16 rounded-full">
-                <% if current_user.avator.attached? %>
-                  <%= image_tag current_user.avator%>
-                <% else %>
-                  <%= image_tag 'avator.jpeg' %>
-                <% end %>
-            </div>
-          </div>
-        </div>
-      <% else %>
-        <%= link_to t('user_sessions.new.title'), login_path %>
-        <%= link_to t('users.new.title'), new_user_path %>
-      <% end  %>
+      </div>
     </div>
   </div>
 </header>
-
-
-
