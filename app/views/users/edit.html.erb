@@ -5,8 +5,8 @@
         <%= t('users.show.edit') %>
       </h1>
       <div class="flex justify-start mb-3">
-        <%= link_to :back do %>
-          <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back') %> </button>
+        <%= link_to user_path(current_user.id) do %>
+          <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonColor"> <%= t('helpers.link.back') %> </button>
         <% end %>
       </div>
       <% if current_user.avator.attached? %>

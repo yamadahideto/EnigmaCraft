@@ -1,4 +1,4 @@
-<%= form_with model: @mystery, url: mysteries_path  , data: { controller: "modal" }, class: "flex flex-col text-mainTextColor" do |f| %>
+<%= form_with model: @mystery , data: { controller: "modal" }, class: "flex flex-col text-mainTextColor" do |f| %>
   <%= render "/shared/error_messages", model: f.object %>
   <div class="badge badge-warning text-header font-bold gap-2 my-1">
     <%= f.label :title %> (必須)
@@ -36,3 +36,4 @@
   </button>
 </div>
 <% end %>
+

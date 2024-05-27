@@ -6,10 +6,9 @@
           <h1 class="mb-5 text-3xl font-bold"> <%= t('mysteries.show.title') %> </h1>
           <div class="flex justify-between items-center">
             <div class = "flex items-center" >
-              <%= link_to :back do %>
-                <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back') %> </button>
+              <%= link_to mysteries_path do %>
+                <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back_index') %> </button>
               <% end %>
-
               <%# Xシェアボタン %>
               <%= link_to "https://x.com/intent/tweet?url=#{mystery_url(@mystery)}/&hashtags=EnigmaPortals&text=みんなも謎解きに挑戦しよう", target: '_blank' do %>
                 <button class="btn btn-sm bg-buttonColor text-white my-6 flex justify-end">

@@ -5,11 +5,11 @@
       <%= t('users.show.title') %>
     </h1>
     <div class="items-center mb-5">
+      <%= link_to mysteries_path do %>
+        <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonColor"> <%= t('helpers.link.back_index') %> </button>
+      <% end %>
       <%= link_to edit_user_path(@user.id) do %>
         <button class="btn btn-sm bg-green-400 text-black"> <%= t('helpers.link.edit') %> </button>
-      <% end %>
-      <%= link_to :back do %>
-        <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back') %> </button>
       <% end %>
     </div>
     <div class="max-w-lg w-full rounded-lg mx-auto" style="background-image: url(<%= asset_path 'backColor.png' %>);">
