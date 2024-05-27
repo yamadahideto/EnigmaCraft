@@ -1,5 +1,14 @@
-<footer class="footer items-center p-4 bg-neutral text-neutral-content">
-  <aside class="items-center grid-flow-col">
-    <p>Copyright © 2024 - All right reserved</p>
-  </aside> 
+<footer class="footer flex flex-col md:flex-row justify-between items-center p-4 bg-neutral text-neutral-content">
+  <div class="flex items-center text-white text-xs md:text-sm">
+    <%= link_to "利用規約", terms_path, class: 'mx-5 my-4 hover:text-blue-600 transition duration-300 font-gorilla underline' %>
+    <%= link_to "プライバシーポリシー", privacy_path, class: 'mx-5 my-4 hover:text-blue-600 transition duration-300 font-gorilla underline' %>
+    <%= link_to "お問い合わせ",
+                "https://docs.google.com/forms/d/e/1FAIpQLSdGAPHLXIVM5M1J3TxoLlJK7oU41r6uVIu77EMrHE2mPDAegw/viewform",
+                target: '_blank',
+                rel: 'noopener noreferrer',
+                class: 'mx-5 my-4 hover:text-blue-600 transition duration-300 font-gorilla underline' %>
+  </div>
+  <div class="text-right">
+    <p class="text-xs md:text-sm">Copyright © 2024 - All right reserved</p>
+  </div>
 </footer>

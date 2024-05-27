@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root 'tops#index'
+  get 'privacy', to: 'tops#privacy'
+  get 'terms', to: 'tops#terms'
   resources :mysteries do
     collection do
       post 'generate'
