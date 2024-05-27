@@ -2,8 +2,8 @@
   <div class="hero-content text-center w-full bg-opacity-60">
     <div class="w-full md:mx-44 mx-auto">
       <div class="flex justify-between">
-        <%= link_to :back do %>
-          <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back') %> </button>
+        <%= link_to mysteries_path do %>
+          <button class="btn btn-sm mx-4 bg-editDeleteBtn text-buttonText"> <%= t('helpers.link.back_index') %> </button>
         <% end %>
       </div>
       <h1 class = "text-center text-3xl font-zen-old-mincho text-white mb-7">
@@ -13,7 +13,7 @@
         <div class = "mb-3 text-right">
           <%= image_tag @mystery.image, size: '500x500', class: "mx-auto rounded-lg" %>
         </div>
-        <div id="image_post_form">
+        <div>
           <%= render 'form', mystery: @mystery %>
         </div>
         <%= render 'shared/modal' %>

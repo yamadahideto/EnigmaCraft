@@ -10,7 +10,7 @@ export default class extends Controller {
     document.addEventListener("turbo:submit-end", () => {
       this.hideModal();
     });
-    document.addEventListener("turbo:load", () => {
+    document.addEventListener("turbo:render", () => {
       this.switchForm();
     });
   }

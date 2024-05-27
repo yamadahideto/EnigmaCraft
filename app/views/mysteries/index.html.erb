@@ -18,7 +18,7 @@
     <%= turbo_frame_tag 'mystery-list' do%>
       <%# 謎の一覧表示 %>
       <% if @mysteries.present? %>
-        <div class = "grid sm:grid-cols-3 grid-cols-1 gap-10 animate-text-focus-in">
+        <div class = "grid sm:grid-cols-3 grid-cols-1 gap-10">
           <%= render @mysteries %>
         </div>
       <% else %>
