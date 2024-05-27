@@ -31,10 +31,15 @@
       </div>
       <img src="https://i.gyazo.com/c0ae7555788c5eed136fde1f0b07c980.gif", width="600">
       <% unless logged_in? %>
-        <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
-        <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
-          <button class="btn bg-buttonColor text-white my-3">謎を作ってみる</br>(ゲストログイン)</button>
-        <% end %>
+        <div class = "flex flex-items-center">
+          <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
+          <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
+            <button class="btn bg-buttonColor text-white my-3">謎を作ってみる</br>(ゲストログイン)</button>
+          <% end %>
+          <%= link_to auth_at_provider_path(provider: :google), class: 'text-center mx-2 my-5 mb-5' do %>
+            <%= image_tag 'google_signin.png', class: 'mx-auto hover:opacity-50' %>
+          <% end %>
+        </div>
       <% else %>
         <%= link_to new_mystery_path do %>
           <button class="btn bg-buttonColor text-white my-3">謎を作ってみる</button>
@@ -57,13 +62,18 @@
       </div>
       <img src="https://i.gyazo.com/6d11fcee682d70789875ea5a4b86db82.gif", width="500">
       <% unless logged_in? %>
-        <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
-        <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
-          <button class="btn bg-buttonColor text-white my-3">謎を作ってみる</br>(ゲストログイン)</button>
-        <% end %>
+        <div class = "flex flex-items-center">
+          <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
+          <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
+            <button class="btn bg-buttonColor text-white my-3">謎に回答してみる</br>(ゲストログイン)</button>
+          <% end %>
+          <%= link_to auth_at_provider_path(provider: :google), class: 'text-center mx-2 my-5 mb-5' do %>
+            <%= image_tag 'google_signin.png', class: 'mx-auto hover:opacity-50' %>
+          <% end %>
+        </div>
       <% else %>
         <%= link_to new_mystery_path do %>
-          <button class="btn bg-buttonColor text-white my-3">謎を作ってみる</button>
+          <button class="btn bg-buttonColor text-white my-3">謎に回答する</button>
         <% end %>
       <% end %>
     </div>
