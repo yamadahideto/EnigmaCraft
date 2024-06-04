@@ -47,7 +47,7 @@ RSpec.describe Mystery, type: :model do
       end
     end
 
-    context 'userが未入力の場合にバリデーションが有効か' do
+    context 'userが未入力' do
       let(:mystery) { build(:mystery, user: nil, genre: genre, image: image ) }
       it '投稿が失敗する' do
         expect(mystery).to be_invalid

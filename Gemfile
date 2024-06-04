@@ -77,9 +77,14 @@ group :development, :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'pry-byebug'
+  # rspec導入
   gem 'rspec-rails'
+  # factory_bot導入
   gem 'factory_bot_rails'
+  # rspecテスト時のデーターベースを削除のgem
   gem 'database_cleaner'
+  # テスト時にブラウザ立ち上げるgem
+  gem 'webdrivers'
 end
 
 group :development do
