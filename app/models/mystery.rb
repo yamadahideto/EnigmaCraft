@@ -30,4 +30,14 @@ class Mystery < ApplicationRecord
     # 正解済みであればtrueを返却
     answers.exists?(user_id: current_user_id, mystery_id: id, correct_flag: true)
   end
+
+  def selfmade?(mystery_id, user_id)
+    # 謎の作成者を取得
+    Mystery.exists?(id: mystery_id, user_id: user_id)
+  end
+
+  # 正解者数をカウント
+  def correct_person(mystery_id)
+    Answer.where(mystery_id: mystery_id).count
+  end
 end
