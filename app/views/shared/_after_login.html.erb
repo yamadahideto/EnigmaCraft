@@ -13,17 +13,24 @@
       <div class="dropdown dropdown-bottom dropdown-end border-none">
         <div tabindex="0" class="bg-header border-none">
           <div tabindex="0" role="button" class="bg-header border-none">
-            <div class="avatar">
-              <div class="w-20 rounded-full hover:cursor-pointer hover:opacity-50 ml-12">
-                <% if current_user.avator.attached? %>
-                  <%= image_tag current_user.avator%>
-                <% else %>
-                  <%= image_tag 'avator.jpeg' %>
-                <% end %>
+            <%# アイコン画像にポイント数の表示バッチ %>
+            <div class="indicator">
+              <span class="indicator-item badge bg-buttonColor text-white text-lg  mt-2"> <%= current_user.point %> </span> 
+              <div class="avatar">
+                <div class="w-20 rounded-full hover:cursor-pointer hover:opacity-50 ml-12">
+                  <% if current_user.avator.attached? %>
+                    <%= image_tag current_user.avator%>
+                  <% else %>
+                    <%= image_tag 'avator.jpeg' %>
+                  <% end %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <%# クリックでプルダウンリスト %>
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 text-header rounded-box w-52">
+          <li class = "text-lg text-center bg-buttonColor rounded-lg text-white"> 謎ポイント: <%= current_user.point %> </li>
           <li> <%= link_to 'ランキング', rankings_users_path, class: "md:hidden text-header hover:text-lime-500 transition-all duration-300" %> </li>
           <li> <%= link_to '謎一覧', mysteries_path, class: "md:hidden text-header hover:text-lime-500 transition-all duration-300" %> </li>
           <li> <%= link_to '謎をつくる', new_mystery_path, class: "hover:text-lime-500 transition-all duration-300" %> </li>

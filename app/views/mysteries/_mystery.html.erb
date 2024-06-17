@@ -1,7 +1,12 @@
 <% if logged_in? %>
   <% if mystery.correctly?(current_user.id) %>
-    <div class="card w-full bg-base-100 shadow-xl hover:animate-text-pop-up-top min-h-[400px] relative" style="background-image: url(<%= asset_path 'backColorCorrect.png' %>); opacity: 0.5;">
-      <span class="text-xl font-bold text-correctText z-10">解決済み</span>
+    <%# 正解済みの謎は背景色変更 %>
+    <div class="card w-full bg-base-100 shadow-xl hover:animate-text-pop-up-top min-h-[400px] relative" style="opacity: 0.5;">
+      <span class="text-xl text-buttonColor font-bold z-10">解決済み</span>
+  <% elsif mystery.selfmade?(mystery.id, current_user.id) %>
+    <%# 自分で作成した謎は背景色変更 %>
+    <div class="card w-full bg-base-100 shadow-xl hover:animate-text-pop-up-top min-h-[400px] relative" style="opacity: 0.6;">
+      <span class="text-xl font-bold text-black z-10">自作の謎</span>
   <% else %>
     <div class="card w-full bg-base-100 shadow-xl hover:animate-text-pop-up-top min-h-[400px]" style="background-image: url( <%= asset_path 'backColor.png' %> );">
   <% end %>
@@ -11,18 +16,36 @@
   <%= link_to mystery_path(mystery), class: "hover:transition-all duration-300 max-h-96", data: { turbo_frame: '_top' } do %>
     <figure><%= image_tag mystery.image, size: "300x300", class: "mx-auto rounded-lg my-5 bg-opacity-60 h-48 object-cover"%></figure>
   <% end %>
-  <div class="card-body">
-    <h2 class="card-title text-header">
-      <%= mystery.title %>
-      <div class="">
+  <div class="card-body ">
+    <div class = "flex items-center">
+      <%= link_to mystery_path(mystery), class: "hover:transition-all duration-300 max-h-96", data: { turbo_frame: '_top' } do %>
+        <%# 謎の正解者数を表示 %>
+        <div class="tooltip tooltip-open tooltip-accent text-buttonColor" data-tip="正解ユーザー数: <%= mystery.correct_person(mystery.id) %>">
+          <h2 class="card-title text-header mt-2">
+              <%= mystery.title %>
+          </h2>
+        </div>
+      <% end %>
+      <div class = "ml-5">
         <% if logged_in? %>
           <%= render 'bookmark_button', { mystery: mystery } %>
         <% end %>
       </div>
-    </h2>
-    <div class="card-actions justify-start flex items-center text-header">
+    </div>
+    <div class="card-actions justify-start flex items-center text-header mx-2 mt-1">
       カテゴリー:
       <div class="badge badge-outline text-header"><%= mystery.genre.name %></div> 
+    </div>
+    <div class="card-actions justify-start flex items-center text-header mx-2 mt-1">
+      作成者:
+      <% if mystery.user.avator.attached? %>
+        <%= image_tag mystery.user.avator, class: 'w-14 rounded-full hover:cursor-pointer hover:opacity-50' %>
+      <% else %>
+        <%= image_tag 'avator.jpeg', class: 'w-14 rounded-full hover:cursor-pointer hover:opacity-50' %>
+      <% end %>
+      <div class = "mx-3 py-3">
+        <%= mystery.user.name %>
+      </div>
     </div>
   </div>
 </div>
