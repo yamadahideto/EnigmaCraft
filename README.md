@@ -1,4 +1,4 @@
-サービス名： EnigmaPortals 〜 謎クリエイト 〜
+### サービス名： EnigmaPortals 〜 謎クリエイト 〜
 [![Image from Gyazo](https://i.gyazo.com/0d8b483df7e4c9eb17e3b01e828333da.png)](https://gyazo.com/0d8b483df7e4c9eb17e3b01e828333da)
 ## サービスURL
 https://enigmaportals.com/
@@ -22,7 +22,8 @@ https://enigmaportals.com/
 ### ・ AIを使用して謎解きの問題の生成
 [![Image from Gyazo](https://i.gyazo.com/dc60fba4cf18a1688aced92075f69911.gif)](https://gyazo.com/dc60fba4cf18a1688aced92075f69911)
 
-###  謎に解答でき、正解時にポイントが1ポイント付与されます。ポイント数によってユーザーランキングが決定します。
+###  ・謎解答機能
+謎に解答でき、正解時にポイントが1ポイント付与されます。ポイント数によってユーザーランキングが決定します。
 [![Image from Gyazo](https://i.gyazo.com/9d0917bbb3ccb845625974bfac569031.gif)](https://gyazo.com/9d0917bbb3ccb845625974bfac569031)
 
 ### ユーザーランキング
