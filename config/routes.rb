@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root 'tops#index'
+  get 'privacy', to: 'tops#privacy'
+  get 'terms', to: 'tops#terms'
   resources :mysteries do
     collection do
       post 'generate'
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
       get 'rankings'
     end
   end
+  # ゲストログイン
   post 'guestlogin', to: 'user_sessions#guestlogin'
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
@@ -22,4 +25,9 @@ Rails.application.routes.draw do
   post "oauth/callback" => "oauths#callback"
   get "oauth/callback" => "oauths#callback"
   get "oauth/:provider" => "oauths#oauth", :as => :auth_at_provider
+
+  # 未定義のルーティングにアクセス時にルートにリダイレクト
+  match '*path', to: redirect('/'), via: :all, constraints: lambda { |req|
+    !req.path.starts_with?('/rails/active_storage')
+  }
 end

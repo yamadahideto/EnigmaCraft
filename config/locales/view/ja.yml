@@ -22,6 +22,7 @@ ja:
       edit: 編集
       delete: 削除
       post: 謎をつくる
+      back_index: 一覧へ戻る
       bookmarks: ブックマーク一覧
       logout: ログアウト
     submit:
@@ -57,3 +58,6 @@ ja:
       title: 謎編集
     bookmark:
       title: ブックマーク一覧
+  tops:
+    privasy: プライバシーポリシー
+    terms: 利用規約

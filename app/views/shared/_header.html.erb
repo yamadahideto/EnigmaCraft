@@ -1,13 +1,13 @@
 <%# 未ログイン ヘッダー %>
 <header class="py-6 text-white bg-header">
   <div class="container mx-auto flex justify-between items-center px-8 md:px-14 lg:px-24 w-full">
-    <%= link_to root_path, class: "text-3xl mr-4" do %>
+    <%= link_to root_path, class: "hover:opacity-50 text-3xl mr-4" do %>
       <%= image_tag 'logo.png', size: '200x200' %>
     <% end %>
     <div class="space-x-12 text-sm hidden md:flex items-center">
-      <%= link_to 'ランキング', rankings_users_path, class: "hover:text-selected-text transition-all duration-300" %>
-      <%= link_to '謎一覧', mysteries_path, class: "hover:text-selected-text transition-all duration-300" %>
-      <%= link_to t('user_sessions.new.title'), login_path, class: "hover:text-selected-text transition-all duration-300" %>
+      <%= link_to 'ランキング', rankings_users_path, class: "hover:text-lime-500 transition-all duration-300" %>
+      <%= link_to '謎一覧', mysteries_path, class: "hover:text-lime-500 transition-all duration-300" %>
+      <%= link_to t('user_sessions.new.title'), login_path, class: "hover:text-lime-500 transition-all duration-300" %>
     </div>
     <%# 縮小でヘッダー文字を隠しアイコン表示 %>
     <div class="md:hidden">
@@ -18,9 +18,9 @@
           </svg>
         </div>
         <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-          <li> <%= link_to 'ランキング', rankings_users_path, class: "text-header hover:text-selected-text transition-all duration-300" %> </li>
-          <li> <%= link_to '謎一覧', mysteries_path, class: "text-header hover:text-selected-text transition-all duration-300" %> </li>
-          <li> <%= link_to t('user_sessions.new.title'), login_path, class: "text-header hover:text-selected-text transition-all duration-300" %> </li>
+          <li> <%= link_to 'ランキング', rankings_users_path, class: "text-header hover:text-lime-500 transition-all duration-300" %> </li>
+          <li> <%= link_to '謎一覧', mysteries_path, class: "text-header hover:text-lime-500 transition-all duration-300" %> </li>
+          <li> <%= link_to t('user_sessions.new.title'), login_path, class: "text-header hover:text-lime-500 transition-all duration-300" %> </li>
         </ul>
       </div>
     </div>

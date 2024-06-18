@@ -23,7 +23,7 @@ class MysteriesController < ApplicationController
       flash[:notice] = t('flash.messages.create', text: Mystery.model_name.human)
       redirect_to mysteries_path
     else
-      flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
+      flash.now[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
       render :new, status: :unprocessable_entity
     end
   end
@@ -44,7 +44,7 @@ class MysteriesController < ApplicationController
         render :new, status: :unprocessable_entity
       end
     else
-      flash[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
+      flash.now[:alert] = t('flash.messages.not_create', text: Mystery.model_name.human)
       render :new, status: :unprocessable_entity
     end
   end
@@ -56,7 +56,7 @@ class MysteriesController < ApplicationController
       flash[:notice] = t('flash.messages.updated', text: Mystery.model_name.human)
       redirect_to mysteries_path
     else
-      flash[:notice] = t('flash.messages.not_updated', text: Mystery.model_name.human)
+      flash.now[:notice] = t('flash.messages.not_updated', text: Mystery.model_name.human)
       render :edit, status: :unprocessable_entity
     end
   end
@@ -71,7 +71,7 @@ class MysteriesController < ApplicationController
     @mystery.image.purge_later
     @mystery.destroy!
     flash[:notice] = t('flash.messages.deleted', text: Mystery.model_name.human)
-    redirect_to mysteries_path, status: :see_other
+    redirect_to mysteries_path
   end
 
   private

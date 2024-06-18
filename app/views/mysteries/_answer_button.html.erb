@@ -4,7 +4,16 @@
     回答
   </button>
 <% else %>
-  <button class="btn py-1 bg-white text-mainTextColor text-center mx-auto" disabled>
-    ログインすると<br/>回答できます
-  </button>
+  <div class="badge badge-warning gap-2 my-3">
+    ※ログインすると回答できます
+  </div>
+  <div class = "flex flex-items-center">
+    <%# 未ログイン時の謎を作ってみるボタン追加 (新規登録に遷移) %>
+    <%= link_to guestlogin_path, data: {turbo_method: :post} do %>
+      <button class="btn bg-buttonColor text-white my-3">謎に回答してみる</br>(ゲストログイン)</button>
+    <% end %>
+    <%= link_to auth_at_provider_path(provider: :google), class: 'text-center mx-2 my-5 mb-5' do %>
+      <%= image_tag 'google_signin.png', class: 'mx-auto hover:opacity-50' %>
+    <% end %>
+  </div>
 <% end %>
