@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Mystery, type: :model do
     let!(:user) { create(:user) }
     let!(:genre) { create(:genre) }
-    let(:image_path) { Rails.root.join('spec', 'fixtures', 'aa.png') }
+    let(:image_path) { Rails.root.join('spec', 'fixtures', 'test.png') }
     let(:image) { fixture_file_upload(image_path, 'image/png') }
 
   describe 'バリデーションチェック' do

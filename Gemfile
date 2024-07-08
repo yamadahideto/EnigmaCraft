@@ -83,8 +83,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   # rspecテスト時のデーターベースを削除のgem
   gem 'database_cleaner'
-  # テスト時にブラウザ立ち上げるgem
-  gem 'webdrivers'
+  gem "capybara"
+  gem "selenium-webdriver"
 end
 
 group :development do
@@ -100,6 +100,4 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
 end
