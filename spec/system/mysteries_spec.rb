@@ -1,20 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "Mysteries", type: :system do
-  # include LoginMacros
-  let(:user) { create(:user) } 
 
   describe 'ログイン前' do
     it 'トップページにリダイレクトされる' do
-      visit new_mystery_path
-      expect(current_path).to eq root_path
-    end
-
-    it 'ログインができる' do
-      login(user)
-      sleep(15)
-      expect(current_path).to eq mysteries_path
+      visit mysteries_path
+      expect{ visit new_mystery_path }.to change{
+        current_path
+      }.from(mysteries_path).to(root_path)
+      expect(page).to have_content('ログインしてください')
     end
   end
-
 end
